@@ -2,7 +2,6 @@ package project.model;
 
 import org.junit.jupiter.api.Test;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class Vector2DTest {
@@ -34,7 +33,7 @@ class Vector2DTest {
 
         //when & then
         assertTrue(v1.precedes(v2));
-        assertTrue(v2.precedes(v2));
+        assertTrue(v2.precedes(v2)); //te same wektory
         assertFalse(v3.precedes(v2));
         assertFalse(v4.precedes(v2));
         assertFalse(v5.precedes(v2));
@@ -51,8 +50,8 @@ class Vector2DTest {
         Vector2D v5 = new Vector2D(3,1);
 
         //when & then
-        assertTrue(v2.follows(v2));
-        assertTrue(v3.follows(v2));
+        assertTrue(v2.follows(v2)); //te same wektory
+        assertTrue(v3.follows(v2)); //
         assertFalse(v1.follows(v2));
         assertFalse(v4.follows(v2));
         assertFalse(v5.follows(v2));

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RectangularMap {
+public final class RectangularMap implements MoveValidator {
     protected final Map<Vector2D, Animal> animals = new HashMap<>();
     private final static Vector2D LEFT_END = new Vector2D(0, 0);
     private final Vector2D rightEnd;
@@ -40,5 +40,18 @@ public class RectangularMap {
 
     public List<WorldElement> getElements() {
         return new ArrayList<>(animals.values());
+    }
+
+    private boolean inBorder(Vector2D position) {
+        return (position.getX() >= LEFT_END.getX() && position.getX() < rightEnd.getX()
+                && position.getY() >= LEFT_END.getY() && position.getY() < rightEnd.getY());
+    }
+
+    @Override
+    public boolean canMoveTo(Vector2D position) {
+        if (!inBorder(position) || isOccupied(position)) {
+            return false;
+        }
+        return true;
     }
 }

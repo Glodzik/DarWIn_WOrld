@@ -2,7 +2,7 @@ package project.model;
 
 import java.util.Objects;
 
-public class Vector2D {
+public final class Vector2D {
     private final int x;
     private final int y;
 
