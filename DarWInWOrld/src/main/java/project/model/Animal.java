@@ -1,11 +1,13 @@
 package project.model;
 
+import static project.model.GenomeGenerator.randomGenome;
+
 public class Animal implements WorldElement {
     private MapDirection currDirection;
     private Vector2D position;
 
     // to do: losowy genom
-    private final String genom = "01234567";
+    private final String genom = randomGenome(8);
     private int daysAlive = 0;
 
     // to do: zarzadzanie energia
