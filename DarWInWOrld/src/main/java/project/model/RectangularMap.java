@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class RectangularMap implements MoveValidator {
-    protected final Map<Vector2D, Animal> animals = new HashMap<>();
+public final class RectangularMap {
+    private final Map<Vector2D, Animal> animals = new HashMap<>();
     private final static Vector2D LEFT_END = new Vector2D(0, 0);
     private final Vector2D rightEnd;
 
@@ -24,9 +24,31 @@ public final class RectangularMap implements MoveValidator {
 
     public void move(Animal animal) {
         if (animals.get(animal.getPosition()) == animal) {
+            Vector2D oldPosition = animal.getPosition();
             animals.remove(animal.getPosition(), animal);
             animal.move();
-            animals.put(animal.getPosition(), animal);
+            Vector2D newPosition = animal.getPosition();
+
+            if(!inBorder(newPosition)) {
+                if (newPosition.aboveYLine(rightEnd.getY()) || newPosition.belowYLine(LEFT_END.getY())) {
+                    // odbicie od biegunów
+                    animal.turnBack();
+                    animal.setPosition(oldPosition);
+                    animals.put(oldPosition, animal);
+                } else if (newPosition.onLeftXLine(LEFT_END.getX())) {
+                    // przejście z lewej strony na prawą
+                    Vector2D correctedPosition = new Vector2D(rightEnd.getX(), newPosition.getY());
+                    animal.setPosition(correctedPosition);
+                    animals.put(correctedPosition, animal);
+                } else if (newPosition.onRightXLine(rightEnd.getX())) {
+                    // przejście z prawej strony na lewą
+                    Vector2D correctedPosition = new Vector2D(LEFT_END.getX(), newPosition.getY());
+                    animal.setPosition(correctedPosition);
+                    animals.put(correctedPosition, animal);
+                }
+            } else {
+                animals.put(newPosition, animal);
+            }
         }
     }
 
@@ -35,23 +57,20 @@ public final class RectangularMap implements MoveValidator {
     }
 
     public WorldElement objectAt(Vector2D position) {
+        // to do: do zmiany po dodaniu grass
         return animals.get(position);
     }
 
     public List<WorldElement> getElements() {
+        // to do: do zmiany po dodaniu grass
         return new ArrayList<>(animals.values());
     }
 
     private boolean inBorder(Vector2D position) {
-        return (position.getX() >= LEFT_END.getX() && position.getX() < rightEnd.getX()
-                && position.getY() >= LEFT_END.getY() && position.getY() < rightEnd.getY());
+        return (position.precedes(rightEnd) && position.follows(LEFT_END));
     }
 
-    @Override
     public boolean canMoveTo(Vector2D position) {
-        if (!inBorder(position) || isOccupied(position)) {
-            return false;
-        }
-        return true;
+        return inBorder(position) && !isOccupied(position);
     }
 }

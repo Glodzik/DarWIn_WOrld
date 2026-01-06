@@ -5,18 +5,12 @@ import project.model.*;
 public class World {
     public static void main(String[] args) {
         Animal animal = new Animal();
-        RectangularMap map = new RectangularMap(20, 20);
-
-        animal.move();
-        System.out.println("Animal: " + animal.getPosition() + " " + animal.getCurrDirection());
-        animal.move();
-        System.out.println("Animal: " + animal.getPosition() + " " + animal.getCurrDirection());
-        animal.move();
-        System.out.println("Animal: " + animal.getPosition() + " " + animal.getCurrDirection());
+        RectangularMap map = new RectangularMap(2, 2);
 
         map.place(animal);
-        map.move(animal);
-        map.move(animal);
-        map.move(animal);
+
+        for(int i = 0; i < 100; i++) {
+            map.move(animal);
+        }
     }
 }

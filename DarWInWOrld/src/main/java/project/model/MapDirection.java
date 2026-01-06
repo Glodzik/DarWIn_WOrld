@@ -36,7 +36,7 @@ public enum MapDirection {
         return switch (this) {
             case NORTH -> new Vector2D(0, 1);
             case NORTH_EAST -> new Vector2D(1, 1);
-            case EAST -> new Vector2D(0, 1);
+            case EAST -> new Vector2D(1, 0);
             case SOUTH_EAST -> new Vector2D(1, -1);
             case SOUTH -> new Vector2D(0, -1);
             case SOUTH_WEST -> new Vector2D(-1, -1);

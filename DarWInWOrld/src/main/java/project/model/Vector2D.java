@@ -43,6 +43,22 @@ public final class Vector2D {
         return new Vector2D( Math.min(x, other.getX()), Math.min(y, other.getY()) );
     }
 
+    public boolean aboveYLine(int y) {
+        return this.y > y;
+    }
+
+    public boolean belowYLine(int y) {
+        return this.y < y;
+    }
+
+    public boolean onLeftXLine(int x) {
+        return this.x < x;
+    }
+
+    public boolean onRightXLine(int x) {
+        return this.x > x;
+    }
+
     @Override
     public String toString() {
         return "(" + x + ", " + y + ")";

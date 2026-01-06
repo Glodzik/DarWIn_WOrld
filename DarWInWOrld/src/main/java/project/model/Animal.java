@@ -5,22 +5,25 @@ import static project.model.GenomeGenerator.randomGenome;
 public class Animal implements WorldElement {
     private MapDirection currDirection;
     private Vector2D position;
-
-    // to do: losowy genom
-    private final String genom = randomGenome(8);
+    private final String genom;
     private int daysAlive = 0;
+    private int energy;
 
-    // to do: zarzadzanie energia
-    private int energy = 100;
+    private static final Vector2D START_POSITION = new Vector2D(2, 2);
+    private static final int START_ENERGY = 100;
 
-    private final static Vector2D START_POSITION = new Vector2D(2, 2);
+    public Animal(Vector2D position, int energy) {
+        this.position = position;
+        // to do: zarządzanie energia, parametr - wartość energii startowej
+        this.energy = energy;
+        // to do: parametr - długość genomu
+        this.genom = randomGenome(8);
+        // to do: losowy kierunek
+        this.currDirection = MapDirection.NORTH;
+    }
 
     public Animal(Vector2D position) {
-        // to do: losowa pozycja startowa
-        this.position = position;
-
-        // to do: ma byc losowy kierunek
-        this.currDirection = MapDirection.NORTH;
+        this(position, START_ENERGY);
     }
 
     public Animal() {
@@ -53,16 +56,18 @@ public class Animal implements WorldElement {
         return this.position.equals(position);
     }
 
+    public void turnBack() {
+        currDirection = currDirection.opposite();
+    }
 
     public void move() {
         int rotation = Character.getNumericValue(genom.charAt(daysAlive % genom.length()));
         currDirection = currDirection.rotate(rotation);
-
-        // to do: odbijanie od biegonow i przechodzenie z prawej na lewa/lewej na prawa strone mapy
-        Vector2D newPosition = position.add(currDirection.toUnitVector());
-
-        position = newPosition;
+        position = position.add(currDirection.toUnitVector());
         daysAlive += 1;
     }
 
+    public void setPosition(Vector2D position) {
+        this.position = position;
+    }
 }
