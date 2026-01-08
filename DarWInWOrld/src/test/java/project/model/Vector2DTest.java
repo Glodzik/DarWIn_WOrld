@@ -190,6 +190,118 @@ class Vector2DTest {
         assertEquals(new Vector2D(-3,-6), result);
     }
 
+    @Test
+    void aboveYLine() {
+        // given
+        Vector2D v1 = new Vector2D(0, 0);
+        Vector2D v2 = new Vector2D(-3, -5);
+        Vector2D v3 = new Vector2D(6, 8);
+
+        // when
+        boolean result1 = v1.aboveYLine(-1);
+        boolean result2 = v1.aboveYLine(0);
+
+        boolean result3 = v2.aboveYLine(-6);
+        boolean result4 = v2.aboveYLine(0);
+
+        boolean result5 = v3.aboveYLine(1);
+        boolean result6 = v3.aboveYLine(10);
+
+        // then
+        assertTrue(result1);
+        assertFalse(result2);
+
+        assertTrue(result3);
+        assertFalse(result4);
+
+        assertTrue(result5);
+        assertFalse(result6);
+    }
+
+    @Test
+    void belowYLine() {
+        // given
+        Vector2D v1 = new Vector2D(0, 0);
+        Vector2D v2 = new Vector2D(-3, -5);
+        Vector2D v3 = new Vector2D(6, 8);
+
+        // when
+        boolean result1 = v1.belowYLine(1);
+        boolean result2 = v1.belowYLine(0);
+
+        boolean result3 = v2.belowYLine(-4);
+        boolean result4 = v2.belowYLine(-10);
+
+        boolean result5 = v3.belowYLine(10);
+        boolean result6 = v3.belowYLine(6);
+
+        // then
+        assertTrue(result1);
+        assertFalse(result2);
+
+        assertTrue(result3);
+        assertFalse(result4);
+
+        assertTrue(result5);
+        assertFalse(result6);
+    }
+
+    @Test
+    void onLeftXLine() {
+        // given
+        Vector2D v1 = new Vector2D(0, 0);
+        Vector2D v2 = new Vector2D(-3, -5);
+        Vector2D v3 = new Vector2D(6, 8);
+
+        // when
+        boolean result1 = v1.onLeftXLine(1);
+        boolean result2 = v1.onLeftXLine(0);
+
+        boolean result3 = v2.onLeftXLine(-2);
+        boolean result4 = v2.onLeftXLine(-5);
+
+        boolean result5 = v3.onLeftXLine(10);
+        boolean result6 = v3.onLeftXLine(3);
+
+        // then
+        assertTrue(result1);
+        assertFalse(result2);
+
+        assertTrue(result3);
+        assertFalse(result4);
+
+        assertTrue(result5);
+        assertFalse(result6);
+    }
+
+    @Test
+    void onRightXLine() {
+        // given
+        Vector2D v1 = new Vector2D(0, 0);
+        Vector2D v2 = new Vector2D(-3, -5);
+        Vector2D v3 = new Vector2D(6, 8);
+
+        // when
+        boolean result1 = v1.onRightXLine(-1);
+        boolean result2 = v1.onRightXLine(0);
+
+        boolean result3 = v2.onRightXLine(-6);
+        boolean result4 = v2.onRightXLine(0);
+
+        boolean result5 = v3.onRightXLine(1);
+        boolean result6 = v3.onRightXLine(12);
+
+        // then
+        assertTrue(result1);
+        assertFalse(result2);
+
+        assertTrue(result3);
+        assertFalse(result4);
+
+        assertTrue(result5);
+        assertFalse(result6);
+    }
+
 
     @Test
     void testToString() {

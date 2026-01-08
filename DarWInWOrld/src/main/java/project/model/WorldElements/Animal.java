@@ -4,9 +4,6 @@ import project.model.MapDirection;
 import project.model.RandomGenerator;
 import project.model.Vector2D;
 
-import static project.model.RandomGenerator.randomDirection;
-import static project.model.RandomGenerator.randomGenome;
-
 public class Animal implements WorldElement {
     private MapDirection currDirection;
     private Vector2D position;
@@ -81,6 +78,10 @@ public class Animal implements WorldElement {
     // to do: odejmowanie energii po ruchu i zjedzeniu trującej rośliny
     public void energyLoss(int energyAmount) {
         this.energy -= energyAmount;
+    }
+
+    public int getEnergy() {
+        return this.energy;
     }
 
     /*
