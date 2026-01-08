@@ -1,36 +1,34 @@
 package project.model.WorldElements;
 
 import project.model.MapDirection;
+import project.model.RandomGenerator;
 import project.model.Vector2D;
 
-import static project.model.GenomeGenerator.randomGenome;
+import static project.model.RandomGenerator.randomDirection;
+import static project.model.RandomGenerator.randomGenome;
 
 public class Animal implements WorldElement {
     private MapDirection currDirection;
     private Vector2D position;
     private final String genom;
-    private int daysAlive = 0;
     private int energy;
-    private int energyLoss;
+    private int daysAlive = 0;
 
     private static final Vector2D START_POSITION = new Vector2D(2, 2);
     private static final int START_ENERGY = 100;
-    private static final int ENERGY_LOSS = 10;
+    private static final int GENOM_LENGTH = 8;
 
-    public Animal(Vector2D position, int energy, int energyLoss) {
+    public Animal(Vector2D position, int startEnergy, int genomLength) {
         this.position = position;
         // to do: zarządzanie energia, parametr - wartość energii startowej
-        this.energy = energy;
-        // to do: parametr - długość genomu
-        this.genom = randomGenome(8);
-        // to do: losowy kierunek
-        this.currDirection = MapDirection.NORTH;
-        // to do: parametr - energia tracona na koniec dnia
-        this.energyLoss = energyLoss;
+        this.energy = startEnergy;
+
+        this.currDirection = RandomGenerator.randomDirection();
+        this.genom = RandomGenerator.randomGenome(genomLength);
     }
 
     public Animal(Vector2D position) {
-        this(position, START_ENERGY, ENERGY_LOSS);
+        this(position, START_ENERGY, GENOM_LENGTH);
     }
 
     public Animal() {
@@ -74,11 +72,15 @@ public class Animal implements WorldElement {
             position = position.add(currDirection.toUnitVector());
             daysAlive += 1;
         }
-        energy -= energyLoss;
     }
 
     public void setPosition(Vector2D position) {
         this.position = position;
+    }
+
+    // to do: odejmowanie energii po ruchu i zjedzeniu trującej rośliny
+    public void energyLoss(int energyAmount) {
+        this.energy -= energyAmount;
     }
 
     /*

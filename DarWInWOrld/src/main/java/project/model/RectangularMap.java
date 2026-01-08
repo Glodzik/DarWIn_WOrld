@@ -22,7 +22,9 @@ public final class RectangularMap {
     }
 
     public void place(Animal animal) {
-        animals.put(animal.getPosition(), animal);
+        Vector2D position = RandomGenerator.randomPositionWithinBounds(LEFT_END, rightEnd);
+        animal.setPosition(position);
+        animals.put(position, animal);
     }
 
     public void move(Animal animal) {
