@@ -1,6 +1,7 @@
 package project;
 
 import project.model.*;
+import project.model.WorldElements.Animal;
 
 public class World {
     public static void main(String[] args) {

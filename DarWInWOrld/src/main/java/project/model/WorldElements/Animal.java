@@ -1,4 +1,7 @@
-package project.model;
+package project.model.WorldElements;
+
+import project.model.MapDirection;
+import project.model.Vector2D;
 
 import static project.model.GenomeGenerator.randomGenome;
 
@@ -8,11 +11,13 @@ public class Animal implements WorldElement {
     private final String genom;
     private int daysAlive = 0;
     private int energy;
+    private int energyLoss;
 
     private static final Vector2D START_POSITION = new Vector2D(2, 2);
     private static final int START_ENERGY = 100;
+    private static final int ENERGY_LOSS = 10;
 
-    public Animal(Vector2D position, int energy) {
+    public Animal(Vector2D position, int energy, int energyLoss) {
         this.position = position;
         // to do: zarządzanie energia, parametr - wartość energii startowej
         this.energy = energy;
@@ -20,10 +25,12 @@ public class Animal implements WorldElement {
         this.genom = randomGenome(8);
         // to do: losowy kierunek
         this.currDirection = MapDirection.NORTH;
+        // to do: parametr - energia tracona na koniec dnia
+        this.energyLoss = energyLoss;
     }
 
     public Animal(Vector2D position) {
-        this(position, START_ENERGY);
+        this(position, START_ENERGY, ENERGY_LOSS);
     }
 
     public Animal() {
@@ -61,13 +68,23 @@ public class Animal implements WorldElement {
     }
 
     public void move() {
-        int rotation = Character.getNumericValue(genom.charAt(daysAlive % genom.length()));
-        currDirection = currDirection.rotate(rotation);
-        position = position.add(currDirection.toUnitVector());
-        daysAlive += 1;
+        if(energy > 0) {
+            int rotation = Character.getNumericValue(genom.charAt(daysAlive % genom.length()));
+            currDirection = currDirection.rotate(rotation);
+            position = position.add(currDirection.toUnitVector());
+            daysAlive += 1;
+        }
+        energy -= energyLoss;
     }
 
     public void setPosition(Vector2D position) {
         this.position = position;
     }
+
+    /*
+    // to do: system jedzenia, klasa Edible i dziedziczace po niej rosliny
+    public void eat(Edible edible) {
+        this.energy += edible.getEnergy();
+    }
+     */
 }

@@ -1,5 +1,8 @@
 package project.model;
 
+import project.model.WorldElements.Animal;
+import project.model.WorldElements.WorldElement;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,17 +34,17 @@ public final class RectangularMap {
 
             if(!inBorder(newPosition)) {
                 if (newPosition.aboveYLine(rightEnd.getY()) || newPosition.belowYLine(LEFT_END.getY())) {
-                    // odbicie od biegunów
+                    // turning back from the poles
                     animal.turnBack();
                     animal.setPosition(oldPosition);
                     animals.put(oldPosition, animal);
                 } else if (newPosition.onLeftXLine(LEFT_END.getX())) {
-                    // przejście z lewej strony na prawą
+                    // transition from left to right
                     Vector2D correctedPosition = new Vector2D(rightEnd.getX(), newPosition.getY());
                     animal.setPosition(correctedPosition);
                     animals.put(correctedPosition, animal);
                 } else if (newPosition.onRightXLine(rightEnd.getX())) {
-                    // przejście z prawej strony na lewą
+                    // transition from right to left
                     Vector2D correctedPosition = new Vector2D(LEFT_END.getX(), newPosition.getY());
                     animal.setPosition(correctedPosition);
                     animals.put(correctedPosition, animal);
