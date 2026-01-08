@@ -14,4 +14,6 @@ public final class GenomeGenerator {
 
         return genome.toString();
     }
+
+    public static Vector2D randomPositionWithinBounds
 }
