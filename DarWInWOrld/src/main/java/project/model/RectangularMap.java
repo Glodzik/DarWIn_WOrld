@@ -1,6 +1,7 @@
 package project.model;
 
 import project.model.WorldElements.Animal;
+import project.model.WorldElements.Plant;
 import project.model.WorldElements.WorldElement;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 public final class RectangularMap {
     private final Map<Vector2D, Animal> animals = new HashMap<>();
+    private Map<Vector2D, Plant> plants = new HashMap<>();
     private final static Vector2D LEFT_END = new Vector2D(0, 0);
     private final Vector2D rightEnd;
 
