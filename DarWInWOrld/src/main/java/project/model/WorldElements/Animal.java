@@ -80,6 +80,10 @@ public class Animal implements WorldElement {
         this.energy -= energyAmount;
     }
 
+    public void energyIncrease(int energyAmount) {
+        this.energy += energyAmount;
+    }
+
     public int getEnergy() {
         return this.energy;
     }
