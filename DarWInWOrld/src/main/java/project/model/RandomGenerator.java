@@ -4,16 +4,6 @@ import java.util.Random;
 
 
 public final class RandomGenerator {
-    public static void randomGenome(int n) {
-        Genome genome = new Genome(n);
-        Random random = new Random();
-        int[] sequence = genome.getGenomeSequence();
-
-        for (int i = 0; i < n; i++) {
-            sequence[i] = random.nextInt(8);
-        }
-    }
-
     public static Vector2D randomPositionWithinBounds(Vector2D leftEnd, Vector2D rightEnd) {
         Random random = new Random();
         int x1 = leftEnd.getX(), x2 = rightEnd.getX();

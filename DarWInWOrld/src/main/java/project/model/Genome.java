@@ -1,6 +1,6 @@
 package project.model;
 
-import java.util.Arrays;
+import java.util.Random;
 
 public final class Genome {
 
@@ -14,10 +14,26 @@ public final class Genome {
 
     @Override
     public String toString() {
-        return Arrays.toString(genomeSequence);
+        StringBuilder sequenceToString = new StringBuilder();
+        for (int i : this.genomeSequence) {
+            sequenceToString.append(i);
+        }
+        return sequenceToString.toString();
     }
 
     public int[] getGenomeSequence() {
         return genomeSequence;
     }
+
+    public int getGenomeSize() {
+        return size;
+    }
+
+    public void generateRandomGenome(int size) {
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            this.genomeSequence[i] = random.nextInt(8);
+        }
+    }
+
 }
