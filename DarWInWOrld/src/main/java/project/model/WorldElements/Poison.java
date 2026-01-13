@@ -2,7 +2,7 @@ package project.model.WorldElements;
 
 import project.model.Vector2D;
 
-public class Poison extends Plant {
+public final class Poison extends Plant {
     private String protection;
     private final TypeOfPoison typeOfPoison;
 

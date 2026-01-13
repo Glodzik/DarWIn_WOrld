@@ -2,7 +2,7 @@ package project.model.WorldElements;
 
 import project.model.Vector2D;
 
-public class Antidote extends Plant {
+public final class Antidote extends Plant {
     private final TypeOfAntidote typeOfAntidote;
 
     protected Antidote(Vector2D position, TypeOfAntidote typeOfAntidote) {
