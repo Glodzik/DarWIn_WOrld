@@ -4,15 +4,14 @@ import java.util.Random;
 
 
 public final class RandomGenerator {
-    public static String randomGenome(int n) {
-        StringBuilder genome = new StringBuilder();
+    public static void randomGenome(int n) {
+        Genome genome = new Genome(n);
         Random random = new Random();
+        int[] sequence = genome.getGenomeSequence();
 
         for (int i = 0; i < n; i++) {
-            genome.append(random.nextInt(8));
+            sequence[i] = random.nextInt(8);
         }
-
-        return genome.toString();
     }
 
     public static Vector2D randomPositionWithinBounds(Vector2D leftEnd, Vector2D rightEnd) {

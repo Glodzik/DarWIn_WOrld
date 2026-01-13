@@ -1,5 +1,6 @@
 package project.model.WorldElements;
 
+import project.model.Genome;
 import project.model.MapDirection;
 import project.model.RandomGenerator;
 import project.model.Vector2D;
@@ -7,7 +8,7 @@ import project.model.Vector2D;
 public class Animal implements WorldElement {
     private MapDirection currDirection;
     private Vector2D position;
-    private final String genom;
+    private final Genome genom;
     private int energy;
     private int daysAlive = 0;
 
@@ -21,7 +22,7 @@ public class Animal implements WorldElement {
         this.energy = startEnergy;
 
         this.currDirection = RandomGenerator.randomDirection();
-        this.genom = RandomGenerator.randomGenome(genomLength);
+        this.genom = new Genome(genomLength);
     }
 
     public Animal(Vector2D position) {
@@ -64,7 +65,7 @@ public class Animal implements WorldElement {
 
     public void move() {
         if(energy > 0) {
-            int rotation = Character.getNumericValue(genom.charAt(daysAlive % genom.length()));
+            int rotation = genom.getGenomeSequence()[daysAlive];
             currDirection = currDirection.rotate(rotation);
             position = position.add(currDirection.toUnitVector());
             daysAlive += 1;
