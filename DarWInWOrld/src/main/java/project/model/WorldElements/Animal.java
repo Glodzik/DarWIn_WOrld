@@ -65,7 +65,7 @@ public class Animal implements WorldElement {
 
     public void move() {
         if(energy > 0) {
-            int rotation = genom.getGenomeSequence()[daysAlive];
+            int rotation = genom.getGenomeSequence()[daysAlive % GENOM_LENGTH];
             currDirection = currDirection.rotate(rotation);
             position = position.add(currDirection.toUnitVector());
             daysAlive += 1;
@@ -87,6 +87,10 @@ public class Animal implements WorldElement {
 
     public int getEnergy() {
         return this.energy;
+    }
+
+    public Genome getGenom() {
+        return this.genom;
     }
 
     /*

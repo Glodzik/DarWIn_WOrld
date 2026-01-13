@@ -1,6 +1,6 @@
 package project;
 
-import project.model.*;
+import project.model.RectangularMap;
 import project.model.WorldElements.Animal;
 
 public class World {
@@ -9,6 +9,7 @@ public class World {
         RectangularMap map = new RectangularMap(2, 2);
 
         map.place(animal);
+        animal.getGenom().generateRandomGenome(8);
 
         for(int i = 0; i < 100; i++) {
             map.move(animal);
