@@ -3,13 +3,15 @@ package project.model.WorldElements;
 import project.model.MapDirection;
 import project.model.RandomGenerator;
 import project.model.Vector2D;
+import project.model.WorldElements.EdibleElements.Plant;
 
 public class Animal implements WorldElement {
     private MapDirection currDirection;
     private Vector2D position;
-    private final String genom;
+    private final Genome genom;
     private int energy;
     private int daysAlive = 0;
+    private int protection;
 
     private static final Vector2D START_POSITION = new Vector2D(2, 2);
     private static final int START_ENERGY = 100;
@@ -19,9 +21,11 @@ public class Animal implements WorldElement {
         this.position = position;
         // to do: zarządzanie energia, parametr - wartość energii startowej
         this.energy = startEnergy;
-
         this.currDirection = RandomGenerator.randomDirection();
-        this.genom = RandomGenerator.randomGenome(genomLength);
+        this.genom = new Genome(genomLength);
+
+        // to do: dodanie parametru - genom ochrony przed trucizną i obliczenie ochrony zwierzaka
+        int protection = 0;
     }
 
     public Animal(Vector2D position) {
@@ -64,7 +68,7 @@ public class Animal implements WorldElement {
 
     public void move() {
         if(energy > 0) {
-            int rotation = Character.getNumericValue(genom.charAt(daysAlive % genom.length()));
+            int rotation = genom.getGenomeSequence()[daysAlive % this.genom.getGenomeSize()];
             currDirection = currDirection.rotate(rotation);
             position = position.add(currDirection.toUnitVector());
             daysAlive += 1;
@@ -80,14 +84,19 @@ public class Animal implements WorldElement {
         this.energy -= energyAmount;
     }
 
+    public void energyIncrease(int energyAmount) {
+        this.energy += energyAmount;
+    }
+
     public int getEnergy() {
         return this.energy;
     }
 
-    /*
-    // to do: system jedzenia, klasa Edible i dziedziczace po niej rosliny
-    public void eat(Edible edible) {
-        this.energy += edible.getEnergy();
+    public Genome getGenom() {
+        return this.genom;
     }
-     */
+
+    public void eat(Plant plant) {
+        this.energy += plant.getEnergy();
+    }
 }

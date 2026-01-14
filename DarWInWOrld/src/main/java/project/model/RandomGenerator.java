@@ -4,17 +4,6 @@ import java.util.Random;
 
 
 public final class RandomGenerator {
-    public static String randomGenome(int n) {
-        StringBuilder genome = new StringBuilder();
-        Random random = new Random();
-
-        for (int i = 0; i < n; i++) {
-            genome.append(random.nextInt(8));
-        }
-
-        return genome.toString();
-    }
-
     public static Vector2D randomPositionWithinBounds(Vector2D leftEnd, Vector2D rightEnd) {
         Random random = new Random();
         int x1 = leftEnd.getX(), x2 = rightEnd.getX();
