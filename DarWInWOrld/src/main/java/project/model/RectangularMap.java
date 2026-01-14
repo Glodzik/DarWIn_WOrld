@@ -1,7 +1,7 @@
 package project.model;
 
 import project.model.WorldElements.Animal;
-import project.model.WorldElements.Plant;
+import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.WorldElement;
 
 import java.util.*;

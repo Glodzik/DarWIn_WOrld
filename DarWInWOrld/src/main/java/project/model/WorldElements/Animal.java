@@ -1,6 +1,5 @@
 package project.model.WorldElements;
 
-import project.model.Genome;
 import project.model.MapDirection;
 import project.model.RandomGenerator;
 import project.model.Vector2D;

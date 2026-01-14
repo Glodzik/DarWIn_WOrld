@@ -1,4 +1,4 @@
-package project.model.WorldElements;
+package project.model.WorldElements.EdibleElements;
 
 public enum TypeOfAntidote {
     GRASS(5),
