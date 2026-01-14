@@ -101,7 +101,6 @@ public final class RectangularMap {
     }
 
     public WorldElement plantAt(Vector2D position) {
-        // to do: do zmiany po dodaniu grass
         return plants.get(position);
     }
 
@@ -110,7 +109,6 @@ public final class RectangularMap {
     }
 
     public List<WorldElement> getAnimals() {
-        // to do: do zmiany po dodaniu grass
         return new ArrayList<>(animals.values());
     }
 

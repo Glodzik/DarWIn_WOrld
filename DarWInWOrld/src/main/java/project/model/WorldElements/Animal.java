@@ -3,6 +3,7 @@ package project.model.WorldElements;
 import project.model.MapDirection;
 import project.model.RandomGenerator;
 import project.model.Vector2D;
+import project.model.WorldElements.EdibleElements.Plant;
 
 public class Animal implements WorldElement {
     private MapDirection currDirection;
@@ -95,10 +96,7 @@ public class Animal implements WorldElement {
         return this.genom;
     }
 
-    /*
-    // to do: system jedzenia, klasa Edible i dziedziczace po niej rosliny
-    public void eat(Edible edible) {
-        this.energy += edible.getEnergy();
+    public void eat(Plant plant) {
+        this.energy += plant.getEnergy();
     }
-     */
 }
