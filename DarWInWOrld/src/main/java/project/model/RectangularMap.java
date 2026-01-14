@@ -43,12 +43,12 @@ public final class RectangularMap {
         if (random.nextDouble() < 0.8) {
             Vector2D vectorToPlacePlant = new Vector2D(random.nextInt(rightEnd.getX()), random.nextInt(equatorHeight, equatorHeight + jungleHeigth - 1));
             if (!isOccupiedByPlant(vectorToPlacePlant)) {
-                plants.put(vectorToPlacePlant, plant);
+                plants.put(vectorToPlacePlant, plant); // postawienie rosliny w dzungli
             }
         } else {
             Vector2D vectorToPlacePlant = new Vector2D(random.nextInt(rightEnd.getX()), random.nextInt(rightEnd.getY()));
             if ((!jungle.contains(vectorToPlacePlant)) && (!isOccupiedByPlant(vectorToPlacePlant))) {
-                plants.put(vectorToPlacePlant, plant);
+                plants.put(vectorToPlacePlant, plant); // postawienie rosliny na stepach
             }
         }
     }
