@@ -6,9 +6,14 @@ import project.model.WorldElements.Animal;
 public final class Antidote extends Plant {
     private final TypeOfAntidote typeOfAntidote;
 
-    protected Antidote(Vector2D position, TypeOfAntidote typeOfAntidote) {
-        super(position, typeOfAntidote.getEnergy());
-        this.typeOfAntidote = typeOfAntidote;
+    public Antidote(Vector2D position, TypeOfAntidote type) {
+        super(position, type.getEnergy());
+        this.typeOfAntidote = type;
+    }
+
+    public Antidote(Vector2D position, int antidote) {
+        TypeOfAntidote[] values = TypeOfAntidote.values();
+        this(position, values[antidote]);
     }
 
     @Override

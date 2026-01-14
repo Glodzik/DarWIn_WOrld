@@ -10,20 +10,20 @@ import java.util.*;
 public final class RectangularMap {
     private final Map<Vector2D, Animal> animals = new HashMap<>();
     private Map<Vector2D, Plant> plants = new HashMap<>();
+
     private final static Vector2D LEFT_END = new Vector2D(0, 0);
     private final Vector2D rightEnd;
-    private final int jungleHeight;
-    private final int equatorHeight;
     private final Vector2D jungleLeftEnd;
     private final Vector2D jungleRightEnd;
-
+    private final int jungleHeight;
 
     public RectangularMap(int width, int height) {
-        rightEnd = new Vector2D(width, height);
-        jungleHeight = Math.max((height + 1) / 5, 1);
-        equatorHeight = (int) (double) ((height + 1) / 2);
-        jungleLeftEnd = new Vector2D(0, equatorHeight);
-        jungleRightEnd = new Vector2D(rightEnd.getX(), equatorHeight + jungleHeight - 1);
+        this.rightEnd = new Vector2D(width, height);
+
+        this.jungleHeight = Math.max((height + 1) / 5, 1);
+        int equatorHeight = ((height + 1) / 2);
+        this.jungleLeftEnd = new Vector2D(0, equatorHeight);
+        this.jungleRightEnd = new Vector2D(rightEnd.getX(), equatorHeight + jungleHeight - 1);
     }
 
     public Vector2D getRightEnd() {
@@ -38,13 +38,27 @@ public final class RectangularMap {
 
     public void placePlant(Plant plant) {
         Random random = new Random();
+        Vector2D vectorToPlacePlant;
         if (random.nextDouble() < 0.8) {
-            Vector2D vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(jungleLeftEnd, jungleRightEnd);
-            plants.put(vectorToPlacePlant, plant);
+            // plant in the jungle
+            vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(jungleLeftEnd, jungleRightEnd);
         } else {
-            Vector2D vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(LEFT_END, rightEnd);
-            //if vector not in jungle -> plants.put(vectorToPlacePlant, plant);
-            //to do zmienic w przyszlosci zeby losowało poza dzunglą
+            // plant out of jungle
+            if(random.nextDouble() < 0.5) {
+                // plant to the north of the jungle
+                Vector2D northLeftEnd = jungleLeftEnd.add(new Vector2D(0, jungleHeight));
+                vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(northLeftEnd, rightEnd);
+            } else {
+                // plant to the south of the jungle
+                Vector2D southRightEnd = jungleRightEnd.subtract(new Vector2D(0, jungleHeight));
+                vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(LEFT_END, southRightEnd);
+            }
+
+        }
+
+        if(!isOccupiedByPlant(vectorToPlacePlant)) {
+            plants.put(vectorToPlacePlant, plant);
+            plant.setPosition(vectorToPlacePlant);
         }
     }
 

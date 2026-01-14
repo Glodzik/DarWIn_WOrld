@@ -5,10 +5,10 @@ import project.model.WorldElements.Animal;
 import project.model.WorldElements.WorldElement;
 
 public abstract class Plant implements WorldElement {
-    private final Vector2D position;
+    private Vector2D position;
     private final int energy;
 
-    protected Plant(Vector2D position, int energy) {
+    public Plant(Vector2D position, int energy) {
         this.position = position;
         this.energy = energy;
     }
@@ -19,6 +19,10 @@ public abstract class Plant implements WorldElement {
 
     public int getEnergy() {
         return energy;
+    }
+
+    public void setPosition(Vector2D position) {
+        this.position = position;
     }
 
     public abstract void changeAnimalEnergy(Animal animal);

@@ -10,6 +10,7 @@ public final class Genome {
     public Genome(int size) {
         this.size = size;
         this.genomeSequence = new int[size];
+        generateRandomGenome(size);
     }
 
     @Override

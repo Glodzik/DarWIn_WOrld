@@ -10,7 +10,7 @@ public class Animal implements WorldElement {
     private final Genome genom;
     private int energy;
     private int daysAlive = 0;
-    private int[] protectionGenome;
+    private int protection;
 
     private static final Vector2D START_POSITION = new Vector2D(2, 2);
     private static final int START_ENERGY = 100;
@@ -22,6 +22,9 @@ public class Animal implements WorldElement {
         this.energy = startEnergy;
         this.currDirection = RandomGenerator.randomDirection();
         this.genom = new Genome(genomLength);
+
+        // to do: dodanie parametru - genom ochrony przed trucizną i obliczenie ochrony zwierzaka
+        int protection = 0;
     }
 
     public Animal(Vector2D position) {
@@ -64,7 +67,7 @@ public class Animal implements WorldElement {
 
     public void move() {
         if(energy > 0) {
-            int rotation = genom.getGenomeSequence()[daysAlive % GENOM_LENGTH];
+            int rotation = genom.getGenomeSequence()[daysAlive % this.genom.getGenomeSize()];
             currDirection = currDirection.rotate(rotation);
             position = position.add(currDirection.toUnitVector());
             daysAlive += 1;

@@ -13,13 +13,6 @@ public final class RandomGenerator {
         return new Vector2D(randomX, randomY);
     }
 
-//  public static Vector2D randomPositionOutOfJungle(Vector2D leftEnd, Vector2D rightEnd,
-//                                                   Vector2D leftEndBound, Vector2D rightEndBound){
-//  Random random = new Random();
-//      int x1 = leftEndBound.getX(), x2 = rightEndBound.getX();
-//      int y1 = leftEndBound.getY();
-//   }
-
     public static MapDirection randomDirection() {
         Random random = new Random();
         MapDirection[] directions = MapDirection.values();
