@@ -35,5 +35,4 @@ public final class Genome {
             this.genomeSequence[i] = random.nextInt(8);
         }
     }
-
 }

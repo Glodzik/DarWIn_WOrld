@@ -17,9 +17,9 @@ class RectangularMapTest {
         map.place(animal);
 
         //then
-        assertEquals(animal, map.objectAt(animal.getPosition()));
-        assertTrue(map.isOccupied(animal.getPosition()));
-        assertTrue(map.getElements().contains(animal));
+        assertEquals(animal, map.animalAt(animal.getPosition()));
+        assertTrue(map.isOccupiedByAnimal(animal.getPosition()));
+        assertTrue(map.getAnimals().contains(animal));
     }
 
     @Test
@@ -34,8 +34,8 @@ class RectangularMapTest {
         map.move(animal);
 
         //then
-        assertFalse(map.isOccupied(oldPosition));
-        assertTrue(map.isOccupied(animal.getPosition()));
+        assertFalse(map.isOccupiedByAnimal(oldPosition));
+        assertTrue(map.isOccupiedByAnimal(animal.getPosition()));
     }
 
     @Test
@@ -46,7 +46,7 @@ class RectangularMapTest {
         map.place(animal);
 
         //when & then
-        assertTrue(map.isOccupied(animal.getPosition()));
+        assertTrue(map.isOccupiedByAnimal(animal.getPosition()));
     }
 
     @Test
@@ -57,7 +57,7 @@ class RectangularMapTest {
         map.place(animal);
 
         //when & then
-        assertEquals(animal, map.objectAt(animal.getPosition()));
+        assertEquals(animal, map.animalAt(animal.getPosition()));
     }
 
     @Test
@@ -70,7 +70,7 @@ class RectangularMapTest {
         map.place(animal2);
 
         //when & then
-        assertTrue(map.getElements().contains(animal1));
-        assertTrue(map.getElements().contains(animal2));
+        assertTrue(map.getAnimals().contains(animal1));
+        assertTrue(map.getAnimals().contains(animal2));
     }
 }

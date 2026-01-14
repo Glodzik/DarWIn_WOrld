@@ -11,6 +11,7 @@ public class Animal implements WorldElement {
     private final Genome genom;
     private int energy;
     private int daysAlive = 0;
+    private int[] protectionGenome;
 
     private static final Vector2D START_POSITION = new Vector2D(2, 2);
     private static final int START_ENERGY = 100;
@@ -20,7 +21,6 @@ public class Animal implements WorldElement {
         this.position = position;
         // to do: zarządzanie energia, parametr - wartość energii startowej
         this.energy = startEnergy;
-
         this.currDirection = RandomGenerator.randomDirection();
         this.genom = new Genome(genomLength);
     }
