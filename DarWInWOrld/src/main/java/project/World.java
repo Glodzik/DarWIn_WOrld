@@ -14,16 +14,17 @@ import java.util.Random;
 
 public class World {
     public static void main(String[] args) {
-        Animal animal = new Animal();
-        Animal animal2 = new Animal();
         RectangularMap map = new RectangularMap(2, 2);
 
-        map.place(animal);
-        map.place(animal2);
-
+        Animal[] animals = new Animal[5];
         Plant[] plantArray = new Plant[10];
 
-        // Wypełnienie tablicy
+
+        for (int i = 0; i < animals.length; i++) {
+            animals[i] = new Animal();
+            map.place(animals[i]);
+        }
+
         Random random = new Random();
         for (int i = 0; i < plantArray.length; i++) {
             int antidoteType = random.nextInt(5);
@@ -32,7 +33,7 @@ public class World {
         }
 
         for(int i = 0; i < 100; i++) {
-            map.move(animal);
+            map.move(animals[i % animals.length]);
         }
     }
 }
