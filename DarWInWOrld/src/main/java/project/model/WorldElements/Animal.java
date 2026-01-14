@@ -5,6 +5,8 @@ import project.model.RandomGenerator;
 import project.model.Vector2D;
 import project.model.WorldElements.EdibleElements.Plant;
 
+import java.util.Random;
+
 public class Animal implements WorldElement {
     private MapDirection currDirection;
     private Vector2D position;
@@ -75,7 +77,7 @@ public class Animal implements WorldElement {
     }
 
     public void move() {
-        if(energy > 0) {
+        if (energy > 0) {
             int rotation = genom.getGenomeSequence()[daysAlive % this.genom.getGenomeSize()];
             currDirection = currDirection.rotate(rotation);
             position = position.add(currDirection.toUnitVector());
@@ -105,5 +107,35 @@ public class Animal implements WorldElement {
 
     public void eat(Plant plant) {
         this.energy += plant.getEnergy();
+    }
+
+    public void getGenomeFromParents(Animal animal1, Animal animal2) {
+        int sumOfEnergy = animal1.getEnergy() + animal2.getEnergy();
+        int sizeOfStrongerParentGenome = Math.round(((float) animal1.getEnergy() / sumOfEnergy) * GENOM_LENGTH);
+        int sizeOfWeakerParentGenome = GENOM_LENGTH - sizeOfStrongerParentGenome;
+
+        Random random = new Random();
+
+        if (random.nextDouble() < 0.5) {
+            for (int i = 0; i < sizeOfStrongerParentGenome; i++) {
+                this.genom.getGenomeSequence()[i] = animal1.getGenom().getGenomeSequence()[i];
+            }
+            for (int i = sizeOfStrongerParentGenome; i < GENOM_LENGTH; i++) {
+                this.genom.getGenomeSequence()[i] = animal2.getGenom().getGenomeSequence()[i];
+            }
+        } else {
+            for (int i = 0; i < sizeOfWeakerParentGenome; i++) {
+                this.genom.getGenomeSequence()[i] = animal2.getGenom().getGenomeSequence()[i];
+            }
+            for (int i = sizeOfWeakerParentGenome; i < GENOM_LENGTH; i++) {
+                this.genom.getGenomeSequence()[i] = animal1.getGenom().getGenomeSequence()[i];
+            }
+        }
+
+        int mutationCount = random.nextInt(GENOM_LENGTH);
+        for (int i = 0; i < mutationCount; i++) {
+            int mutationIndex = random.nextInt(GENOM_LENGTH);
+            this.genom.getGenomeSequence()[mutationIndex] = random.nextInt(8);
+        }
     }
 }
