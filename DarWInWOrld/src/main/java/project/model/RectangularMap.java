@@ -18,11 +18,7 @@ public final class RectangularMap {
     public RectangularMap(int width, int height) {
         rightEnd = new Vector2D(width, height);
         jungleHeigth = height / 5;
-        if ((height + 1) % 2 != 0) {
-            equatorHeight = height / 2 + 1;
-        } else {
-            equatorHeight = height / 2;
-        }
+        equatorHeight = (height + 1) / 2;
         for (int i = 0; i < width; i++) {
             this.jungle.add(new Vector2D(i, equatorHeight));
         }
