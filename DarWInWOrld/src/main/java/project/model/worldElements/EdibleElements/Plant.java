@@ -1,8 +1,8 @@
-package project.model.WorldElements.EdibleElements;
+package project.model.worldElements.EdibleElements;
 
 import project.model.Vector2D;
-import project.model.WorldElements.Animal;
-import project.model.WorldElements.WorldElement;
+import project.model.worldElements.Animal;
+import project.model.worldElements.WorldElement;
 
 public abstract class Plant implements WorldElement {
     private Vector2D position;

@@ -1,9 +1,9 @@
-package project.model.WorldElements;
+package project.model.worldElements;
 
 import project.model.MapDirection;
 import project.model.RandomGenerator;
 import project.model.Vector2D;
-import project.model.WorldElements.EdibleElements.Plant;
+import project.model.worldElements.EdibleElements.Plant;
 
 public class Animal implements WorldElement {
     private MapDirection currDirection;

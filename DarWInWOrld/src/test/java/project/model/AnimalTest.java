@@ -1,7 +1,7 @@
 package project.model;
 
 import org.junit.jupiter.api.Test;
-import project.model.WorldElements.Animal;
+import project.model.worldElements.Animal;
 
 import static org.junit.jupiter.api.Assertions.*;
 

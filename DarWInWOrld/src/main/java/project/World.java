@@ -2,14 +2,10 @@ package project;
 
 import project.model.RectangularMap;
 import project.model.Vector2D;
-import project.model.WorldElements.Animal;
-import project.model.WorldElements.EdibleElements.Antidote;
-import project.model.WorldElements.EdibleElements.Plant;
-import project.model.WorldElements.EdibleElements.Poison;
-import project.model.WorldElements.EdibleElements.TypeOfPoison;
-import project.model.WorldElements.WorldElement;
+import project.model.worldElements.Animal;
+import project.model.worldElements.EdibleElements.Antidote;
+import project.model.worldElements.EdibleElements.Plant;
 
-import java.util.List;
 import java.util.Random;
 
 public class World {
