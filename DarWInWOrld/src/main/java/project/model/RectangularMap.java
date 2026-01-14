@@ -6,22 +6,24 @@ import project.model.WorldElements.WorldElement;
 
 import java.util.*;
 
+
 public final class RectangularMap {
     private final Map<Vector2D, Animal> animals = new HashMap<>();
     private Map<Vector2D, Plant> plants = new HashMap<>();
     private final static Vector2D LEFT_END = new Vector2D(0, 0);
     private final Vector2D rightEnd;
+    private final int jungleHeight;
     private final int equatorHeight;
-    private HashSet<Vector2D> jungle;
-    private final int jungleHeigth;
+    private final Vector2D jungleLeftEnd;
+    private final Vector2D jungleRightEnd;
+
 
     public RectangularMap(int width, int height) {
         rightEnd = new Vector2D(width, height);
-        jungleHeigth = height / 5;
-        equatorHeight = (height + 1) / 2;
-        for (int i = 0; i < width; i++) {
-            this.jungle.add(new Vector2D(i, equatorHeight));
-        }
+        jungleHeight = Math.max((height + 1) / 5, 1);
+        equatorHeight = (int) (double) ((height + 1) / 2);
+        jungleLeftEnd = new Vector2D(0, equatorHeight);
+        jungleRightEnd = new Vector2D(rightEnd.getX(), equatorHeight + jungleHeight - 1);
     }
 
     public Vector2D getRightEnd() {
@@ -37,15 +39,12 @@ public final class RectangularMap {
     public void placePlant(Plant plant) {
         Random random = new Random();
         if (random.nextDouble() < 0.8) {
-            Vector2D vectorToPlacePlant = new Vector2D(random.nextInt(rightEnd.getX()), random.nextInt(equatorHeight, equatorHeight + jungleHeigth - 1));
-            if (!isOccupiedByPlant(vectorToPlacePlant)) {
-                plants.put(vectorToPlacePlant, plant); // postawienie rosliny w dzungli
-            }
+            Vector2D vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(jungleLeftEnd, jungleRightEnd);
+            plants.put(vectorToPlacePlant, plant);
         } else {
-            Vector2D vectorToPlacePlant = new Vector2D(random.nextInt(rightEnd.getX()), random.nextInt(rightEnd.getY()));
-            if ((!jungle.contains(vectorToPlacePlant)) && (!isOccupiedByPlant(vectorToPlacePlant))) {
-                plants.put(vectorToPlacePlant, plant); // postawienie rosliny na stepach
-            }
+            Vector2D vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(LEFT_END, rightEnd);
+            //if vector not in jungle -> plants.put(vectorToPlacePlant, plant);
+            //to do zmienic w przyszlosci zeby losowało poza dzunglą
         }
     }
 
