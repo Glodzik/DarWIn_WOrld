@@ -14,9 +14,21 @@ public final class RectangularMap {
     private Map<Vector2D, Plant> plants = new HashMap<>();
     private final static Vector2D LEFT_END = new Vector2D(0, 0);
     private final Vector2D rightEnd;
+    private final int equatorHeight;
+    private ArrayList<Vector2D> jungle;
+    private final int jungleHeigth;
 
     public RectangularMap(int width, int height) {
         rightEnd = new Vector2D(width, height);
+        jungleHeigth = height / 5;
+        if (height % 2 != 0) {
+            equatorHeight = height / 2 + 1;
+        } else {
+            equatorHeight = height / 2;
+        }
+        for (int i = 0; i < width; i++) {
+            this.jungle.add(new Vector2D(i, equatorHeight));
+        }
     }
 
     public Vector2D getRightEnd() {
