@@ -1,9 +1,9 @@
-package project.model.worldElements;
+package project.model.WorldElements;
 
 import project.model.MapDirection;
 import project.model.RandomGenerator;
 import project.model.Vector2D;
-import project.model.worldElements.EdibleElements.Plant;
+import project.model.WorldElements.EdibleElements.Plant;
 
 public class Animal implements WorldElement {
     private MapDirection currDirection;
@@ -16,6 +16,14 @@ public class Animal implements WorldElement {
     private static final Vector2D START_POSITION = new Vector2D(2, 2);
     private static final int START_ENERGY = 100;
     private static final int GENOM_LENGTH = 8;
+
+    public Animal(int startEnergy, int genomLength, Genome protectionGenome) {
+        this.position = START_POSITION;
+        this.energy = startEnergy;
+        this.genom = new Genome(genomLength);
+        this.protection = Genome.protectionLevel(this.genom, protectionGenome);
+        this.currDirection = RandomGenerator.randomDirection();
+    }
 
     public Animal(Vector2D position, int startEnergy, int genomLength) {
         this.position = position;
@@ -79,7 +87,6 @@ public class Animal implements WorldElement {
         this.position = position;
     }
 
-    // to do: odejmowanie energii po ruchu i zjedzeniu trującej rośliny
     public void energyLoss(int energyAmount) {
         this.energy -= energyAmount;
     }

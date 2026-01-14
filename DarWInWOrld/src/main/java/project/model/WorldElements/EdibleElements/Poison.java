@@ -1,7 +1,7 @@
-package project.model.worldElements.EdibleElements;
+package project.model.WorldElements.EdibleElements;
 
 import project.model.Vector2D;
-import project.model.worldElements.Animal;
+import project.model.WorldElements.Animal;
 
 public final class Poison extends Plant {
     private final TypeOfPoison typeOfPoison;

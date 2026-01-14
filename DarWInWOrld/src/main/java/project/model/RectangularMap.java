@@ -1,8 +1,8 @@
 package project.model;
 
-import project.model.worldElements.Animal;
-import project.model.worldElements.EdibleElements.Plant;
-import project.model.worldElements.WorldElement;
+import project.model.WorldElements.Animal;
+import project.model.WorldElements.EdibleElements.Plant;
+import project.model.WorldElements.WorldElement;
 
 import java.util.*;
 

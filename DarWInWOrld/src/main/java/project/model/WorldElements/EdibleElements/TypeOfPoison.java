@@ -1,4 +1,4 @@
-package project.model.worldElements.EdibleElements;
+package project.model.WorldElements.EdibleElements;
 
 public enum TypeOfPoison {
     LILY(5),

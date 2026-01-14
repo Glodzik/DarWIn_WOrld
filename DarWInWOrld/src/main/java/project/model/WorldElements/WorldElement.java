@@ -1,4 +1,4 @@
-package project.model.worldElements;
+package project.model.WorldElements;
 
 import project.model.Vector2D;
 
