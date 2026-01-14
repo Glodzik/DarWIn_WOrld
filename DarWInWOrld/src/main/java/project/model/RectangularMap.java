@@ -8,7 +8,7 @@ import java.util.*;
 
 
 public final class RectangularMap {
-    private final Map<Vector2D, Animal> animals = new HashMap<>();
+    private final Map<Vector2D, List<Animal>> animals = new HashMap<>();
     private Map<Vector2D, Plant> plants = new HashMap<>();
 
     private final static Vector2D LEFT_END = new Vector2D(0, 0);
@@ -33,7 +33,7 @@ public final class RectangularMap {
     public void place(Animal animal) {
         Vector2D position = RandomGenerator.randomPositionWithinBounds(LEFT_END, rightEnd);
         animal.setPosition(position);
-        animals.put(position, animal);
+        animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
     }
 
     public void placePlant(Plant plant) {
@@ -63,33 +63,42 @@ public final class RectangularMap {
     }
 
     public void move(Animal animal) {
-        if (animals.get(animal.getPosition()) == animal) {
-            Vector2D oldPosition = animal.getPosition();
-            animals.remove(animal.getPosition(), animal);
-            animal.move();
-            Vector2D newPosition = animal.getPosition();
+        Vector2D oldPosition = animal.getPosition();
+        List<Animal> animalsAtPosition = animals.get(oldPosition);
 
-            if(!inBorder(newPosition)) {
-                if (newPosition.aboveYLine(rightEnd.getY()) || newPosition.belowYLine(LEFT_END.getY())) {
-                    // turning back from the poles
-                    animal.turnBack();
-                    animal.setPosition(oldPosition);
-                    animals.put(oldPosition, animal);
-                } else if (newPosition.onLeftXLine(LEFT_END.getX())) {
-                    // transition from left to right
-                    Vector2D correctedPosition = new Vector2D(rightEnd.getX(), newPosition.getY());
-                    animal.setPosition(correctedPosition);
-                    animals.put(correctedPosition, animal);
-                } else if (newPosition.onRightXLine(rightEnd.getX())) {
-                    // transition from right to left
-                    Vector2D correctedPosition = new Vector2D(LEFT_END.getX(), newPosition.getY());
-                    animal.setPosition(correctedPosition);
-                    animals.put(correctedPosition, animal);
-                }
-            } else {
-                animals.put(newPosition, animal);
-            }
+        animalsAtPosition.remove(animal);
+        animal.move();
+        Vector2D newPosition = animal.getPosition();
+
+        if (animalsAtPosition.isEmpty()) {
+            animals.remove(oldPosition);
         }
+
+        if(!inBorder(newPosition)) {
+            if (newPosition.aboveYLine(rightEnd.getY()) || newPosition.belowYLine(LEFT_END.getY())) {
+                // turning back from the poles
+                animal.turnBack();
+                animal.setPosition(oldPosition);
+                animals.computeIfAbsent(oldPosition, k -> new ArrayList<>()).add(animal);
+            } else if (newPosition.onLeftXLine(LEFT_END.getX())) {
+                // transition from left to right
+                Vector2D correctedPosition = new Vector2D(rightEnd.getX(), newPosition.getY());
+                animal.setPosition(correctedPosition);
+                animals.computeIfAbsent(correctedPosition, k -> new ArrayList<>()).add(animal);
+            } else if (newPosition.onRightXLine(rightEnd.getX())) {
+                // transition from right to left
+                Vector2D correctedPosition = new Vector2D(LEFT_END.getX(), newPosition.getY());
+                animal.setPosition(correctedPosition);
+                animals.computeIfAbsent(correctedPosition, k -> new ArrayList<>()).add(animal);
+            }
+        } else {
+            animals.computeIfAbsent(newPosition, k -> new ArrayList<>()).add(animal);
+        }
+    }
+
+    public List<Animal> getAnimalsAt(Vector2D position) {
+        List<Animal> animalsAtPosition = animals.get(position);
+        return animalsAtPosition != null ? new ArrayList<>(animalsAtPosition) : new ArrayList<>();
     }
 
     public boolean isOccupiedByPlant(Vector2D position) {
@@ -97,7 +106,8 @@ public final class RectangularMap {
     }
 
     public boolean isOccupiedByAnimal(Vector2D position) {
-        return animalAt(position) != null;
+        List<Animal> animalsAtPosition = animals.get(position);
+        return animalsAtPosition != null && !animalsAtPosition.isEmpty();
     }
 
     public WorldElement plantAt(Vector2D position) {
@@ -105,11 +115,20 @@ public final class RectangularMap {
     }
 
     public WorldElement animalAt(Vector2D position) {
-        return animals.get(position);
+        List<Animal> animalsAtPosition = animals.get(position);
+        return (animalsAtPosition != null && !animalsAtPosition.isEmpty())
+                ? animalsAtPosition.get(0)
+                : null;
+
+        // to do: sortowanie zwierzaków według kryteriów
     }
 
     public List<WorldElement> getAnimals() {
-        return new ArrayList<>(animals.values());
+        List<WorldElement> allAnimals = new ArrayList<>();
+        for (List<Animal> animalList : animals.values()) {
+            allAnimals.addAll(animalList);
+        }
+        return allAnimals;
     }
 
     public List<WorldElement> getPlants() {
