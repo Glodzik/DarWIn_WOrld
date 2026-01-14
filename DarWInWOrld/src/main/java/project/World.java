@@ -34,6 +34,7 @@ public class World {
 
         for(int i = 0; i < 100; i++) {
             map.move(animals[i % animals.length]);
+            map.eatIfPossible(animals[i % animals.length]);
         }
     }
 }

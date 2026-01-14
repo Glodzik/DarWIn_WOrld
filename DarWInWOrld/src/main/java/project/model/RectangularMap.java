@@ -101,6 +101,14 @@ public final class RectangularMap {
         return animalsAtPosition != null ? new ArrayList<>(animalsAtPosition) : new ArrayList<>();
     }
 
+    public void eatIfPossible(Animal animal) {
+        Vector2D position = animal.getPosition();
+        if(isOccupiedByPlant(position)) {
+            animal.eat(plants.get(position));
+            plants.remove(position);
+        }
+    }
+
     public boolean isOccupiedByPlant(Vector2D position) {
         return plantAt(position) != null;
     }
@@ -112,15 +120,6 @@ public final class RectangularMap {
 
     public WorldElement plantAt(Vector2D position) {
         return plants.get(position);
-    }
-
-    public WorldElement animalAt(Vector2D position) {
-        List<Animal> animalsAtPosition = animals.get(position);
-        return (animalsAtPosition != null && !animalsAtPosition.isEmpty())
-                ? animalsAtPosition.get(0)
-                : null;
-
-        // to do: sortowanie zwierzaków według kryteriów
     }
 
     public List<WorldElement> getAnimals() {
