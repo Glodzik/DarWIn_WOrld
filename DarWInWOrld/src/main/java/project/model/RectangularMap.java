@@ -11,27 +11,24 @@ public final class RectangularMap {
     private final Map<Vector2D, List<Animal>> animals = new HashMap<>();
     private Map<Vector2D, Plant> plants = new HashMap<>();
 
-    private final static Vector2D LEFT_END = new Vector2D(0, 0);
-    private final Vector2D rightEnd;
-    private final Vector2D jungleLeftEnd;
-    private final Vector2D jungleRightEnd;
+    private final static Vector2D LOWER_LEFT = new Vector2D(0, 0);
+    private final Vector2D jungleLowerLeft;
+    private final Vector2D jungleUpperRight;
     private final int jungleHeight;
+    private final Boundary mapBounds;
+    private final Boundary jungleBoundary;
 
     public RectangularMap(int width, int height) {
-        this.rightEnd = new Vector2D(width, height);
-
+        this.mapBounds = new Boundary(LOWER_LEFT, new Vector2D(width, height));
         this.jungleHeight = Math.max((height + 1) / 5, 1);
         int equatorHeight = ((height + 1) / 2);
-        this.jungleLeftEnd = new Vector2D(0, equatorHeight);
-        this.jungleRightEnd = new Vector2D(rightEnd.getX(), equatorHeight + jungleHeight - 1);
-    }
-
-    public Vector2D getRightEnd() {
-        return rightEnd;
+        jungleLowerLeft = new Vector2D(0, equatorHeight);
+        jungleUpperRight = new Vector2D(mapBounds.upperRight().getX(), equatorHeight + jungleHeight - 1);
+        this.jungleBoundary = new Boundary(jungleLowerLeft, jungleUpperRight);
     }
 
     public void place(Animal animal) {
-        Vector2D position = RandomGenerator.randomPositionWithinBounds(LEFT_END, rightEnd);
+        Vector2D position = RandomGenerator.randomPositionWithinBounds(mapBounds);
         animal.setPosition(position);
         animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
     }
@@ -41,17 +38,18 @@ public final class RectangularMap {
         Vector2D vectorToPlacePlant;
         if (random.nextDouble() < 0.8) {
             // plant in the jungle
-            vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(jungleLeftEnd, jungleRightEnd);
+            vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(mapBounds);
         } else {
             // plant out of jungle
             if(random.nextDouble() < 0.5) {
                 // plant to the north of the jungle
-                Vector2D northLeftEnd = jungleLeftEnd.add(new Vector2D(0, jungleHeight));
-                vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(northLeftEnd, rightEnd);
+                Vector2D northLeftEnd = jungleLowerLeft.add(new Vector2D(0, jungleHeight));
+                vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds
+                        (new Boundary(northLeftEnd, mapBounds.upperRight()));
             } else {
                 // plant to the south of the jungle
-                Vector2D southRightEnd = jungleRightEnd.subtract(new Vector2D(0, jungleHeight));
-                vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(LEFT_END, southRightEnd);
+                Vector2D southRightEnd = jungleUpperRight.subtract(new Vector2D(0, jungleHeight));
+                vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(new Boundary(mapBounds.lowerLeft(), southRightEnd));
             }
 
         }
@@ -75,19 +73,19 @@ public final class RectangularMap {
         }
 
         if(!inBorder(newPosition)) {
-            if (newPosition.aboveYLine(rightEnd.getY()) || newPosition.belowYLine(LEFT_END.getY())) {
+            if (newPosition.aboveYLine(mapBounds.upperRight().getY()) || newPosition.belowYLine(LOWER_LEFT.getY())) {
                 // turning back from the poles
                 animal.turnBack();
                 animal.setPosition(oldPosition);
                 animals.computeIfAbsent(oldPosition, k -> new ArrayList<>()).add(animal);
-            } else if (newPosition.onLeftXLine(LEFT_END.getX())) {
+            } else if (newPosition.onLeftXLine(LOWER_LEFT.getX())) {
                 // transition from left to right
-                Vector2D correctedPosition = new Vector2D(rightEnd.getX(), newPosition.getY());
+                Vector2D correctedPosition = new Vector2D(mapBounds.upperRight().getX(), newPosition.getY());
                 animal.setPosition(correctedPosition);
                 animals.computeIfAbsent(correctedPosition, k -> new ArrayList<>()).add(animal);
-            } else if (newPosition.onRightXLine(rightEnd.getX())) {
+            } else if (newPosition.onRightXLine(mapBounds.upperRight().getX())) {
                 // transition from right to left
-                Vector2D correctedPosition = new Vector2D(LEFT_END.getX(), newPosition.getY());
+                Vector2D correctedPosition = new Vector2D(LOWER_LEFT.getX(), newPosition.getY());
                 animal.setPosition(correctedPosition);
                 animals.computeIfAbsent(correctedPosition, k -> new ArrayList<>()).add(animal);
             }
@@ -135,6 +133,6 @@ public final class RectangularMap {
     }
 
     private boolean inBorder(Vector2D position) {
-        return (position.precedes(rightEnd) && position.follows(LEFT_END));
+        return (position.precedes(mapBounds.upperRight()) && position.follows(LOWER_LEFT));
     }
 }

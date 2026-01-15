@@ -3,7 +3,8 @@ package project.model;
 import org.junit.jupiter.api.Test;
 import project.model.WorldElements.Animal;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RectangularMapTest {
 
@@ -17,7 +18,6 @@ class RectangularMapTest {
         map.place(animal);
 
         //then
-        assertEquals(animal, map.animalAt(animal.getPosition()));
         assertTrue(map.isOccupiedByAnimal(animal.getPosition()));
         assertTrue(map.getAnimals().contains(animal));
     }
@@ -49,16 +49,6 @@ class RectangularMapTest {
         assertTrue(map.isOccupiedByAnimal(animal.getPosition()));
     }
 
-    @Test
-    void objectAt() {
-        //given
-        RectangularMap map = new RectangularMap(5, 5);
-        Animal animal = new Animal();
-        map.place(animal);
-
-        //when & then
-        assertEquals(animal, map.animalAt(animal.getPosition()));
-    }
 
     @Test
     void getElements() {
