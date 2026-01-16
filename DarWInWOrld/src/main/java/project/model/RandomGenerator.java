@@ -19,4 +19,9 @@ public final class RandomGenerator {
         int direction = random.nextInt(directions.length);
         return directions[direction];
     }
+
+    public static double probability() {
+        Random random = new Random();
+        return random.nextDouble();
+    }
 }

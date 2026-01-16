@@ -32,14 +32,13 @@ public final class RectangularMap {
     }
 
     public void placePlant(Plant plant) {
-        Random random = new Random();
         Vector2D vectorToPlacePlant;
-        if (random.nextDouble() < 0.8) {
+        if (RandomGenerator.probability() < 0.8) {
             // plant in the jungle
             vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds(jungleBoundary);
         } else {
             // plant out of jungle
-            if(random.nextDouble() < 0.5) {
+            if(RandomGenerator.probability() < 0.5) {
                 // plant to the north of the jungle
                 Vector2D northLeftEnd = jungleBoundary.lowerLeft().add(new Vector2D(0, jungleHeight));
                 vectorToPlacePlant = RandomGenerator.randomPositionWithinBounds
