@@ -69,6 +69,7 @@ public class Simulation {
         animalsEating();
         animalsBreeding();
         addPlants(simulationParameters.newPlantsEveryday(), simulationParameters.plantParameters(), simulationParameters.customPlants());
+        animalsEnergyLoss();
     }
 
     private void removeAllDead() {
