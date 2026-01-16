@@ -9,7 +9,7 @@ public final class RandomGenerator {
     private final static Random random = new Random();
 
     public static Vector2D randomPositionWithinBounds(Boundary bounds) {
-        int x1 = bounds.lowerLeft().getX(), x2 = bounds.upperRight().getY();
+        int x1 = bounds.lowerLeft().getX(), x2 = bounds.upperRight().getX();
         int y1 = bounds.lowerLeft().getY(), y2 = bounds.upperRight().getY();
         int randomX = random.nextInt(x2 - x1 + 1) + x1;
         int randomY = random.nextInt(y2 - y1 + 1) + y1;
