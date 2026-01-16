@@ -1,6 +1,6 @@
 package project.model;
 
-import project.model.WorldElements.Animal;
+import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.WorldElement;
 
@@ -74,7 +74,7 @@ public final class RectangularMap {
 
     public List<Animal> getAnimalsAt(Vector2D position) {
         List<Animal> animalsAtPosition = animals.get(position);
-        return animalsAtPosition != null ? new ArrayList<>(animalsAtPosition) : new ArrayList<>();
+        return animalsAtPosition != null ? animalsAtPosition : new ArrayList<>();
     }
 
     public void eatIfPossible(Animal animal) {
@@ -86,7 +86,7 @@ public final class RectangularMap {
     }
 
     public boolean isOccupiedByPlant(Vector2D position) {
-        return plantAt(position) != null;
+        return getPlantAt(position) != null;
     }
 
     public boolean isOccupiedByAnimal(Vector2D position) {
@@ -94,7 +94,7 @@ public final class RectangularMap {
         return animalsAtPosition != null && !animalsAtPosition.isEmpty();
     }
 
-    public WorldElement plantAt(Vector2D position) {
+    public WorldElement getPlantAt(Vector2D position) {
         return plants.get(position);
     }
 

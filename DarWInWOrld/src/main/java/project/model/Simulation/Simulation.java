@@ -1,7 +1,7 @@
 package project.model.Simulation;
 
 import project.model.RectangularMap;
-import project.model.WorldElements.Animal;
+import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.EdibleElements.Plant;
 
 import java.util.ArrayList;

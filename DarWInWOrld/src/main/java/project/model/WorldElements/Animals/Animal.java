@@ -1,9 +1,8 @@
-package project.model.WorldElements;
+package project.model.WorldElements.Animals;
 
 import project.model.*;
 import project.model.WorldElements.EdibleElements.Plant;
-
-import java.util.ArrayList;
+import project.model.WorldElements.WorldElement;
 
 public final class Animal implements WorldElement {
     private MapDirection currDirection;
@@ -12,16 +11,21 @@ public final class Animal implements WorldElement {
     private int energy;
     private int daysAlive = 0;
     private int protection = 0;
+    private int childrenCount = 0;
 
     private static final Vector2D START_POSITION = new Vector2D(0, 0);
     private static final int START_ENERGY = 100;
 
     public Animal(Animal animal1, Animal animal2, AnimalParameters parameters, Genome protectionGenome) {
-        this.energy = parameters.energyLossAfterBreed() * 2;
         animal1.energyLoss(parameters.energyLevelToBreed());
         animal2.energyLoss(parameters.energyLevelToBreed());
+        animal1.childrenCount += 1;
+        animal2.childrenCount += 1;
+
+        this.energy = parameters.energyLossAfterBreed() * 2;
         this.position = animal1.getPosition();
         this.currDirection = RandomGenerator.randomDirection();
+
         Animal strongerParent = animal1.getEnergy() >= animal2.getEnergy() ? animal1 : animal2;
         Animal weakerParent = animal1.getEnergy() >= animal2.getEnergy() ? animal2 : animal1;
         this.genom = new Genome(
@@ -124,6 +128,14 @@ public final class Animal implements WorldElement {
 
     public Genome getGenom() {
         return this.genom;
+    }
+
+    public int getDaysAlive() {
+        return this.daysAlive;
+    }
+
+    public int getChildrenCount() {
+        return this.childrenCount;
     }
 
     public void eat(Plant plant) {

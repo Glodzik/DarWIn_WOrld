@@ -1,9 +1,8 @@
 package project.model;
 
 import org.junit.jupiter.api.Test;
-import project.model.WorldElements.Animal;
+import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.EdibleElements.Antidote;
-import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.EdibleElements.Poison;
 
 import static org.junit.jupiter.api.Assertions.*;

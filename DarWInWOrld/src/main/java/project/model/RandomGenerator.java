@@ -24,4 +24,9 @@ public final class RandomGenerator {
         Random random = new Random();
         return random.nextDouble();
     }
+
+    public static boolean TrueOrFalse() {
+        Random random = new Random();
+        return random.nextBoolean();
+    }
 }

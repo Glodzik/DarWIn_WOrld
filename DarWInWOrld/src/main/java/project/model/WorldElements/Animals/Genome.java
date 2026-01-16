@@ -1,4 +1,4 @@
-package project.model.WorldElements;
+package project.model.WorldElements.Animals;
 
 import java.util.Random;
 

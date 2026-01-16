@@ -1,4 +1,4 @@
-package project.model.WorldElements;
+package project.model.WorldElements.Animals;
 
 public record AnimalParameters(int startEnergy, int energyLossEveryDay,
                                 int energyLevelToBreed, int energyLossAfterBreed,

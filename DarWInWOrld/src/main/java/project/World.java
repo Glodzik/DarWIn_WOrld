@@ -2,11 +2,11 @@ package project;
 
 import project.model.RectangularMap;
 import project.model.Vector2D;
-import project.model.WorldElements.Animal;
-import project.model.WorldElements.AnimalParameters;
+import project.model.WorldElements.Animals.Animal;
+import project.model.WorldElements.Animals.AnimalParameters;
 import project.model.WorldElements.EdibleElements.Antidote;
 import project.model.WorldElements.EdibleElements.Plant;
-import project.model.WorldElements.Genome;
+import project.model.WorldElements.Animals.Genome;
 
 import java.util.Random;
 
