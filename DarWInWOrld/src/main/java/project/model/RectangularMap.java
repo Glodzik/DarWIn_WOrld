@@ -103,12 +103,12 @@ public final class RectangularMap {
     }
 
     // unmodifiable lists
-    public List<WorldElement> getPlants() {
+    public List<Plant> getPlants() {
         return new ArrayList<>(plants.values());
     }
 
-    public List<WorldElement> getAnimals() {
-        List<WorldElement> allAnimals = new ArrayList<>();
+    public List<Animal> getAnimals() {
+        List<Animal> allAnimals = new ArrayList<>();
         for (List<Animal> animalList : animals.values()) {
             allAnimals.addAll(animalList);
         }

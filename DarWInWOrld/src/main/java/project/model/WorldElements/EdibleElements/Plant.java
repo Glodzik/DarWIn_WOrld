@@ -3,7 +3,7 @@ package project.model.WorldElements.EdibleElements;
 import project.model.Vector2D;
 import project.model.WorldElements.WorldElement;
 
-public abstract class Plant implements WorldElement {
+public class Plant implements WorldElement {
     private Vector2D position;
     private final int energy;
 
@@ -22,5 +22,10 @@ public abstract class Plant implements WorldElement {
 
     public void setPosition(Vector2D position) {
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return "*";
     }
 }

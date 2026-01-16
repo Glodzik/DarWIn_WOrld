@@ -1,11 +1,14 @@
 package project.model;
 
+import project.model.WorldElements.EdibleElements.*;
+
 import java.util.Random;
 
 
 public final class RandomGenerator {
+    private final static Random random = new Random();
+
     public static Vector2D randomPositionWithinBounds(Boundary bounds) {
-        Random random = new Random();
         int x1 = bounds.lowerLeft().getX(), x2 = bounds.upperRight().getY();
         int y1 = bounds.lowerLeft().getY(), y2 = bounds.upperRight().getY();
         int randomX = random.nextInt(x2 - x1 + 1) + x1;
@@ -14,19 +17,36 @@ public final class RandomGenerator {
     }
 
     public static MapDirection randomDirection() {
-        Random random = new Random();
         MapDirection[] directions = MapDirection.values();
         int direction = random.nextInt(directions.length);
         return directions[direction];
     }
 
     public static double probability() {
-        Random random = new Random();
         return random.nextDouble();
     }
 
     public static boolean TrueOrFalse() {
-        Random random = new Random();
         return random.nextBoolean();
+    }
+
+    public static Plant randomCustomPlants(int poisonPlantProbability) {
+        int probability = random.nextInt(101);
+        if(probability <= poisonPlantProbability) {
+            int poison = random.nextInt(TypeOfPoison.values().length);
+            return new Poison(null, poison);
+        } else {
+            int antidote = random.nextInt(TypeOfAntidote.values().length);
+            return new Antidote(null, TypeOfAntidote.values().length);
+        }
+    }
+
+    public static Plant randomPlant(int plantEnergy, int poisonPlantProbability, int poisonEnergy) {
+        int probability = random.nextInt(101);
+        if(probability <= poisonPlantProbability) {
+            return new Plant(null, poisonEnergy);
+        } else {
+            return new Plant(null, plantEnergy);
+        }
     }
 }
