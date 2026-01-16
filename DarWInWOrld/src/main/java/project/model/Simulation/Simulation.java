@@ -2,6 +2,7 @@ package project.model.Simulation;
 
 import project.model.RandomGenerator;
 import project.model.RectangularMap;
+import project.model.Vector2D;
 import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.Animals.AnimalComparator;
 import project.model.WorldElements.Animals.AnimalParameters;
@@ -17,27 +18,18 @@ public class Simulation {
     private List<Plant> plants = new ArrayList<Plant>();
     private RectangularMap worldMap;
     private final Genome protectionGenome;
-    private int day = 0
+    private int day = 0;
+    private SimulationParameters simulationParameters;
 
     public Simulation(SimulationParameters parameters) {
         this.worldMap = new RectangularMap(parameters.mapWidth(), parameters.mapHeight());
         this.protectionGenome = new Genome(parameters.protectionGenomLength());
+        this.simulationParameters = parameters;
 
         addAnimals(parameters.startAnimals(), parameters.animalParameters());
         addPlants(parameters.startPlants(), parameters.plantParameters(), parameters.customPlants());
 
         updateAnimalsAndPlants();
-
-        dayAction();
-        /*
-            Symulacja każdego dnia składa się z poniższej sekwencji kroków:
-
-            Usunięcie martwych zwierzaków z mapy.
-            Skręt i przemieszczenie każdego zwierzaka.
-            Konsumpcja roślin, na których pola weszły zwierzaki.
-            Rozmnażanie się najedzonych zwierzaków znajdujących się na tym samym polu.
-            Wzrastanie nowych roślin na wybranych polach mapy.
-        */
     }
 
     public void addAnimals(int animalsCount, AnimalParameters parameters) {
@@ -70,17 +62,17 @@ public class Simulation {
         day++;
 
         removeAllDead();
-
         animalsMoving();
         // miedzy kazdym ruchem ma byc pauza na moment
         // moze animalsMoving(time)?
 
         animalsEating();
-        //animalsBreeding();
-        //addNewPlants();
+        animalsBreeding();
+        addPlants(simulationParameters.newPlantsEveryday(), simulationParameters.plantParameters(), simulationParameters.customPlants());
     }
 
     private void removeAllDead() {
+        updateAnimalsAndPlants();
         worldMap.removeDeadAnimals();
     }
 
@@ -97,5 +89,31 @@ public class Simulation {
             worldMap.eatIfPossible(animal);
         }
     }
-    
+
+    private void animalsBreeding() {
+        updateAnimalsAndPlants();
+        List<Vector2D> positions = worldMap.getAllPositions();
+        for(Vector2D position : positions) {
+            List<Animal> aliveAnimals = worldMap.getAnimalsAt(position);
+            if (aliveAnimals.size() >= 2) {
+                aliveAnimals.sort(AnimalComparator.createComparator());
+
+                Animal parent1 = aliveAnimals.get(0);
+                Animal parent2 = aliveAnimals.get(1);
+
+                AnimalParameters params = simulationParameters.animalParameters();
+                if (parent1.getEnergy() >= params.energyLevelToBreed() &&
+                        parent2.getEnergy() >= params.energyLevelToBreed()) {
+                    Animal child = new Animal(parent1, parent2, params, protectionGenome);
+                    worldMap.place(child, child.getPosition());
+                }
+            }
+        }
+    }
+
+    public void run() {
+        while (!animals.isEmpty()) {
+            dayAction();
+        }
+    }
 }

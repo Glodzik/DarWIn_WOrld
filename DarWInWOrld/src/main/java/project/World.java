@@ -44,5 +44,6 @@ public class World {
                 animalParameters,
                 new PlantParameters(20, 40, -20), 8, false);
         Simulation simulation = new Simulation(parameters);
+        simulation.run();
     }
 }

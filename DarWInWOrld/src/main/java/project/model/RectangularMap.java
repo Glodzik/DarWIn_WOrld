@@ -31,6 +31,10 @@ public final class RectangularMap {
         animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
     }
 
+    public void place(Animal animal, Vector2D position) {
+        animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
+    }
+
     public void placePlant(Plant plant) {
         Vector2D vectorToPlacePlant;
         if (RandomGenerator.probability() < 0.8) {
@@ -102,6 +106,20 @@ public final class RectangularMap {
         return animalsAtPosition != null && !animalsAtPosition.isEmpty();
     }
 
+    public void removeDeadAnimals() {
+        Iterator<Map.Entry<Vector2D, List<Animal>>> iterator = animals.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Vector2D, List<Animal>> entry = iterator.next();
+            List<Animal> animalsAtPosition = entry.getValue();
+
+            animalsAtPosition.removeIf(Animal::isDead);
+
+            if (animalsAtPosition.isEmpty()) {
+                iterator.remove();
+            }
+        }
+    }
+
     // unmodifiable lists
     public List<Plant> getPlants() {
         return new ArrayList<>(plants.values());
@@ -115,17 +133,7 @@ public final class RectangularMap {
         return allAnimals;
     }
 
-    public void removeDeadAnimals() {
-        Iterator<Map.Entry<Vector2D, List<Animal>>> iterator = animals.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Vector2D, List<Animal>> entry = iterator.next();
-            List<Animal> animalsAtPosition = entry.getValue();
-
-            animalsAtPosition.removeIf(Animal::isDead);
-
-            if (animalsAtPosition.isEmpty()) {
-                iterator.remove();
-            }
-        }
+    public List<Vector2D> getAllPositions() {
+        return new ArrayList<>(animals.keySet());
     }
 }
