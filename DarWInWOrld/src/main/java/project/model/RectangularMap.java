@@ -72,9 +72,17 @@ public final class RectangularMap {
         animals.computeIfAbsent(newPosition, k -> new ArrayList<>()).add(animal);
     }
 
+    public Boundary getMapBounds() {
+        return mapBounds;
+    }
+
     public List<Animal> getAnimalsAt(Vector2D position) {
         List<Animal> animalsAtPosition = animals.get(position);
         return animalsAtPosition != null ? animalsAtPosition : new ArrayList<>();
+    }
+
+    public WorldElement getPlantAt(Vector2D position) {
+        return plants.get(position);
     }
 
     public void eatIfPossible(Animal animal) {
@@ -94,8 +102,9 @@ public final class RectangularMap {
         return animalsAtPosition != null && !animalsAtPosition.isEmpty();
     }
 
-    public WorldElement getPlantAt(Vector2D position) {
-        return plants.get(position);
+    // unmodifiable lists
+    public List<WorldElement> getPlants() {
+        return new ArrayList<>(plants.values());
     }
 
     public List<WorldElement> getAnimals() {
@@ -104,13 +113,5 @@ public final class RectangularMap {
             allAnimals.addAll(animalList);
         }
         return allAnimals;
-    }
-
-    public Boundary getMapBounds() {
-        return mapBounds;
-    }
-
-    public List<WorldElement> getPlants() {
-        return new ArrayList<>(plants.values());
     }
 }
