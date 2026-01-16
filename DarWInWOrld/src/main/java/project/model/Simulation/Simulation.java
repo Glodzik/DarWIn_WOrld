@@ -111,6 +111,13 @@ public class Simulation {
         }
     }
 
+    public void animalsEnergyLoss() {
+        updateAnimalsAndPlants();
+        for(Animal animal : animals) {
+            animal.energyLoss(simulationParameters.animalParameters().energyLossEveryDay());
+        }
+    }
+
     public void run() {
         while (!animals.isEmpty()) {
             dayAction();
