@@ -1,11 +1,11 @@
 package project.model.WorldElements.EdibleElements;
 
 public enum TypeOfPoison {
-    LILY(5),
-    ALOE(10),
-    AZALEA(15),
-    OLEANDER(20),
-    COMMON_YEW(30);
+    LILY(-5),
+    ALOE(-10),
+    AZALEA(-15),
+    OLEANDER(-20),
+    COMMON_YEW(-30);
 
     private final int energy;
 

@@ -14,6 +14,7 @@ public final class Animal implements WorldElement {
     private int protection = 0;
 
     private static final Vector2D START_POSITION = new Vector2D(0, 0);
+    private static final int START_ENERGY = 100;
 
     public Animal(Animal animal1, Animal animal2, AnimalParameters parameters, Genome protectionGenome) {
         this.energy = parameters.energyLossAfterBreed() * 2;
@@ -43,6 +44,7 @@ public final class Animal implements WorldElement {
         this.position = position;
         this.genom = new Genome(8);
         this.currDirection = RandomGenerator.randomDirection();
+        this.energy = START_ENERGY;
     }
 
     public Animal() {
@@ -125,6 +127,11 @@ public final class Animal implements WorldElement {
     }
 
     public void eat(Plant plant) {
-        this.energy += plant.getEnergy();
+        int energyFromPlant = plant.getEnergy();
+        if(energyFromPlant < 0) {
+            this.energy += energyFromPlant * ((100 - protection) / 100);
+        } else {
+            this.energy += energyFromPlant;
+        }
     }
 }
