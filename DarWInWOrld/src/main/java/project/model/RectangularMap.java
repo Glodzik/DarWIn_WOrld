@@ -114,4 +114,18 @@ public final class RectangularMap {
         }
         return allAnimals;
     }
+
+    public void removeDeadAnimals() {
+        Iterator<Map.Entry<Vector2D, List<Animal>>> iterator = animals.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Vector2D, List<Animal>> entry = iterator.next();
+            List<Animal> animalsAtPosition = entry.getValue();
+
+            animalsAtPosition.removeIf(Animal::isDead);
+
+            if (animalsAtPosition.isEmpty()) {
+                iterator.remove();
+            }
+        }
+    }
 }

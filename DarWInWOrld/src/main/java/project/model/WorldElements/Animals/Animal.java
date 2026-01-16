@@ -141,9 +141,13 @@ public final class Animal implements WorldElement {
     public void eat(Plant plant) {
         int energyFromPlant = plant.getEnergy();
         if(energyFromPlant < 0) {
-            this.energy += energyFromPlant * ((100 - protection) / 100);
+            this.energy += (int)(energyFromPlant * (100.0 - protection) / 100.0);
         } else {
             this.energy += energyFromPlant;
         }
+    }
+
+    public boolean isDead() {
+        return this.energy <= 0;
     }
 }

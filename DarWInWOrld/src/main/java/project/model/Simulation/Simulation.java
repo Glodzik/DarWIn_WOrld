@@ -17,6 +17,7 @@ public class Simulation {
     private List<Plant> plants = new ArrayList<Plant>();
     private RectangularMap worldMap;
     private final Genome protectionGenome;
+    private int day = 0
 
     public Simulation(SimulationParameters parameters) {
         this.worldMap = new RectangularMap(parameters.mapWidth(), parameters.mapHeight());
@@ -25,9 +26,8 @@ public class Simulation {
         addAnimals(parameters.startAnimals(), parameters.animalParameters());
         addPlants(parameters.startPlants(), parameters.plantParameters(), parameters.customPlants());
 
-        animals = worldMap.getAnimals();
-        plants = worldMap.getPlants();
-
+        updateAnimalsAndPlants();
+        
         dayAction();
         /*
             Symulacja każdego dnia składa się z poniższej sekwencji kroków:
@@ -61,8 +61,15 @@ public class Simulation {
         }
     }
 
+    public void updateAnimalsAndPlants() {
+        animals = worldMap.getAnimals();
+        plants = worldMap.getPlants();
+    }
+
     public void dayAction() {
-        //removeAllDead();
+        day++;
+
+        removeAllDead();
 
         //animalsMoving();
         // miedzy kazdym ruchem ma byc pauza na moment
@@ -71,5 +78,9 @@ public class Simulation {
         //animalsEating();
         //animalsBreeding();
         //addNewPlants();
+    }
+
+    private void removeAllDead() {
+        worldMap.removeDeadAnimals();
     }
 }
