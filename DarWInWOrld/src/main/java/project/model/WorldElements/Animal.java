@@ -1,9 +1,9 @@
 package project.model.WorldElements;
 
-import project.model.MapDirection;
-import project.model.RandomGenerator;
-import project.model.Vector2D;
+import project.model.*;
 import project.model.WorldElements.EdibleElements.Plant;
+
+import java.util.ArrayList;
 
 public final class Animal implements WorldElement {
     private MapDirection currDirection;
@@ -90,12 +90,30 @@ public final class Animal implements WorldElement {
         currDirection = currDirection.opposite();
     }
 
-    public void move() {
+    public void move(RectangularMap map) {
         if (energy > 0) {
             int rotation = genom.getGenomeSequence()[daysAlive % this.genom.getGenomeSize()];
             currDirection = currDirection.rotate(rotation);
-            position = position.add(currDirection.toUnitVector());
+            Vector2D oldPosition = position;
+            Vector2D newPosition = position.add(currDirection.toUnitVector());
             daysAlive += 1;
+
+            if(!map.inBorder(newPosition)) {
+                Boundary mapBounds = map.getMapBounds();
+                if (newPosition.aboveYLine(mapBounds.upperRight().getY()) || newPosition.belowYLine(mapBounds.lowerLeft().getY())) {
+                    // turning back from the poles
+                    this.turnBack();
+                    this.position = oldPosition;
+                } else if (newPosition.onLeftXLine(mapBounds.lowerLeft().getX())) {
+                    // transition from left to right
+                    this.position = new Vector2D(mapBounds.upperRight().getX(), newPosition.getY());
+                } else if (newPosition.onRightXLine(mapBounds.upperRight().getX())) {
+                    // transition from right to left
+                    this.position = new Vector2D(mapBounds.lowerLeft().getX(), newPosition.getY());
+                }
+            } else {
+                this.position = newPosition;
+            }
         }
     }
 
