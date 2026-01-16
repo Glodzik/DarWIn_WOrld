@@ -27,7 +27,7 @@ public final class Animal implements WorldElement {
     }
 
     public Animal(Animal animal1, Animal animal2) {
-        this.energy = ENERGY_LOST * 2;
+        this.energy = ENERGY_LOST * 2; // ???
         this.position = animal1.getPosition();
         this.currDirection = RandomGenerator.randomDirection();
         Animal strongerParent = animal1.getEnergy() >= animal2.getEnergy() ? animal1 : animal2;
