@@ -75,7 +75,7 @@ public class Simulation {
         // miedzy kazdym ruchem ma byc pauza na moment
         // moze animalsMoving(time)?
 
-        //animalsEating();
+        animalsEating();
         //animalsBreeding();
         //addNewPlants();
     }
@@ -86,9 +86,15 @@ public class Simulation {
 
     private void animalsMoving() {
         updateAnimalsAndPlants();
-
         for(Animal animal : animals) {
             worldMap.move(animal);
+        }
+    }
+
+    private void animalsEating() {
+        updateAnimalsAndPlants();
+        for(Animal animal : animals) {
+            worldMap.eatIfPossible(animal);
         }
     }
     
