@@ -15,10 +15,5 @@ public final class Antidote extends Plant {
         TypeOfAntidote[] values = TypeOfAntidote.values();
         this(position, values[antidote]);
     }
-
-    @Override
-    public void changeAnimalEnergy(Animal animal) {
-        animal.energyIncrease(getEnergy());
-    }
 }
 

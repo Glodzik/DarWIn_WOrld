@@ -15,10 +15,4 @@ public final class Poison extends Plant {
         TypeOfPoison[] values = TypeOfPoison.values();
         this(position, values[poison]);
     }
-
-    @Override
-    public void changeAnimalEnergy(Animal animal) {
-        animal.energyLoss(getEnergy());
-    }
-
 }

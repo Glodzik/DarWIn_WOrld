@@ -90,7 +90,7 @@ public final class Animal implements WorldElement {
         currDirection = currDirection.opposite();
     }
 
-    public void move(RectangularMap map) {
+    public void move(Boundary bounds) {
         if (energy > 0) {
             int rotation = genom.getGenomeSequence()[daysAlive % this.genom.getGenomeSize()];
             currDirection = currDirection.rotate(rotation);
@@ -98,18 +98,20 @@ public final class Animal implements WorldElement {
             Vector2D newPosition = position.add(currDirection.toUnitVector());
             daysAlive += 1;
 
-            if(!map.inBorder(newPosition)) {
-                Boundary mapBounds = map.getMapBounds();
-                if (newPosition.aboveYLine(mapBounds.upperRight().getY()) || newPosition.belowYLine(mapBounds.lowerLeft().getY())) {
+            Vector2D lowerLeft = bounds.lowerLeft();
+            Vector2D upperRight = bounds.upperRight();
+
+            if(!(newPosition.precedes(upperRight) && newPosition.follows(lowerLeft))) {
+                if (newPosition.aboveYLine(upperRight.getY()) || newPosition.belowYLine(lowerLeft.getY())) {
                     // turning back from the poles
                     this.turnBack();
                     this.position = oldPosition;
-                } else if (newPosition.onLeftXLine(mapBounds.lowerLeft().getX())) {
+                } else if (newPosition.onLeftXLine(lowerLeft.getX())) {
                     // transition from left to right
-                    this.position = new Vector2D(mapBounds.upperRight().getX(), newPosition.getY());
-                } else if (newPosition.onRightXLine(mapBounds.upperRight().getX())) {
+                    this.position = new Vector2D(upperRight.getX(), newPosition.getY());
+                } else if (newPosition.onRightXLine(upperRight.getX())) {
                     // transition from right to left
-                    this.position = new Vector2D(mapBounds.lowerLeft().getX(), newPosition.getY());
+                    this.position = new Vector2D(lowerLeft.getX(), newPosition.getY());
                 }
             } else {
                 this.position = newPosition;
@@ -123,10 +125,6 @@ public final class Animal implements WorldElement {
 
     public void energyLoss(int energyAmount) {
         this.energy -= energyAmount;
-    }
-
-    public void energyIncrease(int energyAmount) {
-        this.energy += energyAmount;
     }
 
     public int getEnergy() {

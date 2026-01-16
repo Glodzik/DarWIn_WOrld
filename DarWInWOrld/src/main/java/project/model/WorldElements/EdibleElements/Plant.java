@@ -24,6 +24,4 @@ public abstract class Plant implements WorldElement {
     public void setPosition(Vector2D position) {
         this.position = position;
     }
-
-    public abstract void changeAnimalEnergy(Animal animal);
 }

@@ -63,7 +63,7 @@ public final class RectangularMap {
         List<Animal> animalsAtPosition = animals.get(oldPosition);
 
         animalsAtPosition.remove(animal);
-        animal.move(this);
+        animal.move(this.getMapBounds());
 
         if (animalsAtPosition.isEmpty()) {
             animals.remove(oldPosition);
@@ -113,9 +113,5 @@ public final class RectangularMap {
 
     public List<WorldElement> getPlants() {
         return new ArrayList<>(plants.values());
-    }
-
-    public boolean inBorder(Vector2D position) {
-        return (position.precedes(mapBounds.upperRight()) && position.follows(LOWER_LEFT));
     }
 }
