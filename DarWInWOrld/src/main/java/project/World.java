@@ -3,6 +3,7 @@ package project;
 import project.model.RectangularMap;
 import project.model.Vector2D;
 import project.model.WorldElements.Animal;
+import project.model.WorldElements.AnimalParameters;
 import project.model.WorldElements.EdibleElements.Antidote;
 import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.Genome;
@@ -16,9 +17,11 @@ public class World {
         Animal[] animals = new Animal[5];
         Plant[] plantArray = new Plant[10];
 
+        AnimalParameters parameters = new AnimalParameters(100, 10, 80, 20, 1, 3, 8);
         Genome protectionGenome = new Genome(8);
+
         for (int i = 0; i < animals.length; i++) {
-            animals[i] = new Animal(100, protectionGenome);
+            animals[i] = new Animal(parameters, protectionGenome);
             map.place(animals[i]);
         }
 

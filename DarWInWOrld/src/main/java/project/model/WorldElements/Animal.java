@@ -11,49 +11,38 @@ public final class Animal implements WorldElement {
     private final Genome genom;
     private int energy;
     private int daysAlive = 0;
-    private int protection;
+    private int protection = 0;
 
-    private static final Vector2D START_POSITION = new Vector2D(2, 2);
-    private static final int START_ENERGY = 100;
-    private static final int GENOM_LENGTH = 8;
-    private static final int ENERGY_LOST = 10;
+    private static final Vector2D START_POSITION = new Vector2D(0, 0);
 
-    public Animal(int startEnergy, Genome protectionGenome) {
-        this.position = START_POSITION;
-        this.energy = startEnergy;
-        this.genom = new Genome(GENOM_LENGTH);
-        this.protection = Genome.protectionLevel(this.genom, protectionGenome);
-        this.currDirection = RandomGenerator.randomDirection();
-    }
-
-    public Animal(Animal animal1, Animal animal2) {
-        this.energy = ENERGY_LOST * 2; // ???
+    public Animal(Animal animal1, Animal animal2, AnimalParameters parameters, Genome protectionGenome) {
+        this.energy = parameters.energyLossAfterBreed() * 2;
+        animal1.energyLoss(parameters.energyLevelToBreed());
+        animal2.energyLoss(parameters.energyLevelToBreed());
         this.position = animal1.getPosition();
         this.currDirection = RandomGenerator.randomDirection();
         Animal strongerParent = animal1.getEnergy() >= animal2.getEnergy() ? animal1 : animal2;
         Animal weakerParent = animal1.getEnergy() >= animal2.getEnergy() ? animal2 : animal1;
         this.genom = new Genome(
-                strongerParent.getGenom(),
-                weakerParent.getGenom(),
-                strongerParent.getEnergy(),
-                weakerParent.getEnergy()
+                strongerParent.getGenom(), weakerParent.getGenom(),
+                strongerParent.getEnergy(), weakerParent.getEnergy(),
+                parameters.minMutation(), parameters.maxMutation()
         );
-        //this.protection
+        this.protection = Genome.protectionLevel(this.genom, protectionGenome);
     }
 
-    public Animal(Vector2D position, int startEnergy, int genomLength) {
-        this.position = position;
-        // to do: zarządzanie energia, parametr - wartość energii startowej
-        this.energy = startEnergy;
+    public Animal(AnimalParameters parameters, Genome protectionGenome) {
+        this.position = START_POSITION;
         this.currDirection = RandomGenerator.randomDirection();
-        this.genom = new Genome(genomLength);
-
-        // to do: dodanie parametru - genom ochrony przed trucizną i obliczenie ochrony zwierzaka
-        int protection = 0;
+        this.energy = parameters.startEnergy();
+        this.genom = new Genome(parameters.genomLength());
+        this.protection = Genome.protectionLevel(this.genom, protectionGenome);
     }
 
     public Animal(Vector2D position) {
-        this(position, START_ENERGY, GENOM_LENGTH);
+        this.position = position;
+        this.genom = new Genome(8);
+        this.currDirection = RandomGenerator.randomDirection();
     }
 
     public Animal() {

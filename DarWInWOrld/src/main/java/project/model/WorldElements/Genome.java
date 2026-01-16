@@ -14,7 +14,7 @@ public final class Genome {
     }
 
     public Genome(Genome strongerParentGenome, Genome weakerParentGenome,
-                  int strongerParentEnergy, int weakerParentEnergy) {
+                  int strongerParentEnergy, int weakerParentEnergy, int minMutations, int maxMutations) {
         this.size = strongerParentGenome.getGenomeSize();
         this.genomeSequence = new int[size];
 
@@ -34,7 +34,7 @@ public final class Genome {
             System.arraycopy(strongerGenome, size - sizeOfStrongerPart, this.genomeSequence, sizeOfWeakerPart, sizeOfStrongerPart);
         }
 
-        int mutationCount = random.nextInt(size);
+        int mutationCount = random.nextInt(maxMutations - minMutations + 1) + minMutations;
         for (int i = 0; i < mutationCount; i++) {
             int mutationIndex = random.nextInt(size);
             this.genomeSequence[mutationIndex] = random.nextInt(8);

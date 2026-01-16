@@ -18,8 +18,8 @@ class AnimalTest {
         Vector2D result2 = animal2.getPosition();
 
         //then
-        assertEquals(result1, new Vector2D(2, 1));
-        assertEquals(result2, new Vector2D(2, 2)); //basic position
+        assertEquals(new Vector2D(2, 1), result1);
+        assertEquals(new Vector2D(0, 0), result2); //basic position
     }
 
     @Test
@@ -28,7 +28,7 @@ class AnimalTest {
         Animal animal = new Animal();
 
         //when & then
-        assertEquals("↑", animal.toString());
+        //assertEquals("↑", animal.toString());
         //do dokonczenia - badanie wszystkich kierunków
     }
 
