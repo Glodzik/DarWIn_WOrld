@@ -27,7 +27,7 @@ public class Simulation {
         addPlants(parameters.startPlants(), parameters.plantParameters(), parameters.customPlants());
 
         updateAnimalsAndPlants();
-        
+
         dayAction();
         /*
             Symulacja każdego dnia składa się z poniższej sekwencji kroków:
@@ -71,7 +71,7 @@ public class Simulation {
 
         removeAllDead();
 
-        //animalsMoving();
+        animalsMoving();
         // miedzy kazdym ruchem ma byc pauza na moment
         // moze animalsMoving(time)?
 
@@ -83,4 +83,13 @@ public class Simulation {
     private void removeAllDead() {
         worldMap.removeDeadAnimals();
     }
+
+    private void animalsMoving() {
+        updateAnimalsAndPlants();
+
+        for(Animal animal : animals) {
+            worldMap.move(animal);
+        }
+    }
+    
 }
