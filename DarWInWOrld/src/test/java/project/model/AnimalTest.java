@@ -41,4 +41,5 @@ class AnimalTest {
         assertTrue(animal.isAt(new Vector2D(6, 7)));
         assertFalse(animal.isAt(new Vector2D(5, 5)));
     }
+
 }

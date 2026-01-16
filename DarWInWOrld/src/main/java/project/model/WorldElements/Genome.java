@@ -13,6 +13,34 @@ public final class Genome {
         generateRandomGenome(size);
     }
 
+    public Genome(Genome strongerParentGenome, Genome weakerParentGenome,
+                  int strongerParentEnergy, int weakerParentEnergy) {
+        this.size = strongerParentGenome.getGenomeSize();
+        this.genomeSequence = new int[size];
+
+        int sumOfEnergy = strongerParentEnergy + weakerParentEnergy;
+        int sizeOfStrongerPart = (int) (((float) strongerParentEnergy / sumOfEnergy) * size);
+        int sizeOfWeakerPart = size - sizeOfStrongerPart;
+        Random random = new Random();
+        int[] strongerGenome = strongerParentGenome.getGenomeSequence();
+        int[] weakerGenome = weakerParentGenome.getGenomeSequence();
+        if (random.nextDouble() < 0.5) {
+            // lewa strona od silniejszego, prawa od słabszego
+            System.arraycopy(strongerGenome, 0, this.genomeSequence, 0, sizeOfStrongerPart);
+            System.arraycopy(weakerGenome, sizeOfStrongerPart, this.genomeSequence, sizeOfStrongerPart, sizeOfWeakerPart);
+        } else {
+            // lewa strona od słabszego, prawa od silniejszego
+            System.arraycopy(weakerGenome, 0, this.genomeSequence, 0, sizeOfWeakerPart);
+            System.arraycopy(strongerGenome, size - sizeOfStrongerPart, this.genomeSequence, sizeOfWeakerPart, sizeOfStrongerPart);
+        }
+
+        int mutationCount = random.nextInt(size);
+        for (int i = 0; i < mutationCount; i++) {
+            int mutationIndex = random.nextInt(size);
+            this.genomeSequence[mutationIndex] = random.nextInt(8);
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sequenceToString = new StringBuilder();

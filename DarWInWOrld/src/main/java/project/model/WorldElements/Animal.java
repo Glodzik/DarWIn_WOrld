@@ -5,9 +5,7 @@ import project.model.RandomGenerator;
 import project.model.Vector2D;
 import project.model.WorldElements.EdibleElements.Plant;
 
-import java.util.Random;
-
-public class Animal implements WorldElement {
+public final class Animal implements WorldElement {
     private MapDirection currDirection;
     private Vector2D position;
     private final Genome genom;
@@ -18,13 +16,29 @@ public class Animal implements WorldElement {
     private static final Vector2D START_POSITION = new Vector2D(2, 2);
     private static final int START_ENERGY = 100;
     private static final int GENOM_LENGTH = 8;
+    private static final int ENERGY_LOST = 10;
 
-    public Animal(int startEnergy, int genomLength, Genome protectionGenome) {
+    public Animal(int startEnergy, Genome protectionGenome) {
         this.position = START_POSITION;
         this.energy = startEnergy;
-        this.genom = new Genome(genomLength);
+        this.genom = new Genome(GENOM_LENGTH);
         this.protection = Genome.protectionLevel(this.genom, protectionGenome);
         this.currDirection = RandomGenerator.randomDirection();
+    }
+
+    public Animal(Animal animal1, Animal animal2) {
+        this.energy = ENERGY_LOST * 2;
+        this.position = animal1.getPosition();
+        this.currDirection = RandomGenerator.randomDirection();
+        Animal strongerParent = animal1.getEnergy() >= animal2.getEnergy() ? animal1 : animal2;
+        Animal weakerParent = animal1.getEnergy() >= animal2.getEnergy() ? animal2 : animal1;
+        this.genom = new Genome(
+                strongerParent.getGenom(),
+                weakerParent.getGenom(),
+                strongerParent.getEnergy(),
+                weakerParent.getEnergy()
+        );
+        //this.protection
     }
 
     public Animal(Vector2D position, int startEnergy, int genomLength) {
@@ -107,35 +121,5 @@ public class Animal implements WorldElement {
 
     public void eat(Plant plant) {
         this.energy += plant.getEnergy();
-    }
-
-    public void getGenomeFromParents(Animal animal1, Animal animal2) {
-        int sumOfEnergy = animal1.getEnergy() + animal2.getEnergy();
-        int sizeOfStrongerParentGenome = Math.round(((float) animal1.getEnergy() / sumOfEnergy) * GENOM_LENGTH);
-        int sizeOfWeakerParentGenome = GENOM_LENGTH - sizeOfStrongerParentGenome;
-
-        Random random = new Random();
-
-        if (random.nextDouble() < 0.5) {
-            for (int i = 0; i < sizeOfStrongerParentGenome; i++) {
-                this.genom.getGenomeSequence()[i] = animal1.getGenom().getGenomeSequence()[i];
-            }
-            for (int i = sizeOfStrongerParentGenome; i < GENOM_LENGTH; i++) {
-                this.genom.getGenomeSequence()[i] = animal2.getGenom().getGenomeSequence()[i];
-            }
-        } else {
-            for (int i = 0; i < sizeOfWeakerParentGenome; i++) {
-                this.genom.getGenomeSequence()[i] = animal2.getGenom().getGenomeSequence()[i];
-            }
-            for (int i = sizeOfWeakerParentGenome; i < GENOM_LENGTH; i++) {
-                this.genom.getGenomeSequence()[i] = animal1.getGenom().getGenomeSequence()[i];
-            }
-        }
-
-        int mutationCount = random.nextInt(GENOM_LENGTH);
-        for (int i = 0; i < mutationCount; i++) {
-            int mutationIndex = random.nextInt(GENOM_LENGTH);
-            this.genom.getGenomeSequence()[mutationIndex] = random.nextInt(8);
-        }
     }
 }

@@ -18,7 +18,7 @@ public class World {
 
         Genome protectionGenome = new Genome(8);
         for (int i = 0; i < animals.length; i++) {
-            animals[i] = new Animal(100, 8, protectionGenome);
+            animals[i] = new Animal(100, protectionGenome);
             map.place(animals[i]);
         }
 
