@@ -102,16 +102,15 @@ public final class Simulation {
         updateAnimalsAndPlants();
         List<Vector2D> positions = worldMap.getAllPositions();
         for(Vector2D position : positions) {
-            List<Animal> aliveAnimals = worldMap.getAnimalsAt(position);
-            if (aliveAnimals.size() >= 2) {
-                aliveAnimals.sort(AnimalComparator.createComparator());
+            List<Animal> animalsAtPosition = worldMap.getAnimalsAt(position);
+            if (animalsAtPosition.size() >= 2) {
+                animalsAtPosition.sort(AnimalComparator.createComparator());
 
-                Animal parent1 = aliveAnimals.get(0);
-                Animal parent2 = aliveAnimals.get(1);
+                Animal parent1 = animalsAtPosition.get(0);
+                Animal parent2 = animalsAtPosition.get(1);
 
                 AnimalParameters params = simulationParameters.animalParameters();
-                if (parent1.getEnergy() >= params.energyLevelToBreed() &&
-                        parent2.getEnergy() >= params.energyLevelToBreed()) {
+                if (parent1.getEnergy() >= params.energyLevelToBreed() && parent2.getEnergy() >= params.energyLevelToBreed()) {
                     Animal child = new Animal(parent1, parent2, params, protectionGenome);
                     worldMap.place(child, child.getPosition());
                 }
