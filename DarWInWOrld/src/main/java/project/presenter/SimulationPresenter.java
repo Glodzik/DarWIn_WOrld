@@ -123,8 +123,8 @@ public class SimulationPresenter implements MapChangeListener {
 
     public void onSimulationStartClicked() {
         AnimalParameters animalParameters = new AnimalParameters(100, 10, 80, 20, 1, 3, 8);
-        SimulationParameters parameters = new SimulationParameters(5,5, 5,2,5,
-                animalParameters, new PlantParameters(20, 40, -20), 8, false);
+        SimulationParameters parameters = new SimulationParameters(9,10, 10,5,5,
+                animalParameters, new PlantParameters(20, 40, -20), 8, true);
         Simulation simulation = new Simulation(parameters);
         setWorldMap(simulation.getWorldMap());
         worldMap.addObserver(this);

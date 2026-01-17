@@ -83,7 +83,7 @@ public final class Simulation implements Runnable {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                System.out.printf("Thread interrupted: %s%n", e.getMessage());
+                throw new RuntimeException(e);
             }
             worldMap.move(animal);
         }
