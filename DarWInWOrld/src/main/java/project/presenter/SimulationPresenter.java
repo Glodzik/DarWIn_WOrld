@@ -30,7 +30,7 @@ public class SimulationPresenter implements MapChangeListener {
     @FXML
     private TextField mapWidthField;
     @FXML
-    private TextField mapHeigthField;
+    private TextField mapHeightField;
     @FXML
     private TextField startPlantsField;
     @FXML
@@ -50,7 +50,9 @@ public class SimulationPresenter implements MapChangeListener {
     @FXML
     private TextField maxMutationField;
     @FXML
-    private TextField genomeLenghtField;
+    private TextField genomeLengthField;
+    @FXML
+    private Canvas mapCanvas;
 
 
 
@@ -67,9 +69,6 @@ public class SimulationPresenter implements MapChangeListener {
         int cellSize = Math.min(cellByWidth, cellByHeight);
         return Math.max(cellSize, 5);
     }
-
-    @FXML
-    private Canvas mapCanvas;
 
     public void setWorldMap(RectangularMap worldMap) {
         this.worldMap = worldMap;
@@ -167,7 +166,7 @@ public class SimulationPresenter implements MapChangeListener {
 
     public void onSimulationStartClicked() {
         int mapWidth = Integer.parseInt(mapWidthField.getText());
-        int mapHeigth = Integer.parseInt(mapHeigthField.getText());
+        int mapHeight = Integer.parseInt(mapHeightField.getText());
         int startPlants = Integer.parseInt(startPlantsField.getText());
         int newPlantsEveryday = Integer.parseInt(newPlantsEverydayField.getText());
         int startAnimals = Integer.parseInt(startAnimalsField.getText());
@@ -177,10 +176,10 @@ public class SimulationPresenter implements MapChangeListener {
         int energyLossAfterBreed = Integer.parseInt(energyLossAfterBreedField.getText());
         int minMutation = Integer.parseInt(minMutationField.getText());
         int maxMutation = Integer.parseInt(maxMutationField.getText());
-        int genomeLenght = Integer.parseInt(genomeLenghtField.getText());
+        int genomeLength = Integer.parseInt(genomeLengthField.getText());
 
-        AnimalParameters animalParameters = new AnimalParameters(startEnergy, energyLossEveryDay, energyLevelToBreed, energyLossAfterBreed, minMutation, maxMutation, genomeLenght);
-        SimulationParameters parameters = new SimulationParameters(mapHeigth, mapWidth, startPlants, newPlantsEveryday, startAnimals,
+        AnimalParameters animalParameters = new AnimalParameters(startEnergy, energyLossEveryDay, energyLevelToBreed, energyLossAfterBreed, minMutation, maxMutation, genomeLength);
+        SimulationParameters parameters = new SimulationParameters(mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
                 animalParameters, new PlantParameters(20, 40, -20), 8, true);
         Simulation simulation = new Simulation(parameters);
         setWorldMap(simulation.getWorldMap());

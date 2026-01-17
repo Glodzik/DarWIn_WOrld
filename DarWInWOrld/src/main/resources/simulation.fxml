@@ -16,7 +16,7 @@
         </HBox>
         <HBox spacing="10">
             <Label text="Wysokość mapy:"/>
-            <TextField fx:id="mapHeigthField" text="10" prefWidth="80"/>
+            <TextField fx:id="mapHeightField" text="10" prefWidth="80"/>
         </HBox>
         <HBox spacing="10">
             <Label text="Energia po zjedzeniu rośliny:"/>
