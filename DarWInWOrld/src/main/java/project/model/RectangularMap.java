@@ -10,9 +10,10 @@ import java.util.*;
 public final class RectangularMap {
     private final Map<Vector2D, List<Animal>> animals = new HashMap<>();
     private final Map<Vector2D, Plant> plants = new HashMap<>();
-    private final int jungleHeight;
     private final Boundary mapBounds;
     private final Boundary jungleBoundary;
+    private final int jungleHeight;
+    private final List<MapChangeListener> observers = new ArrayList<>();
 
     private final static Vector2D LOWER_LEFT = new Vector2D(0, 0);
 
@@ -29,10 +30,12 @@ public final class RectangularMap {
         Vector2D position = RandomGenerator.randomPositionWithinBounds(mapBounds);
         animal.setPosition(position);
         animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
+        mapChanged("Animal placed at random position: %s".formatted(animal.getPosition()));
     }
 
     public void place(Animal animal, Vector2D position) {
         animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
+        mapChanged("Animal placed at specified position: %s".formatted(animal.getPosition()));
     }
 
     public void placePlant(Plant plant) {
@@ -82,7 +85,7 @@ public final class RectangularMap {
 
     public List<Animal> getAnimalsAt(Vector2D position) {
         List<Animal> animalsAtPosition = animals.get(position);
-        return animalsAtPosition != null ? animalsAtPosition : new ArrayList<>();
+        return animalsAtPosition != null ? new ArrayList<>(animalsAtPosition) : new ArrayList<>();
     }
 
     public WorldElement getPlantAt(Vector2D position) {
@@ -145,5 +148,15 @@ public final class RectangularMap {
         occupiedFields.addAll(plants.keySet());
 
         return totalFields - occupiedFields.size();
+    }
+
+    public void addObserver(MapChangeListener observer) {
+        observers.add(observer);
+    }
+
+    public void mapChanged(String message) {
+        for (MapChangeListener observer : observers) {
+            observer.mapChanged(this, message);
+        }
     }
 }
