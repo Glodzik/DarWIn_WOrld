@@ -173,31 +173,7 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     public void onSimulationStartClicked() {
-        int mapWidth = Integer.parseInt(mapWidthField.getText());
-        int mapHeight = Integer.parseInt(mapHeightField.getText());
-        int startPlants = Integer.parseInt(startPlantsField.getText());
-        int eatingEnergy = Integer.parseInt(eatingEnergyField.getText());
-        int newPlantsEveryday = Integer.parseInt(newPlantsEverydayField.getText());
-        int startAnimals = Integer.parseInt(startAnimalsField.getText());
-        int startEnergy = Integer.parseInt(startEnergyField.getText());
-        int energyLossEveryDay = Integer.parseInt(energyLossEveryDayField.getText());
-        int energyLevelToBreed = Integer.parseInt(energyLevelToBreedField.getText());
-        int energyLossAfterBreed = Integer.parseInt(energyLossAfterBreedField.getText());
-        int minMutation = Integer.parseInt(minMutationField.getText());
-        int maxMutation = Integer.parseInt(maxMutationField.getText());
-        int genomeLength = Integer.parseInt(genomeLengthField.getText());
-        int poisonPlantProbability = Integer.parseInt(poisonPlantProbabilityField.getText());
-        int poisonEnergyLoss = Integer.parseInt(poisonEnergyLossField.getText());
-        int protectionGenomeLength = Integer.parseInt(protectionGenomeLengthField.getText());
-        boolean customPlants = customPlantsCheckbox.isSelected();
-
-        AnimalParameters animalParameters = new AnimalParameters(startEnergy, energyLossEveryDay, energyLevelToBreed, energyLossAfterBreed, minMutation, maxMutation, genomeLength);
-        PlantParameters plantParameters = new PlantParameters(eatingEnergy, poisonPlantProbability, poisonEnergyLoss);
-
-        SimulationParameters parameters = new SimulationParameters
-                (mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
-                        animalParameters, plantParameters, protectionGenomeLength, customPlants);
-
+        SimulationParameters parameters = getSimulationParameters();
         Simulation simulation = new Simulation(parameters);
 
         try {
@@ -223,5 +199,32 @@ public class SimulationPresenter implements MapChangeListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private SimulationParameters getSimulationParameters() {
+        int mapWidth = Integer.parseInt(mapWidthField.getText());
+        int mapHeight = Integer.parseInt(mapHeightField.getText());
+        int startPlants = Integer.parseInt(startPlantsField.getText());
+        int eatingEnergy = Integer.parseInt(eatingEnergyField.getText());
+        int newPlantsEveryday = Integer.parseInt(newPlantsEverydayField.getText());
+        int startAnimals = Integer.parseInt(startAnimalsField.getText());
+        int startEnergy = Integer.parseInt(startEnergyField.getText());
+        int energyLossEveryDay = Integer.parseInt(energyLossEveryDayField.getText());
+        int energyLevelToBreed = Integer.parseInt(energyLevelToBreedField.getText());
+        int energyLossAfterBreed = Integer.parseInt(energyLossAfterBreedField.getText());
+        int minMutation = Integer.parseInt(minMutationField.getText());
+        int maxMutation = Integer.parseInt(maxMutationField.getText());
+        int genomeLength = Integer.parseInt(genomeLengthField.getText());
+        int poisonPlantProbability = Integer.parseInt(poisonPlantProbabilityField.getText());
+        int poisonEnergyLoss = Integer.parseInt(poisonEnergyLossField.getText());
+        int protectionGenomeLength = Integer.parseInt(protectionGenomeLengthField.getText());
+        boolean customPlants = customPlantsCheckbox.isSelected();
+
+        AnimalParameters animalParameters = new AnimalParameters(startEnergy, energyLossEveryDay, energyLevelToBreed, energyLossAfterBreed, minMutation, maxMutation, genomeLength);
+        PlantParameters plantParameters = new PlantParameters(eatingEnergy, poisonPlantProbability, poisonEnergyLoss);
+
+        return new SimulationParameters
+                (mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
+                        animalParameters, plantParameters, protectionGenomeLength, customPlants);
     }
 }
