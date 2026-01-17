@@ -74,10 +74,10 @@
             <Label text="Długość genomu ochrony:"/>
             <TextField fx:id="protectionGenomeLengthField" text="10" prefWidth="80"/>
         </HBox>
-<!--        <HBox spacing="10">-->
-<!--            <Label text="Customowe rośliny:"/>-->
-<!--            <Checkbox fx:id="customPlantsCheckbox" />-->
-<!--        </HBox>-->
+        <HBox spacing="10">
+            <Label text="Customowe rośliny:"/>
+            <CheckBox fx:id="customPlantsCheckbox" text="Włącz różne rodzaje roślin"/>
+        </HBox>
     </VBox>
 
     </center>

@@ -60,8 +60,8 @@ public class SimulationPresenter implements MapChangeListener {
     private TextField poisonEnergyLossField;
     @FXML
     private TextField protectionGenomeLengthField;
-    //@FXML
-    //private CheckBox customPlantsCheckbox;
+    @FXML
+    private CheckBox customPlantsCheckbox;
     @FXML
     private Canvas mapCanvas;
 
@@ -189,18 +189,16 @@ public class SimulationPresenter implements MapChangeListener {
         int poisonPlantProbability = Integer.parseInt(poisonPlantProbabilityField.getText());
         int poisonEnergyLoss = Integer.parseInt(poisonEnergyLossField.getText());
         int protectionGenomeLength = Integer.parseInt(protectionGenomeLengthField.getText());
-        //boolean customPlants = customPlantsCheckbox.isSelected();
+        boolean customPlants = customPlantsCheckbox.isSelected();
 
         AnimalParameters animalParameters = new AnimalParameters(startEnergy, energyLossEveryDay, energyLevelToBreed, energyLossAfterBreed, minMutation, maxMutation, genomeLength);
         PlantParameters plantParameters = new PlantParameters(eatingEnergy, poisonPlantProbability, poisonEnergyLoss);
 
         SimulationParameters parameters = new SimulationParameters
                 (mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
-                animalParameters, plantParameters, protectionGenomeLength, true);
+                        animalParameters, plantParameters, protectionGenomeLength, customPlants);
 
         Simulation simulation = new Simulation(parameters);
-        setWorldMap(simulation.getWorldMap());
-        worldMap.addObserver(this);
 
         try {
             // Ładowanie FXML dla okna mapy
@@ -211,6 +209,7 @@ public class SimulationPresenter implements MapChangeListener {
             // Pobranie presentera i przekazanie mapy
             SimulationPresenter mapPresenter = loader.getController();
             mapPresenter.setWorldMap(simulation.getWorldMap());
+            mapPresenter.drawMap();
             simulation.getWorldMap().addObserver(mapPresenter);
 
             // Stworzenie nowego okna
