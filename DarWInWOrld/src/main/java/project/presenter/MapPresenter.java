@@ -73,7 +73,6 @@ public final class MapPresenter implements MapChangeListener {
         // Clearing canvas
         clearCanvas();
 
-
         // Creating grid
         GraphicsContext graphics = mapCanvas.getGraphicsContext2D();
         graphics.setStroke(Color.BLACK);

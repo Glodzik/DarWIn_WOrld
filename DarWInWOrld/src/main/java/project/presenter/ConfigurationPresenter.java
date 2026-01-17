@@ -57,7 +57,7 @@ public class ConfigurationPresenter {
         try {
             // Ładowanie FXML dla okna mapy
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getClassLoader().getResource("simulation_map_view.fxml"));
+            loader.setLocation(getClass().getClassLoader().getResource("simulationMap.fxml"));
             BorderPane root = loader.load();
 
             // Pobranie presentera i przekazanie symulacji
@@ -104,4 +104,6 @@ public class ConfigurationPresenter {
                 (mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
                         animalParameters, plantParameters, protectionGenomeLength, customPlants);
     }
+
+
 }

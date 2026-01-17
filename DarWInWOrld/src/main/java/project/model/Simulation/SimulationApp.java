@@ -15,7 +15,7 @@ public class SimulationApp extends Application {
         FXMLLoader loader = new FXMLLoader(); // zainicjowanie wczytywania FXML
 
         // wczytanie zasobu z katalogu resources (uniwersalny sposób)
-        loader.setLocation(getClass().getClassLoader().getResource("simulation.fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("simulationConfiguration.fxml"));
 
         // Wczytanie FXML, konwersja FXML -> obiekty w Javie
         BorderPane viewRoot = loader.load();
