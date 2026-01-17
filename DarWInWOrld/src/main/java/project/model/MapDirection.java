@@ -55,4 +55,17 @@ public enum MapDirection {
         return rotate(4);
     }
 
+    public int rotateDegrees() {
+        return switch(this) {
+            case NORTH -> 0;
+            case NORTH_EAST -> 45;
+            case EAST -> 90;
+            case SOUTH_EAST -> 135;
+            case SOUTH -> 180;
+            case SOUTH_WEST -> 225;
+            case WEST -> 270;
+            case NORTH_WEST -> 315;
+        };
+    }
+
 }

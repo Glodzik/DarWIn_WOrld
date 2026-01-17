@@ -15,6 +15,7 @@ import project.model.RectangularMap;
 import project.model.Simulation.Simulation;
 import project.model.Vector2D;
 import project.model.WorldElements.Animals.Animal;
+import project.model.WorldElements.Animals.AnimalComparator;
 import project.model.WorldElements.EdibleElements.Antidote;
 import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.EdibleElements.Poison;
@@ -36,7 +37,7 @@ public final class MapPresenter implements MapChangeListener {
     // tekstury
     private static final String JUNGLE_BIOME = "/textures/biomes/grass_block_top_jungle.png";
     private static final String STEPPE_BIOME = "/textures/biomes/grass_block_top_steppe.png";
-    private static final String ANIMAL_TEXTURE = "/textures/animal/animalDown.png";
+    private static final String ANIMAL_TEXTURE = "/textures/animal/animalUp.png";
     private static final String DEFAULT_PLANT = "/textures/plants/antidotes/grass.png";
     private static final String DEFAULT_POISON = "/textures/plants/poisons/aloe.png";
 
@@ -152,9 +153,15 @@ public final class MapPresenter implements MapChangeListener {
 
                 var animals = worldMap.getAnimalsAt(currentPos);
                 if (!animals.isEmpty()) {
+                    animals.sort(AnimalComparator.createComparator());
                     Image animalTexture = loadImage(ANIMAL_TEXTURE);
                     if (animalTexture != null) {
-                        graphics.drawImage(animalTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
+                        graphics.save();
+                        graphics.translate(x + BORDER_OFFSET + (cellSize - BORDER_WIDTH) / 2.0, y + BORDER_OFFSET + (cellSize - BORDER_WIDTH) / 2.0);
+                        graphics.rotate(animals.getFirst().getCurrDirection().rotateDegrees());
+                        double size = cellSize - BORDER_WIDTH;
+                        graphics.drawImage(animalTexture, -size/2, -size/2, size, size);
+                        graphics.restore();
                     }
                 }
 
