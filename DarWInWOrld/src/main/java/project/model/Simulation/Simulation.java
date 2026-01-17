@@ -16,10 +16,10 @@ import java.util.List;
 public final class Simulation {
     private List<Animal> animals = new ArrayList<Animal>();
     private List<Plant> plants = new ArrayList<Plant>();
-    private RectangularMap worldMap;
+    private final RectangularMap worldMap;
     private final Genome protectionGenome;
     private int day = 0;
-    private SimulationParameters simulationParameters;
+    private final SimulationParameters simulationParameters;
 
     public Simulation(SimulationParameters parameters) {
         this.worldMap = new RectangularMap(parameters.mapWidth(), parameters.mapHeight());
@@ -86,7 +86,14 @@ public final class Simulation {
 
     private void animalsEating() {
         updateAnimalsAndPlants();
-        for(Animal animal : animals) {
+        List<Vector2D> positions = worldMap.getAllPositions();
+        for(Vector2D position : positions) {
+            List<Animal> animalsAtPosition = worldMap.getAnimalsAt(position);
+            if (animalsAtPosition.size() >= 2) {
+                animalsAtPosition.sort(AnimalComparator.createComparator());
+            }
+
+            Animal animal = animalsAtPosition.getFirst();
             worldMap.eatIfPossible(animal);
         }
     }
