@@ -14,5 +14,10 @@ public final class Antidote extends Plant {
         TypeOfAntidote[] values = TypeOfAntidote.values();
         this(position, values[antidote]);
     }
+
+    public TypeOfAntidote getType() {
+        return typeOfAntidote;
+    }
+
 }
 

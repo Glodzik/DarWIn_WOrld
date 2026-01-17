@@ -14,4 +14,8 @@ public final class Poison extends Plant {
         TypeOfPoison[] values = TypeOfPoison.values();
         this(position, values[poison]);
     }
+
+    public TypeOfPoison getType() {
+        return typeOfPoison;
+    }
 }

@@ -87,6 +87,10 @@ public final class RectangularMap {
         return mapBounds;
     }
 
+    public Boundary getJungleBoundary() {
+        return jungleBoundary;
+    }
+
     public List<Animal> getAnimalsAt(Vector2D position) {
         List<Animal> animalsAtPosition = animals.get(position);
         return animalsAtPosition != null ? new ArrayList<>(animalsAtPosition) : new ArrayList<>();

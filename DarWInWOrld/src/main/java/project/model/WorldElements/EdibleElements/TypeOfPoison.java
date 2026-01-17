@@ -1,17 +1,20 @@
 package project.model.WorldElements.EdibleElements;
 
 public enum TypeOfPoison {
-    LILY(-5),
-    ALOE(-10),
-    AZALEA(-15),
-    OLEANDER(-20),
-    COMMON_YEW(-30);
-
+    LILY(-5, "/textures/plants/poisons/lily.png"),
+    ALOE(-10, "/textures/plants/poisons/aloe.png"),
+    AZALEA(-15, "/textures/plants/poisons/azalea.png"),
+    OLEANDER(-20, "/textures/plants/poisons/oleander.png"),
+    COMMON_YEW(-30, "/textures/plants/poisons/commonYew.png");
     private final int energy;
+    private final String texturePath;
 
-    TypeOfPoison(int energy) {
+
+    TypeOfPoison(int energy, String texturePath) {
         this.energy = energy;
+        this.texturePath = texturePath;
     }
+
 
     @Override
     public String toString() {
@@ -26,5 +29,9 @@ public enum TypeOfPoison {
 
     public int getEnergy() {
         return energy;
+    }
+
+    public String getTexturePath() {
+        return texturePath;
     }
 }

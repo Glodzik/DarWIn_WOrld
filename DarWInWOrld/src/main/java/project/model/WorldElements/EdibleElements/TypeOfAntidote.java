@@ -1,16 +1,18 @@
 package project.model.WorldElements.EdibleElements;
 
 public enum TypeOfAntidote {
-    GRASS(5),
-    BAMBOO(10),
-    CARROT(15),
-    PARSLEY(20),
-    SUNFLOWER(30);
+    GRASS(5, "/textures/plants/antidotes/grass.png"),
+    BAMBOO(10, "/textures/plants/antidotes/bamboo.png"),
+    CARROT(15, "/textures/plants/antidotes/carrot.png"),
+    PARSLEY(20, "/textures/plants/antidotes/parsley.png"),
+    SUNFLOWER(30, "/textures/plants/antidotes/sunflower_front.png");
 
     private final int energy;
+    private final String texturePath;
 
-    TypeOfAntidote(int energy) {
+    TypeOfAntidote(int energy, String texturePath) {
         this.energy = energy;
+        this.texturePath = texturePath;
     }
 
     @Override
@@ -26,5 +28,9 @@ public enum TypeOfAntidote {
 
     public int getEnergy() {
         return energy;
+    }
+
+    public String getTexturePath() {
+        return texturePath;
     }
 }

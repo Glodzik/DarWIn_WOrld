@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -13,6 +14,13 @@ import project.model.MapChangeListener;
 import project.model.RectangularMap;
 import project.model.Simulation.Simulation;
 import project.model.Vector2D;
+import project.model.WorldElements.Animals.Animal;
+import project.model.WorldElements.EdibleElements.Antidote;
+import project.model.WorldElements.EdibleElements.Poison;
+import project.model.WorldElements.WorldElement;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class MapPresenter implements MapChangeListener {
     private RectangularMap worldMap;
@@ -23,6 +31,35 @@ public final class MapPresenter implements MapChangeListener {
 
     private static final int BORDER_WIDTH = 2;
     private static final float BORDER_OFFSET = (float) BORDER_WIDTH / 2;
+
+    // tekstury
+    private static final String JUNGLE_BIOME = "/textures/biomes/grass_block_top_jungle.png";
+    private static final String STEPPE_BIOME = "/textures/biomes/grass_block_top_steppe.png";
+    private static final String ANIMAL_TEXTURE = "/textures/animal/animalDown.png";
+
+    private final Map<String, Image> imageCache = new HashMap<>();
+
+    private Image loadImage(String path) {
+        return imageCache.computeIfAbsent(path, p -> {
+            try {
+                return new Image(getClass().getResourceAsStream(p));
+            } catch (Exception e) {
+                System.err.println("Failed to load image: " + p);
+                return null;
+            }
+        });
+    }
+
+    private Image getTextureForElement(WorldElement element) {
+        if (element instanceof Animal) {
+            return loadImage(ANIMAL_TEXTURE);
+        } else if (element instanceof Antidote antidote) {
+            return loadImage(antidote.getType().getTexturePath());
+        } else if (element instanceof Poison poison) {
+            return loadImage(poison.getType().getTexturePath());
+        }
+        return null;
+    }
 
 
     private int calculateCellSize(int mapWidth, int mapHeight) {
@@ -73,16 +110,55 @@ public final class MapPresenter implements MapChangeListener {
         // Clearing canvas
         clearCanvas();
 
-        // Creating grid
         GraphicsContext graphics = mapCanvas.getGraphicsContext2D();
         graphics.setStroke(Color.BLACK);
         graphics.setLineWidth(BORDER_WIDTH);
 
-        for (int x = 0; x < mapCanvas.getWidth() + 1; x += cellSize) {
-            graphics.strokeLine(x + BORDER_OFFSET, 0, x + BORDER_OFFSET, mapCanvas.getHeight());
+        // Get jungle bounds for biome rendering
+        Boundary jungleBounds = worldMap.getJungleBoundary();
+
+        // Draw biome backgrounds and objects
+        int yCellValue = upperRight.getY();
+        for (int y = cellSize; y < canvasHeight - cellSize + 1; y += cellSize) {
+            int xCellValue = lowerLeft.getX();
+            for (int x = cellSize; x < canvasWidth - cellSize + 1; x += cellSize) {
+                Vector2D currentPos = new Vector2D(xCellValue, yCellValue);
+
+                // Draw biome texture as background
+                boolean isInJungle = currentPos.follows(jungleBounds.lowerLeft()) && currentPos.precedes(jungleBounds.upperRight());
+                Image biomeTexture = loadImage(isInJungle ? JUNGLE_BIOME : STEPPE_BIOME);
+                if (biomeTexture != null) {
+                    graphics.drawImage(biomeTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
+                }
+
+                // Draw objects on top
+                WorldElement plant = worldMap.getPlantAt(currentPos);
+                if (plant != null) {
+                    Image plantTexture = getTextureForElement(plant);
+                    if (plantTexture != null) {
+                        graphics.drawImage(plantTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
+                    }
+                }
+
+                var animals = worldMap.getAnimalsAt(currentPos);
+                if (!animals.isEmpty()) {
+                    Image animalTexture = loadImage(ANIMAL_TEXTURE);
+                    if (animalTexture != null) {
+                        graphics.drawImage(animalTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
+                    }
+                }
+
+                xCellValue++;
+            }
+            yCellValue--;
         }
-        for (int y = 0; y < mapCanvas.getHeight() + 1; y += cellSize) {
-            graphics.strokeLine(0, y + BORDER_OFFSET, mapCanvas.getWidth(), y + BORDER_OFFSET);
+
+        // Draw grid lines
+        for (int x = 0; x < canvasWidth + 1; x += cellSize) {
+            graphics.strokeLine(x + BORDER_OFFSET, 0, x + BORDER_OFFSET, canvasHeight);
+        }
+        for (int y = 0; y < canvasHeight + 1; y += cellSize) {
+            graphics.strokeLine(0, y + BORDER_OFFSET, canvasWidth, y + BORDER_OFFSET);
         }
 
 
@@ -92,31 +168,17 @@ public final class MapPresenter implements MapChangeListener {
         graphics.fillText("y/x", cellSize / 2, cellSize / 2);
 
         // X axis
-        for (int x = cellSize / 2 + cellSize; x < mapCanvas.getWidth() + 1; x += cellSize) {
-            String text = String.valueOf((xCellValue));
+        for (int x = cellSize / 2 + cellSize; x < canvasWidth + 1; x += cellSize) {
+            String text = String.valueOf(xCellValue);
             graphics.fillText(text, x, cellSize / 2);
             xCellValue++;
         }
 
         // Y axis
-        int yCellValue = upperRight.getY();
-        for (int y = cellSize / 2 + cellSize; y < mapCanvas.getHeight() + 1; y += cellSize) {
-            String text = String.valueOf((yCellValue));
-            graphics.fillText(text, cellSize / 2, y);
-            yCellValue--;
-        }
-
-        // Filling cells with objects on map
         yCellValue = upperRight.getY();
-        graphics.setFill(Color.RED);
-        for (int y = cellSize / 2 + cellSize; y < mapCanvas.getHeight() + 1; y += cellSize) {
-            xCellValue = lowerLeft.getX();
-            for (int x = cellSize / 2 + cellSize; x < mapCanvas.getWidth() + 1; x += cellSize) {
-                if (worldMap.objectAt(new Vector2D(xCellValue, yCellValue)) != null) {
-                    graphics.fillText(worldMap.objectAt(new Vector2D(xCellValue, yCellValue)).toString(), x, y);
-                }
-                xCellValue++;
-            }
+        for (int y = cellSize / 2 + cellSize; y < canvasHeight + 1; y += cellSize) {
+            String text = String.valueOf(yCellValue);
+            graphics.fillText(text, cellSize / 2, y);
             yCellValue--;
         }
     }
