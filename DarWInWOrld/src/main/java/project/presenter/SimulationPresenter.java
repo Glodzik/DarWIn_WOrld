@@ -56,7 +56,6 @@ public class SimulationPresenter implements MapChangeListener {
 
     private static final int BORDER_WIDTH = 2;
     private static final float BORDER_OFFSET = (float) BORDER_WIDTH / 2;
-    private static final int FONT_SIZE = 25;
 
     private int calculateCellSize(int mapWidth, int mapHeight) {
         int maxCanvasWidth = 800;  // maksymalna szerokość okna
@@ -86,6 +85,7 @@ public class SimulationPresenter implements MapChangeListener {
         int cellSize = calculateCellSize(upperRight.getX() - lowerLeft.getX() + 1, upperRight.getY() - lowerLeft.getY() + 1);
         int canvasWidth = ((int) cellCount.getX() + 2) * cellSize + BORDER_WIDTH;
         int canvasHeight = ((int) cellCount.getY() + 2) * cellSize + BORDER_WIDTH;
+        int fontSize = Math.max(8, cellSize / 2);
 
         mapCanvas.setWidth(canvasWidth);
         mapCanvas.setHeight(canvasHeight);
@@ -108,7 +108,7 @@ public class SimulationPresenter implements MapChangeListener {
 
 
         // Filling cells
-        configureFont(graphics, FONT_SIZE, Color.BLACK);
+        configureFont(graphics, fontSize, Color.BLACK);
         int xCellValue = lowerLeft.getX();
         graphics.fillText("y/x", cellSize / 2, cellSize / 2);
 
