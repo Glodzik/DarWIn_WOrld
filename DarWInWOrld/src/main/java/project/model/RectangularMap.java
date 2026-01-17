@@ -20,12 +20,11 @@ public final class RectangularMap {
 
     public RectangularMap(int width, int height) {
         this.mapBounds = new Boundary(LOWER_LEFT, new Vector2D(width - 1, height - 1));
-        this.jungleHeight = Math.max((height + 1) / 5, 1);
-        int jungleStartY = (height + 1) / 2 - Math.max((height + 1) / 5, 1) / 2;
-        int jungleEndY = jungleStartY + Math.max((height + 1) / 5, 1) - 1;
-
+        this.jungleHeight = Math.max((int) Math.round(height * 0.2), 1);
+        int jungleStartY = (int) Math.round(((height - 1) / 2.0) - (jungleHeight - 1) / 2.0);
+        int jungleEndY = jungleStartY + jungleHeight - 1;
         Vector2D jungleLowerLeft = new Vector2D(0, jungleStartY);
-        Vector2D jungleUpperRight = new Vector2D(width, jungleEndY);
+        Vector2D jungleUpperRight = new Vector2D(width - 1, jungleEndY);
         this.jungleBoundary = new Boundary(jungleLowerLeft, jungleUpperRight);
     }
 
