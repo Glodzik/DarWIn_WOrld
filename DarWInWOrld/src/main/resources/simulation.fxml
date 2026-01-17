@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.canvas.GraphicsContext?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             minHeight="550.0" minWidth="850.0"
@@ -17,7 +10,56 @@
     <VBox style="-fx-padding: 5px 10px;" spacing="5">
         <Button style="-fx-font-size: 14px; -fx-padding: 8 15;"
                 onAction="#onSimulationStartClicked">Start</Button>
-        <Canvas fx:id="mapCanvas" />
+        <HBox spacing="10">
+            <Label text="Szerokość mapy:"/>
+            <TextField fx:id="mapWidthField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Wysokość mapy:"/>
+            <TextField fx:id="mapHeigthField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Energia po zjedzeniu rośliny:"/>
+            <TextField fx:id="startPlantsField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Liczba roślin wyrastająca każdego dnia:"/>
+            <TextField fx:id="newPlantsEverydayField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Startowa liczba zwierzaków:"/>
+            <TextField fx:id="startAnimalsField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Startowa energia zwierzaków:"/>
+            <TextField fx:id="startEnergyField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Energia tracona przez zwierzaka na koniec dnia:"/>
+            <TextField fx:id="energyLossEveryDayField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Energia konieczna, by uznać zwierzaka za najedzonego:"/>
+            <TextField fx:id="energyLevelToBreedField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Energia rodziców zużywana by stworzyć potomka:"/>
+            <TextField fx:id="energyLossAfterBreedField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Minimalna liczba mutacji u potomków:"/>
+            <TextField fx:id="minMutationField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Maksymalna liczba mutacji u potomków:"/>
+            <TextField fx:id="maxMutationField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Długość genomu zwierzaków:"/>
+            <TextField fx:id="genomeLenghtField" text="10" prefWidth="80"/>
+        </HBox>
+
     </VBox>
+
     </center>
 </BorderPane>
