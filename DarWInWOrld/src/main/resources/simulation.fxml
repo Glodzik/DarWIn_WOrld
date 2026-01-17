@@ -19,8 +19,12 @@
             <TextField fx:id="mapHeightField" text="10" prefWidth="80"/>
         </HBox>
         <HBox spacing="10">
-            <Label text="Energia po zjedzeniu rośliny:"/>
+            <Label text="Startowa liczba roślin:"/>
             <TextField fx:id="startPlantsField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Energia zapewniana przez zjedzenie rośliny:"/>
+            <TextField fx:id="eatingEnergyField" text="10" prefWidth="80"/>
         </HBox>
         <HBox spacing="10">
             <Label text="Liczba roślin wyrastająca każdego dnia:"/>
@@ -56,9 +60,24 @@
         </HBox>
         <HBox spacing="10">
             <Label text="Długość genomu zwierzaków:"/>
-            <TextField fx:id="genomeLenghtField" text="10" prefWidth="80"/>
+            <TextField fx:id="genomeLengthField" text="10" prefWidth="80"/>
         </HBox>
-
+        <HBox spacing="10">
+            <Label text="Prawdopodobieństwo że nowa roślina będzie trująca:"/>
+            <TextField fx:id="poisonPlantProbabilityField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Energia tracona po zjedzeniu trucizny:"/>
+            <TextField fx:id="poisonEnergyLossField" text="10" prefWidth="80"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Długość genomu ochrony:"/>
+            <TextField fx:id="protectionGenomeLengthField" text="10" prefWidth="80"/>
+        </HBox>
+<!--        <HBox spacing="10">-->
+<!--            <Label text="Customowe rośliny:"/>-->
+<!--            <Checkbox fx:id="customPlantsCheckbox" />-->
+<!--        </HBox>-->
     </VBox>
 
     </center>

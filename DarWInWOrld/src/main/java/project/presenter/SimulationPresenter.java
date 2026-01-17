@@ -7,6 +7,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -52,8 +53,17 @@ public class SimulationPresenter implements MapChangeListener {
     @FXML
     private TextField genomeLengthField;
     @FXML
+    private TextField eatingEnergyField;
+    @FXML
+    private TextField poisonPlantProbabilityField;
+    @FXML
+    private TextField poisonEnergyLossField;
+    @FXML
+    private TextField protectionGenomeLengthField;
+    //@FXML
+    //private CheckBox customPlantsCheckbox;
+    @FXML
     private Canvas mapCanvas;
-
 
 
     private static final int BORDER_WIDTH = 2;
@@ -139,8 +149,6 @@ public class SimulationPresenter implements MapChangeListener {
             }
             yCellValue--;
         }
-
-        //System.out.printf(worldMap.toString());
     }
 
     private void clearCanvas() {
@@ -168,6 +176,7 @@ public class SimulationPresenter implements MapChangeListener {
         int mapWidth = Integer.parseInt(mapWidthField.getText());
         int mapHeight = Integer.parseInt(mapHeightField.getText());
         int startPlants = Integer.parseInt(startPlantsField.getText());
+        int eatingEnergy = Integer.parseInt(eatingEnergyField.getText());
         int newPlantsEveryday = Integer.parseInt(newPlantsEverydayField.getText());
         int startAnimals = Integer.parseInt(startAnimalsField.getText());
         int startEnergy = Integer.parseInt(startEnergyField.getText());
@@ -177,10 +186,18 @@ public class SimulationPresenter implements MapChangeListener {
         int minMutation = Integer.parseInt(minMutationField.getText());
         int maxMutation = Integer.parseInt(maxMutationField.getText());
         int genomeLength = Integer.parseInt(genomeLengthField.getText());
+        int poisonPlantProbability = Integer.parseInt(poisonPlantProbabilityField.getText());
+        int poisonEnergyLoss = Integer.parseInt(poisonEnergyLossField.getText());
+        int protectionGenomeLength = Integer.parseInt(protectionGenomeLengthField.getText());
+        //boolean customPlants = customPlantsCheckbox.isSelected();
 
         AnimalParameters animalParameters = new AnimalParameters(startEnergy, energyLossEveryDay, energyLevelToBreed, energyLossAfterBreed, minMutation, maxMutation, genomeLength);
-        SimulationParameters parameters = new SimulationParameters(mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
-                animalParameters, new PlantParameters(20, 40, -20), 8, true);
+        PlantParameters plantParameters = new PlantParameters(eatingEnergy, poisonPlantProbability, poisonEnergyLoss);
+
+        SimulationParameters parameters = new SimulationParameters
+                (mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
+                animalParameters, plantParameters, protectionGenomeLength, true);
+
         Simulation simulation = new Simulation(parameters);
         setWorldMap(simulation.getWorldMap());
         worldMap.addObserver(this);
