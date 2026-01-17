@@ -1,8 +1,13 @@
 package project.model.WorldElements.Animals;
 
-import project.model.*;
+import project.model.Boundary;
+import project.model.MapDirection;
+import project.model.RandomGenerator;
+import project.model.Vector2D;
 import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.WorldElement;
+
+import java.util.Random;
 
 public final class Animal implements WorldElement {
     private MapDirection currDirection;
@@ -12,6 +17,7 @@ public final class Animal implements WorldElement {
     private int daysAlive = 0;
     private int protection = 0;
     private int childrenCount = 0;
+    private int movingPointer;
 
     private static final Vector2D START_POSITION = new Vector2D(0, 0);
     private static final int START_ENERGY = 100;
@@ -34,6 +40,8 @@ public final class Animal implements WorldElement {
                 parameters.minMutation(), parameters.maxMutation()
         );
         this.protection = Genome.protectionLevel(this.genom, protectionGenome);
+        Random random = new Random();
+        this.movingPointer = random.nextInt(parameters.genomLength());
     }
 
     public Animal(AnimalParameters parameters, Genome protectionGenome) {
@@ -42,6 +50,8 @@ public final class Animal implements WorldElement {
         this.energy = parameters.startEnergy();
         this.genom = new Genome(parameters.genomLength());
         this.protection = Genome.protectionLevel(this.genom, protectionGenome);
+        Random random = new Random();
+        this.movingPointer = random.nextInt(parameters.genomLength());
     }
 
     public Animal(Vector2D position) {
@@ -49,6 +59,8 @@ public final class Animal implements WorldElement {
         this.genom = new Genome(8);
         this.currDirection = RandomGenerator.randomDirection();
         this.energy = START_ENERGY;
+        Random random = new Random();
+        this.movingPointer = random.nextInt(genom.getGenomeSize());
     }
 
     public Animal() {
@@ -87,11 +99,12 @@ public final class Animal implements WorldElement {
 
     public void move(Boundary bounds) {
         if (energy > 0) {
-            int rotation = genom.getGenomeSequence()[daysAlive % this.genom.getGenomeSize()];
+            int rotation = genom.getGenomeSequence()[movingPointer % this.genom.getGenomeSize()];
             currDirection = currDirection.rotate(rotation);
             Vector2D oldPosition = position;
             Vector2D newPosition = position.add(currDirection.toUnitVector());
             daysAlive += 1;
+            movingPointer += 1;
 
             Vector2D lowerLeft = bounds.lowerLeft();
             Vector2D upperRight = bounds.upperRight();
