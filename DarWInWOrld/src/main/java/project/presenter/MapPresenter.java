@@ -16,6 +16,7 @@ import project.model.Simulation.Simulation;
 import project.model.Vector2D;
 import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.EdibleElements.Antidote;
+import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.EdibleElements.Poison;
 import project.model.WorldElements.WorldElement;
 
@@ -36,6 +37,8 @@ public final class MapPresenter implements MapChangeListener {
     private static final String JUNGLE_BIOME = "/textures/biomes/grass_block_top_jungle.png";
     private static final String STEPPE_BIOME = "/textures/biomes/grass_block_top_steppe.png";
     private static final String ANIMAL_TEXTURE = "/textures/animal/animalDown.png";
+    private static final String DEFAULT_PLANT = "/textures/plants/antidotes/grass.png";
+    private static final String DEFAULT_POISON = "/textures/plants/poisons/aloe.png";
 
     private final Map<String, Image> imageCache = new HashMap<>();
 
@@ -53,10 +56,17 @@ public final class MapPresenter implements MapChangeListener {
     private Image getTextureForElement(WorldElement element) {
         if (element instanceof Animal) {
             return loadImage(ANIMAL_TEXTURE);
-        } else if (element instanceof Antidote antidote) {
+        }
+        else if (element instanceof Antidote antidote) {
             return loadImage(antidote.getType().getTexturePath());
         } else if (element instanceof Poison poison) {
             return loadImage(poison.getType().getTexturePath());
+        } else if(element instanceof Plant plant) {
+            if(plant.getEnergy() > 0) {
+                return loadImage(DEFAULT_PLANT);
+            } else {
+                return loadImage(DEFAULT_POISON);
+            }
         }
         return null;
     }
