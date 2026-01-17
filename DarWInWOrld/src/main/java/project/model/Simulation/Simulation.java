@@ -13,7 +13,7 @@ import project.model.WorldElements.EdibleElements.PlantParameters;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Simulation {
+public final class Simulation implements Runnable {
     private List<Animal> animals = new ArrayList<Animal>();
     private List<Plant> plants = new ArrayList<Plant>();
     private final RectangularMap worldMap;
@@ -80,6 +80,11 @@ public final class Simulation {
     private void animalsMoving() {
         updateAnimalsAndPlants();
         for(Animal animal : animals) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                System.out.printf("Thread interrupted: %s%n", e.getMessage());
+            }
             worldMap.move(animal);
         }
     }

@@ -1,6 +1,7 @@
 package project.model;
 
 import project.model.WorldElements.Animals.Animal;
+import project.model.WorldElements.Animals.AnimalComparator;
 import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.WorldElement;
 
@@ -61,6 +62,7 @@ public final class RectangularMap {
         if(!isOccupiedByPlant(vectorToPlacePlant)) {
             plants.put(vectorToPlacePlant, plant);
             plant.setPosition(vectorToPlacePlant);
+            mapChanged("Plant placed at position: %s".formatted(vectorToPlacePlant));
         }
     }
 
@@ -77,6 +79,7 @@ public final class RectangularMap {
 
         Vector2D newPosition = animal.getPosition();
         animals.computeIfAbsent(newPosition, k -> new ArrayList<>()).add(animal);
+        mapChanged("Animal moved from %s to %s".formatted(oldPosition, newPosition));
     }
 
     public Boundary getMapBounds() {
@@ -158,5 +161,20 @@ public final class RectangularMap {
         for (MapChangeListener observer : observers) {
             observer.mapChanged(this, message);
         }
+    }
+
+    public WorldElement objectAt(Vector2D position) {
+        List<Animal> animalsAtPosition = getAnimalsAt(position);
+        WorldElement worldElement = null;
+        if(!animalsAtPosition.isEmpty()) {
+            animalsAtPosition.sort(AnimalComparator.createComparator());
+            worldElement = animalsAtPosition.getFirst();
+        }
+
+        if(worldElement == null) {
+            worldElement = getPlantAt(position);
+        }
+
+        return worldElement;
     }
 }
