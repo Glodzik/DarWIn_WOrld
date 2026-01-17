@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import project.presenter.SimulationPresenter;
+import project.presenter.ConfigurationPresenter;
 
 import java.io.IOException;
 
@@ -19,8 +19,7 @@ public class SimulationApp extends Application {
 
         // Wczytanie FXML, konwersja FXML -> obiekty w Javie
         BorderPane viewRoot = loader.load();
-        SimulationPresenter presenter = loader.getController();
-
+        ConfigurationPresenter presenter = loader.getController();
         configureStage(primaryStage, viewRoot);
         primaryStage.show();
     }
