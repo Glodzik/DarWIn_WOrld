@@ -5,80 +5,95 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             minHeight="550.0" minWidth="850.0"
-            fx:controller="project.presenter.ConfigurationPresenter">
+            fx:controller="project.presenter.ConfigurationPresenter"
+            stylesheets="@styles.css">
     <center>
-    <VBox style="-fx-padding: 5px 10px;" spacing="5">
-        <Button style="-fx-font-size: 14px; -fx-padding: 8 15;"
-                onAction="#onSimulationStartClicked">Start</Button>
-        <HBox spacing="10">
-            <Label text="Szerokość mapy:"/>
-            <TextField fx:id="mapWidthField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Wysokość mapy:"/>
-            <TextField fx:id="mapHeightField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Startowa liczba roślin:"/>
-            <TextField fx:id="startPlantsField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Energia zapewniana przez zjedzenie rośliny:"/>
-            <TextField fx:id="eatingEnergyField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Liczba roślin wyrastająca każdego dnia:"/>
-            <TextField fx:id="newPlantsEverydayField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Startowa liczba zwierzaków:"/>
-            <TextField fx:id="startAnimalsField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Startowa energia zwierzaków:"/>
-            <TextField fx:id="startEnergyField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Energia tracona przez zwierzaka na koniec dnia:"/>
-            <TextField fx:id="energyLossEveryDayField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Energia konieczna, by uznać zwierzaka za najedzonego:"/>
-            <TextField fx:id="energyLevelToBreedField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Energia rodziców zużywana by stworzyć potomka:"/>
-            <TextField fx:id="energyLossAfterBreedField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Minimalna liczba mutacji u potomków:"/>
-            <TextField fx:id="minMutationField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Maksymalna liczba mutacji u potomków:"/>
-            <TextField fx:id="maxMutationField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Długość genomu zwierzaków:"/>
-            <TextField fx:id="genomeLengthField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Prawdopodobieństwo że nowa roślina będzie trująca:"/>
-            <TextField fx:id="poisonPlantProbabilityField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Energia tracona po zjedzeniu trucizny:"/>
-            <TextField fx:id="poisonEnergyLossField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Długość genomu ochrony:"/>
-            <TextField fx:id="protectionGenomeLengthField" text="10" prefWidth="80"/>
-        </HBox>
-        <HBox spacing="10">
-            <Label text="Customowe rośliny:"/>
-            <CheckBox fx:id="customPlantsCheckbox" text="Włącz różne rodzaje roślin"/>
-        </HBox>
-    </VBox>
-
+        <VBox style="-fx-padding: 5px 10px;" spacing="5">
+            <HBox spacing="10">
+                <Label text="Szerokość mapy:"/>
+                <Slider fx:id="mapWidthField" min="5" max="25" value="15" majorTickUnit="2" styleClass="slider-style" />
+                <Label fx:id="mapWidthLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Wysokość mapy:"/>
+                <Slider fx:id="mapHeightField" min="5" max="25" value="15" majorTickUnit="2" styleClass="slider-style" />
+                <Label fx:id="mapHeightLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Startowa liczba roślin:"/>
+                <Slider fx:id="startPlantsField" min="0" max="100" value="10" majorTickUnit="10" styleClass="slider-style" />
+                <Label fx:id="startPlantsLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Energia zapewniana przez zjedzenie rośliny:"/>
+                <Slider fx:id="eatingEnergyField" min="10" max="50" value="20" majorTickUnit="5" styleClass="slider-style"/>
+                <Label fx:id="eatingEnergyLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Liczba roślin wyrastająca każdego dnia:"/>
+                <Slider fx:id="newPlantsEverydayField" min="0" max="50" value="10" majorTickUnit="5" styleClass="slider-style"/>
+                <Label fx:id="newPlantsEverydayLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Startowa liczba zwierzaków:"/>
+                <Slider fx:id="startAnimalsField" min="5" max="30" value="10" majorTickUnit="3" styleClass="slider-style" />
+                <Label fx:id="startAnimalsLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Startowa energia zwierzaków:"/>
+                <Slider fx:id="startEnergyField" min="10" max="200" value="100" majorTickUnit="20" styleClass="slider-style"/>
+                <Label fx:id="startEnergyLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Energia tracona przez zwierzaka na koniec dnia:"/>
+                <Slider fx:id="energyLossEveryDayField" min="5" max="50" value="10" majorTickUnit="5" styleClass="slider-style"/>
+                <Label fx:id="energyLossEveryDayLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Energia konieczna, by uznać zwierzaka za najedzonego:"/>
+                <Slider fx:id="energyLevelToBreedField" min="0" max="50" value="10" majorTickUnit="10" styleClass="slider-style"/>
+                <Label fx:id="energyLevelToBreedLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Energia rodziców zużywana by stworzyć potomka:"/>
+                <Slider fx:id="energyLossAfterBreedField" min="20" max="100" value="50" majorTickUnit="10" styleClass="slider-style"/>
+                <Label fx:id="energyLossAfterBreedLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Minimalna liczba mutacji u potomków:"/>
+                <Slider fx:id="minMutationField" min="0" max="10" value="5" majorTickUnit="1" styleClass="slider-style"/>
+                <Label fx:id="minMutationLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Maksymalna liczba mutacji u potomków:"/>
+                <Slider fx:id="maxMutationField" min="0" max="20" value="5" majorTickUnit="1" styleClass="slider-style"/>
+                <Label fx:id="maxMutationLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Długość genomu zwierzaków:"/>
+                <Slider fx:id="genomeLengthField" min="5" max="30" value="10" majorTickUnit="3" styleClass="slider-style"/>
+                <Label fx:id="genomeLengthLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Prawdopodobieństwo że nowa roślina będzie trująca:"/>
+                <Slider fx:id="poisonPlantProbabilityField" min="0" max="100" value="20" majorTickUnit="10" styleClass="slider-style"/>
+                <Label fx:id="poisonPlantProbabilityLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Energia tracona po zjedzeniu trucizny:"/>
+                <Slider fx:id="poisonEnergyLossField" min="10" max="50" value="20" majorTickUnit="5" styleClass="slider-style"/>
+                <Label fx:id="poisonEnergyLossLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Długość genomu ochrony:"/>
+                <Slider fx:id="protectionGenomeLengthField" min="5" max="30" value="10" majorTickUnit="3" styleClass="slider-style"/>
+                <Label fx:id="protectionGenomeLengthLabel" text="10"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Customowe rośliny:"/>
+                <CheckBox fx:id="customPlantsCheckbox" text="Włącz różne rodzaje roślin"/>
+            </HBox>
+            <Button onAction="#onSimulationStartClicked" styleClass="button-style">Start</Button>
+        </VBox>
     </center>
 </BorderPane>

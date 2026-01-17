@@ -4,7 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Slider;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import project.model.Simulation.Simulation;
@@ -16,39 +17,112 @@ import java.io.IOException;
 
 public class ConfigurationPresenter {
     @FXML
-    private TextField mapWidthField;
+    private Slider mapWidthField;
     @FXML
-    private TextField mapHeightField;
+    private Slider mapHeightField;
     @FXML
-    private TextField startPlantsField;
+    private Slider startPlantsField;
     @FXML
-    private TextField newPlantsEverydayField;
+    private Slider newPlantsEverydayField;
     @FXML
-    private TextField startAnimalsField;
+    private Slider startAnimalsField;
     @FXML
-    private TextField startEnergyField;
+    private Slider startEnergyField;
     @FXML
-    private TextField energyLossEveryDayField;
+    private Slider energyLossEveryDayField;
     @FXML
-    private TextField energyLevelToBreedField;
+    private Slider energyLevelToBreedField;
     @FXML
-    private TextField energyLossAfterBreedField;
+    private Slider energyLossAfterBreedField;
     @FXML
-    private TextField minMutationField;
+    private Slider minMutationField;
     @FXML
-    private TextField maxMutationField;
+    private Slider maxMutationField;
     @FXML
-    private TextField genomeLengthField;
+    private Slider genomeLengthField;
     @FXML
-    private TextField eatingEnergyField;
+    private Slider eatingEnergyField;
     @FXML
-    private TextField poisonPlantProbabilityField;
+    private Slider poisonPlantProbabilityField;
     @FXML
-    private TextField poisonEnergyLossField;
+    private Slider poisonEnergyLossField;
     @FXML
-    private TextField protectionGenomeLengthField;
+    private Slider protectionGenomeLengthField;
     @FXML
     private CheckBox customPlantsCheckbox;
+
+    @FXML
+    private Label mapWidthLabel;
+    @FXML
+    private Label mapHeightLabel;
+    @FXML
+    private Label startPlantsLabel;
+    @FXML
+    private Label eatingEnergyLabel;
+    @FXML
+    private Label newPlantsEverydayLabel;
+    @FXML
+    private Label startAnimalsLabel;
+    @FXML
+    private Label startEnergyLabel;
+    @FXML
+    private Label energyLossEveryDayLabel;
+    @FXML
+    private Label energyLevelToBreedLabel;
+    @FXML
+    private Label energyLossAfterBreedLabel;
+    @FXML
+    private Label minMutationLabel;
+    @FXML
+    private Label maxMutationLabel;
+    @FXML
+    private Label genomeLengthLabel;
+    @FXML
+    private Label poisonPlantProbabilityLabel;
+    @FXML
+    private Label poisonEnergyLossLabel;
+    @FXML
+    private Label protectionGenomeLengthLabel;
+
+    @FXML
+    public void initialize() {
+        setupSliderListeners();
+    }
+
+    private void setupSliderListeners() {
+        mapWidthField.valueProperty().addListener((obs, oldVal, newVal) ->
+                mapWidthLabel.setText(String.valueOf(newVal.intValue())));
+        mapHeightField.valueProperty().addListener((obs, oldVal, newVal) ->
+                mapHeightLabel.setText(String.valueOf(newVal.intValue())));
+        startPlantsField.valueProperty().addListener((obs, oldVal, newVal) ->
+                startPlantsLabel.setText(String.valueOf(newVal.intValue())));
+        eatingEnergyField.valueProperty().addListener((obs, oldVal, newVal) ->
+                eatingEnergyLabel.setText(String.valueOf(newVal.intValue())));
+        newPlantsEverydayField.valueProperty().addListener((obs, oldVal, newVal) ->
+                newPlantsEverydayLabel.setText(String.valueOf(newVal.intValue())));
+        startAnimalsField.valueProperty().addListener((obs, oldVal, newVal) ->
+                startAnimalsLabel.setText(String.valueOf(newVal.intValue())));
+        startEnergyField.valueProperty().addListener((obs, oldVal, newVal) ->
+                startEnergyLabel.setText(String.valueOf(newVal.intValue())));
+        energyLossEveryDayField.valueProperty().addListener((obs, oldVal, newVal) ->
+                energyLossEveryDayLabel.setText(String.valueOf(newVal.intValue())));
+        energyLevelToBreedField.valueProperty().addListener((obs, oldVal, newVal) ->
+                energyLevelToBreedLabel.setText(String.valueOf(newVal.intValue())));
+        energyLossAfterBreedField.valueProperty().addListener((obs, oldVal, newVal) ->
+                energyLossAfterBreedLabel.setText(String.valueOf(newVal.intValue())));
+        minMutationField.valueProperty().addListener((obs, oldVal, newVal) ->
+                minMutationLabel.setText(String.valueOf(newVal.intValue())));
+        maxMutationField.valueProperty().addListener((obs, oldVal, newVal) ->
+                maxMutationLabel.setText(String.valueOf(newVal.intValue())));
+        genomeLengthField.valueProperty().addListener((obs, oldVal, newVal) ->
+                genomeLengthLabel.setText(String.valueOf(newVal.intValue())));
+        poisonPlantProbabilityField.valueProperty().addListener((obs, oldVal, newVal) ->
+                poisonPlantProbabilityLabel.setText(String.valueOf(newVal.intValue())));
+        poisonEnergyLossField.valueProperty().addListener((obs, oldVal, newVal) ->
+                poisonEnergyLossLabel.setText(String.valueOf(newVal.intValue())));
+        protectionGenomeLengthField.valueProperty().addListener((obs, oldVal, newVal) ->
+                protectionGenomeLengthLabel.setText(String.valueOf(newVal.intValue())));
+    }
 
     public void onSimulationStartClicked() {
         SimulationParameters parameters = getSimulationParameters();
@@ -79,22 +153,22 @@ public class ConfigurationPresenter {
     }
 
     private SimulationParameters getSimulationParameters() {
-        int mapWidth = Integer.parseInt(mapWidthField.getText());
-        int mapHeight = Integer.parseInt(mapHeightField.getText());
-        int startPlants = Integer.parseInt(startPlantsField.getText());
-        int eatingEnergy = Integer.parseInt(eatingEnergyField.getText());
-        int newPlantsEveryday = Integer.parseInt(newPlantsEverydayField.getText());
-        int startAnimals = Integer.parseInt(startAnimalsField.getText());
-        int startEnergy = Integer.parseInt(startEnergyField.getText());
-        int energyLossEveryDay = Integer.parseInt(energyLossEveryDayField.getText());
-        int energyLevelToBreed = Integer.parseInt(energyLevelToBreedField.getText());
-        int energyLossAfterBreed = Integer.parseInt(energyLossAfterBreedField.getText());
-        int minMutation = Integer.parseInt(minMutationField.getText());
-        int maxMutation = Integer.parseInt(maxMutationField.getText());
-        int genomeLength = Integer.parseInt(genomeLengthField.getText());
-        int poisonPlantProbability = Integer.parseInt(poisonPlantProbabilityField.getText());
-        int poisonEnergyLoss = Integer.parseInt(poisonEnergyLossField.getText());
-        int protectionGenomeLength = Integer.parseInt(protectionGenomeLengthField.getText());
+        int mapWidth = (int) mapWidthField.getValue();
+        int mapHeight = (int) mapHeightField.getValue();
+        int startPlants = (int) startPlantsField.getValue();
+        int eatingEnergy = (int) eatingEnergyField.getValue();
+        int newPlantsEveryday = (int) newPlantsEverydayField.getValue();
+        int startAnimals = (int) startAnimalsField.getValue();
+        int startEnergy = (int) startEnergyField.getValue();
+        int energyLossEveryDay = (int) energyLossEveryDayField.getValue();
+        int energyLevelToBreed = (int) energyLevelToBreedField.getValue();
+        int energyLossAfterBreed = (int) energyLossAfterBreedField.getValue();
+        int minMutation = (int) minMutationField.getValue();
+        int maxMutation = (int) maxMutationField.getValue();
+        int genomeLength = (int) genomeLengthField.getValue();
+        int poisonPlantProbability = (int) poisonPlantProbabilityField.getValue();
+        int poisonEnergyLoss = (int) poisonEnergyLossField.getValue();
+        int protectionGenomeLength = (int) protectionGenomeLengthField.getValue();
         boolean customPlants = customPlantsCheckbox.isSelected();
 
         AnimalParameters animalParameters = new AnimalParameters(startEnergy, energyLossEveryDay, energyLevelToBreed, energyLossAfterBreed, minMutation, maxMutation, genomeLength);
@@ -104,6 +178,4 @@ public class ConfigurationPresenter {
                 (mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
                         animalParameters, plantParameters, protectionGenomeLength, customPlants);
     }
-
-
 }

@@ -1,0 +1,11 @@
+.slider-style {
+    -fx-pref-width: 400px;
+    -fx-show-tick-labels: true;
+    -fx-show-tick-marks: true;
+    -fx-minor-tick-count: 0;
+}
+
+.button-style {
+    -fx-font-size: 14px;
+    -fx-padding: 8 15;
+}
