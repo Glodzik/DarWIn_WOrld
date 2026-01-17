@@ -4,7 +4,7 @@ import project.model.RandomGenerator;
 
 import java.util.Comparator;
 
-public class AnimalComparator {
+public final class AnimalComparator {
     public static Comparator<Animal> createComparator() {
         return Comparator
                 .comparingInt(Animal::getEnergy).reversed()

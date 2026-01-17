@@ -136,4 +136,14 @@ public final class RectangularMap {
     public List<Vector2D> getAllPositions() {
         return new ArrayList<>(animals.keySet());
     }
+
+    public int countFreeFields() {
+        int totalFields = (mapBounds.upperRight().getX() + 1) * (mapBounds.upperRight().getY() + 1);
+
+        Set<Vector2D> occupiedFields = new HashSet<>();
+        occupiedFields.addAll(animals.keySet());
+        occupiedFields.addAll(plants.keySet());
+
+        return totalFields - occupiedFields.size();
+    }
 }

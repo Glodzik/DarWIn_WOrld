@@ -13,7 +13,7 @@ import project.model.WorldElements.EdibleElements.PlantParameters;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Simulation {
+public final class Simulation {
     private List<Animal> animals = new ArrayList<Animal>();
     private List<Plant> plants = new ArrayList<Plant>();
     private RectangularMap worldMap;
@@ -123,5 +123,17 @@ public class Simulation {
         while (!animals.isEmpty()) {
             dayAction();
         }
+    }
+
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
+    public List<Plant> getPlants() {
+        return plants;
+    }
+
+    public RectangularMap getWorldMap() {
+        return worldMap;
     }
 }

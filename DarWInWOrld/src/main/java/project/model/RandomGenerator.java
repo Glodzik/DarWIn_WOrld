@@ -37,7 +37,7 @@ public final class RandomGenerator {
             return new Poison(null, poison);
         } else {
             int antidote = random.nextInt(TypeOfAntidote.values().length);
-            return new Antidote(null, TypeOfAntidote.values().length);
+            return new Antidote(null, antidote);
         }
     }
 
