@@ -39,12 +39,12 @@
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
                         <Label text="Energia konieczna, by uznać zwierzaka za najedzonego:" HBox.hgrow="ALWAYS"/>
-                        <Slider fx:id="energyLevelToBreedField" min="0" max="50" value="10" majorTickUnit="10" styleClass="slider-style"/>
+                        <Slider fx:id="energyLevelToBreedField" min="60" max="100" value="80" majorTickUnit="5" styleClass="slider-style"/>
                         <Label fx:id="energyLevelToBreedLabel" text="10"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
                         <Label text="Energia rodziców zużywana by stworzyć potomka:" HBox.hgrow="ALWAYS"/>
-                        <Slider fx:id="energyLossAfterBreedField" min="20" max="100" value="50" majorTickUnit="10" styleClass="slider-style"/>
+                        <Slider fx:id="energyLossAfterBreedField" min="20" max="50" value="30" majorTickUnit="5" styleClass="slider-style"/>
                         <Label fx:id="energyLossAfterBreedLabel" text="50"/>
                     </HBox>
                 </VBox>
