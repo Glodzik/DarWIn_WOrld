@@ -1,20 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             minHeight="600.0" minWidth="800.0"
             fx:controller="project.presenter.MapPresenter"
             stylesheets="@styles.css">
-    <top>
-        <HBox alignment="CENTER" style="-fx-padding: 10;">
-            <Button fx:id="toggleButton" text="STOP" styleClass="button-style" />
-        </HBox>
-    </top>
-    <center>
-        <Canvas fx:id="mapCanvas"/>
 
+    <center>
+        <SplitPane dividerPositions="0.3">
+            <VBox style="-fx-padding: 10;" spacing="15">
+                <Label text="Statystyki symulacji" styleClass="statistics-header"/>
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label text="Liczba zwierzaków:" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="animalCountLabel" text="0" GridPane.columnIndex="1" styleClass="statistics-value"/>
+
+                    <Label text="Liczba roślin:" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="plantCountLabel" text="0" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="statistics-value"/>
+
+                    <Label text="Wolne pola:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="freeFieldsLabel" text="0" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="statistics-value"/>
+
+                    <Label text="Najpopular. genotyp:" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="topGenotypeLabel" text="-" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="statistics-value"/>
+
+                    <Label text="Śr. energia (żywe):" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="avgEnergyLabel" text="0.0" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="statistics-value"/>
+
+                    <Label text="Śr. długość życia:" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="avgLifespanLabel" text="0.0" GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="statistics-value"/>
+
+                    <Label text="Śr. liczba dzieci:" GridPane.rowIndex="6" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="avgChildrenLabel" text="0.0" GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="statistics-value"/>
+                </GridPane>
+            </VBox>
+
+            <VBox style="-fx-padding: 10;" spacing="10">
+                <Canvas fx:id="mapCanvas" VBox.vgrow="ALWAYS"/>
+                <HBox alignment="CENTER" style="-fx-padding: 10 0 0 0;">
+                    <Button fx:id="toggleButton" text="STOP" styleClass="button-style"
+                            minWidth="100" minHeight="40"/>
+                </HBox>
+            </VBox>
+        </SplitPane>
     </center>
 </BorderPane>
