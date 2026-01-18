@@ -167,19 +167,4 @@ public final class RectangularMap {
             observer.mapChanged(this, message);
         }
     }
-
-    public WorldElement objectAt(Vector2D position) {
-        List<Animal> animalsAtPosition = getAnimalsAt(position);
-        WorldElement worldElement = null;
-        if(!animalsAtPosition.isEmpty()) {
-            animalsAtPosition.sort(AnimalComparator.getComparator());
-            worldElement = animalsAtPosition.getFirst();
-        }
-
-        if(worldElement == null) {
-            worldElement = getPlantAt(position);
-        }
-
-        return worldElement;
-    }
 }
