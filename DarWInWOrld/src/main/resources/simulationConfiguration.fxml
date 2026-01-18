@@ -2,12 +2,30 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Pos?>
+<?import javafx.scene.text.*?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            minHeight="550.0" minWidth="850.0"
+            minHeight="600.0" minWidth="850.0"
             fx:controller="project.presenter.ConfigurationPresenter"
             stylesheets="@styles.css">
+    <top>
+        <HBox styleClass="title-container" HBox.hgrow="ALWAYS">
+            <TextFlow textAlignment="CENTER" HBox.hgrow="ALWAYS" style="-fx-padding: 15 0;">
+                <Text text="D" styleClass="app-title"/>
+                <Text text="a" styleClass="app-title"/>
+                <Text text="r" styleClass="app-title"/>
+                <Text text="W" styleClass="app-title-highlight"/>
+                <Text text="I" styleClass="app-title-highlight"/>
+                <Text text="n" styleClass="app-title"/>
+                <Text text=" " styleClass="app-title"/>
+                <Text text="W" styleClass="app-title-highlight"/>
+                <Text text="O" styleClass="app-title-highlight"/>
+                <Text text="r" styleClass="app-title"/>
+                <Text text="l" styleClass="app-title"/>
+                <Text text="d" styleClass="app-title"/>
+            </TextFlow>
+        </HBox>
+    </top>
     <center>
         <VBox style="-fx-padding: 5px 10px;" spacing="5">
             <HBox spacing="20">
@@ -116,7 +134,9 @@
                 <CheckBox fx:id="customPlantsCheckbox" text="Włącz różne rodzaje roślin (przypisana z góry energia roślin)"/>
             </HBox>
 
-            <Button onAction="#onSimulationStartClicked" styleClass="button-style" style="-fx-margin: 10 0 0 0;">Start</Button>
+            <HBox alignment="CENTER" style="-fx-padding: 40 0 20 0;">
+                <Button onAction="#onSimulationStartClicked" styleClass="button-style">START</Button>
+            </HBox>
         </VBox>
     </center>
 </BorderPane>

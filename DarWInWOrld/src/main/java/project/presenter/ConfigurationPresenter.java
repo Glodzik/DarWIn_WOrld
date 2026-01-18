@@ -86,6 +86,7 @@ public final class ConfigurationPresenter {
     @FXML
     private Label protectionGenomeLengthLabel;
 
+
     @FXML
     public void initialize() {
         setupSliderListeners();
