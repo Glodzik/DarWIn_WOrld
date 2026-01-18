@@ -23,8 +23,8 @@ public final class Animal implements WorldElement {
     private static final int START_ENERGY = 100;
 
     public Animal(Animal animal1, Animal animal2, AnimalParameters parameters, Genome protectionGenome) {
-        animal1.energyLoss(parameters.energyLevelToBreed());
-        animal2.energyLoss(parameters.energyLevelToBreed());
+        animal1.energyLoss(parameters.energyLossAfterBreed());
+        animal2.energyLoss(parameters.energyLossAfterBreed());
         animal1.childrenCount += 1;
         animal2.childrenCount += 1;
 

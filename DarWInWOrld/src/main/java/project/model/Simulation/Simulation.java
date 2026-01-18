@@ -82,7 +82,7 @@ public final class Simulation implements Runnable {
         updateAnimalsAndPlants();
         for(Animal animal : animals) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -96,7 +96,7 @@ public final class Simulation implements Runnable {
         for(Vector2D position : positions) {
             List<Animal> animalsAtPosition = worldMap.getAnimalsAt(position);
             if (animalsAtPosition.size() >= 2) {
-                animalsAtPosition.sort(AnimalComparator.createComparator());
+                animalsAtPosition.sort(AnimalComparator.getComparator());
             }
 
             Animal animal = animalsAtPosition.getFirst();
@@ -110,7 +110,7 @@ public final class Simulation implements Runnable {
         for(Vector2D position : positions) {
             List<Animal> animalsAtPosition = worldMap.getAnimalsAt(position);
             if (animalsAtPosition.size() >= 2) {
-                animalsAtPosition.sort(AnimalComparator.createComparator());
+                animalsAtPosition.sort(AnimalComparator.getComparator());
 
                 Animal parent1 = animalsAtPosition.get(0);
                 Animal parent2 = animalsAtPosition.get(1);

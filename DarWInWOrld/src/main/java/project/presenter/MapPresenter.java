@@ -162,7 +162,7 @@ public final class MapPresenter implements MapChangeListener {
 
                 var animals = worldMap.getAnimalsAt(currentPos);
                 if (!animals.isEmpty()) {
-                    animals.sort(AnimalComparator.createComparator());
+                    animals.sort(AnimalComparator.getComparator());
                     Image animalTexture = loadImage(ANIMAL_TEXTURE);
                     if (animalTexture != null) {
                         graphics.save();

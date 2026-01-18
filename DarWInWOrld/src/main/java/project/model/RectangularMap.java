@@ -172,7 +172,7 @@ public final class RectangularMap {
         List<Animal> animalsAtPosition = getAnimalsAt(position);
         WorldElement worldElement = null;
         if(!animalsAtPosition.isEmpty()) {
-            animalsAtPosition.sort(AnimalComparator.createComparator());
+            animalsAtPosition.sort(AnimalComparator.getComparator());
             worldElement = animalsAtPosition.getFirst();
         }
 
