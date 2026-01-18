@@ -51,7 +51,7 @@ public final class Genome {
     }
 
     public int[] getGenomeSequence() {
-        return genomeSequence;
+        return genomeSequence.clone();
     }
 
     public int getGenomeSize() {

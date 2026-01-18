@@ -1,9 +1,7 @@
 package project.model;
 
 import project.model.WorldElements.Animals.Animal;
-import project.model.WorldElements.Animals.AnimalComparator;
 import project.model.WorldElements.EdibleElements.Plant;
-import project.model.WorldElements.WorldElement;
 
 import java.util.*;
 
@@ -96,7 +94,7 @@ public final class RectangularMap {
         return animalsAtPosition != null ? new ArrayList<>(animalsAtPosition) : new ArrayList<>();
     }
 
-    public WorldElement getPlantAt(Vector2D position) {
+    public Plant getPlantAt(Vector2D position) {
         return plants.get(position);
     }
 
