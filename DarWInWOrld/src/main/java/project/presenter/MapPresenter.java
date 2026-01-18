@@ -6,6 +6,7 @@ import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -34,6 +35,26 @@ public final class MapPresenter implements MapChangeListener {
     private Canvas mapCanvas;
     @FXML
     private Button toggleButton;
+    @FXML
+    private Label animalCountLabel;
+
+    @FXML
+    private Label plantCountLabel;
+
+    @FXML
+    private Label freeFieldsLabel;
+
+    @FXML
+    private Label topGenotypeLabel;
+
+    @FXML
+    private Label avgEnergyLabel;
+
+    @FXML
+    private Label avgLifespanLabel;
+
+    @FXML
+    private Label avgChildrenLabel;
     @FXML
     private void initialize() {
         toggleButton.setOnAction(event -> toggleSimulation());
