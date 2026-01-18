@@ -231,7 +231,7 @@ public final class MapPresenter implements MapChangeListener {
             if (plant != null) {
                 Image plantTexture = getTextureForElement(plant);
                 if (plantTexture != null) {
-                    graphics.drawImage(plantTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
+                    graphics.drawImage(plantTexture, x, y, cellSize, cellSize);
                 }
             }
         }
@@ -241,7 +241,7 @@ public final class MapPresenter implements MapChangeListener {
         boolean isInJungle = currentPos.follows(jungleBounds.lowerLeft()) && currentPos.precedes(jungleBounds.upperRight());
         Image biomeTexture = loadImage(isInJungle ? JUNGLE_BIOME : STEPPE_BIOME);
         if (biomeTexture != null) {
-            graphics.drawImage(biomeTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
+            graphics.drawImage(biomeTexture, x, y, cellSize, cellSize);
         }
     }
 
