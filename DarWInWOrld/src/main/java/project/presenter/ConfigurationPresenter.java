@@ -89,6 +89,7 @@ public class ConfigurationPresenter {
     @FXML
     public void initialize() {
         setupSliderListeners();
+        setupCheckboxListeners();
     }
 
     private void setupSliderListeners() {
@@ -124,6 +125,28 @@ public class ConfigurationPresenter {
                 poisonEnergyLossLabel.setText(String.valueOf(newVal.intValue())));
         protectionGenomeLengthField.valueProperty().addListener((obs, oldVal, newVal) ->
                 protectionGenomeLengthLabel.setText(String.valueOf(newVal.intValue())));
+    }
+
+    private void setupCheckboxListeners() {
+        // Listener dla checkboxa trujących roślin
+        poisonPlantsVariantCheckbox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            poisonPlantProbabilityField.setDisable(!newValue);
+            poisonEnergyLossField.setDisable(!newValue);
+            protectionGenomeLengthField.setDisable(!newValue);
+            poisonPlantProbabilityLabel.setDisable(!newValue);
+            poisonEnergyLossLabel.setDisable(!newValue);
+            protectionGenomeLengthLabel.setDisable(!newValue);
+
+            if (!newValue) {
+                poisonPlantProbabilityField.setValue(0);
+                poisonEnergyLossField.setValue(0);
+                protectionGenomeLengthField.setValue(0);
+            } else {
+                poisonPlantProbabilityField.setValue(20);
+                poisonEnergyLossField.setValue(20);
+                protectionGenomeLengthField.setValue(10);
+            }
+        });
     }
 
     public void onSimulationStartClicked() {
