@@ -10,7 +10,8 @@
             stylesheets="@styles.css">
 
     <center>
-        <SplitPane dividerPositions="0.3">
+        <SplitPane dividerPositions="0.4"
+                   minWidth="300">
             <VBox style="-fx-padding: 10;" spacing="15">
                 <Label text="Statystyki symulacji" styleClass="statistics-header"/>
                 <GridPane hgap="10" vgap="10">
@@ -59,6 +60,7 @@
                            styleClass="statistics-label"/>
                     <Label fx:id="avgChildrenLabel" text="0.0" GridPane.rowIndex="8" GridPane.columnIndex="1"
                            styleClass="statistics-value"/>
+
                 </GridPane>
             </VBox>
 

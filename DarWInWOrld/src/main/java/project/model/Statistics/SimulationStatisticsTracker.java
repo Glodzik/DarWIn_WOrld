@@ -11,7 +11,7 @@ public class SimulationStatisticsTracker {
     private int numberOfNotOccupiedFields;
     private Map<String, Integer> mostPopularGenes = new HashMap<>();
     private double averageEnergyLevel;
-    private int averageDaysAlive;
+    private int averageLifespan;
     private int averageCountOfChildren;
     private final Simulation simulation;
     private final SimulationStatistics statistics;
@@ -29,7 +29,7 @@ public class SimulationStatisticsTracker {
         statistics.setAverageEnergyLevel(countAverageEnergyLevel());
         statistics.setAverageAmountOfChildren(countAverageAmountOfChildren());
         //statistics.setMostPopularGenes();
-        //statistics.setAverageLifespan();
+        statistics.setAverageLifespan(countAverageLifespan());
     }
 
     public SimulationStatistics getStatistics() {
@@ -75,6 +75,16 @@ public class SimulationStatisticsTracker {
         return animals.stream()
                 .filter(animal -> !animal.isDead())  // tylko żywe zwierzęta
                 .mapToInt(Animal::getChildrenCount)
+                .average()
+                .orElse(0.0);
+    }
+
+    private double countAverageLifespan() {
+        List<Animal> dead = simulation.getDeadAnimals();
+        if (dead.isEmpty()) return 0.0;
+
+        return dead.stream()
+                .mapToInt(Animal::getDaysAlive)
                 .average()
                 .orElse(0.0);
     }
