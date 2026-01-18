@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             minHeight="600.0" minWidth="800.0"
-            fx:controller="project.presenter.MapPresenter">
+            fx:controller="project.presenter.MapPresenter"
+            stylesheets="@styles.css">
+    <top>
+        <HBox alignment="CENTER" style="-fx-padding: 10;">
+            <Button fx:id="toggleButton" text="STOP" styleClass="button-style" />
+        </HBox>
+    </top>
     <center>
         <Canvas fx:id="mapCanvas"/>
 

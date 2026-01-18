@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -27,9 +28,16 @@ import java.util.Map;
 public final class MapPresenter implements MapChangeListener {
     private RectangularMap worldMap;
     private Simulation simulation;
+    private Thread simulationThread;
 
     @FXML
     private Canvas mapCanvas;
+    @FXML
+    private Button toggleButton;
+    @FXML
+    private void initialize() {
+        toggleButton.setOnAction(event -> toggleSimulation());
+    }
 
     private static final int BORDER_WIDTH = 2;
     private static final float BORDER_OFFSET = (float) BORDER_WIDTH / 2;
@@ -101,6 +109,7 @@ public final class MapPresenter implements MapChangeListener {
         this.simulation = simulation;
         this.worldMap = simulation.getWorldMap();
         drawMap();
+        startSimulation();
     }
 
     public void drawMap() {
@@ -206,5 +215,44 @@ public final class MapPresenter implements MapChangeListener {
             drawMap();
             System.out.println(message);
         });
+    }
+
+    // turning simulation on/off
+
+    private void toggleSimulation() {
+        if (simulation == null) return;
+
+        if (simulation.isRunning()) {
+            stopSimulation();
+            toggleButton.setText("START");
+        } else {
+            startSimulation();
+            toggleButton.setText("STOP");
+        }
+    }
+
+    private void startSimulation() {
+        if (simulation == null) return;
+        if (simulationThread != null && simulationThread.isAlive()) {
+            simulationThread.interrupt();
+        }
+        simulation.start();
+        simulationThread = new Thread(simulation);
+        simulationThread.setDaemon(true);
+        simulationThread.start();
+    }
+
+    private void stopSimulation() {
+        if (simulation != null) {
+            simulation.stop();
+        }
+
+        if (simulationThread != null && simulationThread.isAlive()) {
+            simulationThread.interrupt();
+        }
+    }
+
+    public void cleanup() {
+        stopSimulation();
     }
 }

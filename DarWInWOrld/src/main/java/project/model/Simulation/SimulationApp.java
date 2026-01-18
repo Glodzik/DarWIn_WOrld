@@ -32,7 +32,7 @@ public class SimulationApp extends Application {
         primaryStage.setScene(scene);
 
         // konfiguracja okna
-        primaryStage.setTitle("Simulation app");
+        primaryStage.setTitle("Simulation parameters");
         primaryStage.minWidthProperty().bind(viewRoot.minWidthProperty());
         primaryStage.minHeightProperty().bind(viewRoot.minHeightProperty());
     }

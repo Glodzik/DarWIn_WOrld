@@ -9,3 +9,8 @@
     -fx-font-size: 14px;
     -fx-padding: 8 15;
 }
+
+.toggle-button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

@@ -145,8 +145,10 @@ public class ConfigurationPresenter {
             mapStage.setScene(new Scene(root));
             mapStage.show();
 
-            Thread thread = new Thread(simulation);
-            thread.start();
+            mapStage.setOnCloseRequest(event -> {
+                mapPresenter.cleanup();
+            });
+
         } catch (IOException e) {
             e.printStackTrace();
         }

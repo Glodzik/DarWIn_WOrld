@@ -20,6 +20,7 @@ public final class Simulation implements Runnable {
     private final Genome protectionGenome;
     private int day = 0;
     private final SimulationParameters simulationParameters;
+    private boolean isRunning = false;
 
     public Simulation(SimulationParameters parameters) {
         this.worldMap = new RectangularMap(parameters.mapWidth(), parameters.mapHeight());
@@ -130,8 +131,20 @@ public final class Simulation implements Runnable {
         }
     }
 
+    public void start() {
+        isRunning = true;
+    }
+
+    public void stop() {
+        isRunning = false;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
+
     public void run() {
-        while (!animals.isEmpty()) {
+        while (!animals.isEmpty() && isRunning) {
             dayAction();
         }
     }
