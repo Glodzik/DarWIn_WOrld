@@ -50,6 +50,8 @@ public class ConfigurationPresenter {
     private Slider protectionGenomeLengthField;
     @FXML
     private CheckBox customPlantsCheckbox;
+    @FXML
+    private CheckBox poisonPlantsVariantCheckbox;
 
     @FXML
     private Label mapWidthLabel;
@@ -171,7 +173,13 @@ public class ConfigurationPresenter {
         int poisonPlantProbability = (int) poisonPlantProbabilityField.getValue();
         int poisonEnergyLoss = (int) poisonEnergyLossField.getValue();
         int protectionGenomeLength = (int) protectionGenomeLengthField.getValue();
+        boolean poisonPlantsVariant = poisonPlantsVariantCheckbox.isSelected();
         boolean customPlants = customPlantsCheckbox.isSelected();
+
+        if(!poisonPlantsVariant) {
+            poisonPlantProbability = 0;
+            poisonEnergyLoss = 0;
+        }
 
         AnimalParameters animalParameters = new AnimalParameters(startEnergy, energyLossEveryDay, energyLevelToBreed, energyLossAfterBreed, minMutation, maxMutation, genomeLength);
         PlantParameters plantParameters = new PlantParameters(eatingEnergy, poisonPlantProbability, poisonEnergyLoss);

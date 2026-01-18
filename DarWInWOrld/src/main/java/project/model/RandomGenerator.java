@@ -43,7 +43,7 @@ public final class RandomGenerator {
 
     public static Plant randomPlant(int plantEnergy, int poisonPlantProbability, int poisonEnergy) {
         int probability = random.nextInt(101);
-        if(probability <= poisonPlantProbability) {
+        if(probability < poisonPlantProbability) {
             return new Plant(null, -poisonEnergy);
         } else {
             return new Plant(null, plantEnergy);
