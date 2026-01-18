@@ -3,6 +3,7 @@ package project.model.Statistics;
 import project.model.Simulation.Simulation;
 import project.model.WorldElements.Animals.Animal;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class SimulationStatisticsTracker {
         statistics.setNumberOfPlants(countNumberOfPlants());
         statistics.setAverageEnergyLevel(countAverageEnergyLevel());
         statistics.setAverageAmountOfChildren(countAverageAmountOfChildren());
-        //statistics.setMostPopularGenes();
+        statistics.setMostPopularGenes(countMostPopularGenes());
         statistics.setAverageLifespan(countAverageLifespan());
     }
 
@@ -52,6 +53,32 @@ public class SimulationStatisticsTracker {
 
     private int countDeadAnimals() {
         return simulation.getDeadAnimals().size();
+    }
+
+    private int[] countMostPopularGenes() {
+        List<Animal> animals = simulation.getAnimals();
+        if (animals == null || animals.isEmpty()) {
+            return new int[0];
+        }
+
+        Map<String, Integer> counts = new HashMap<>();
+        int[] mostPopular = null;
+        int maxCount = 0;
+
+        for (Animal animal : animals) {
+            if (!animal.isDead()) {
+                int[] genome = animal.getGenom().getGenomeSequence();
+                String key = Arrays.toString(genome);
+                int newCount = counts.merge(key, 1, Integer::sum);
+
+                if (newCount > maxCount) {
+                    maxCount = newCount;
+                    mostPopular = genome;
+                }
+            }
+        }
+
+        return mostPopular != null ? mostPopular : new int[0];
     }
 
     private double countAverageEnergyLevel() {
