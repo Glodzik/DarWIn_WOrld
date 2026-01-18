@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface WorldMap {
 
-    // Oeracje na zwierzętach
+    // Operacje na zwierzętach
     void place(Animal animal);                      // Umieszcza zwierzę w losowej pozycji
 
     void place(Animal animal, Vector2D position);   // Umieszcza zwierzę w określonej pozycji
