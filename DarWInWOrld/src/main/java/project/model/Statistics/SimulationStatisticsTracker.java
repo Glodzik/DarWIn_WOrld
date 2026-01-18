@@ -11,16 +11,26 @@ public class SimulationStatisticsTracker {
     private double averageEnergyLevel;
     private int averageDaysAlive;
     private int averageCountOfChildren;
+    private final Simulation simulation;
+    private final SimulationStatistics statistics;
 
     public SimulationStatisticsTracker(Simulation simulation) {
-        this.numberOfNotOccupiedFields = simulation.getWorldMap().countFreeFields();
+        this.simulation = simulation;
+        this.statistics = new SimulationStatistics(0, 0, 0, new int[0], 0.0, 0.0, 0.0);
     }
 
-    //tutaj liczymy parametry a poźniej przenosimy to do rekordu
-/*
-    int numberOfAnimals, int numberOfPlants,
-    int numberOfNotOccupiedFields, ArrayList<Integer> mostPopularGenes,
-    double averageEnergyLevel, int averageAmountOfChildren
+    public void updateStats() {
+        statistics.setNumberOfNotOccupiedFields(simulation.getWorldMap().countFreeFields());
+        statistics.setNumberOfAnimals(simulation.getAnimals().size());
+        statistics.setNumberOfPlants(simulation.getPlants().size());
+        //statistics.setMostPopularGenes();
+        //statistics.setAverageEnergyLevel();
+        //statistics.setAverageAmountOfChildren();
+        //statistics.getAverageLifespan();
+    }
 
- */
+    public SimulationStatistics getStatistics() {
+        return statistics;
+    }
+
 }

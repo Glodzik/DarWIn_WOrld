@@ -21,26 +21,29 @@
                         <ColumnConstraints hgrow="ALWAYS"/>
                     </columnConstraints>
 
-                    <Label text="Liczba zwierzaków:" GridPane.columnIndex="0" styleClass="statistics-label"/>
-                    <Label fx:id="animalCountLabel" text="0" GridPane.columnIndex="1" styleClass="statistics-value"/>
+                    <Label text="Dzień:" GridPane.columnIndex="0" styleClass="statistics-label" style="-fx-font-weight: bold;" />
+                    <Label fx:id="dayLabel" text="0" GridPane.columnIndex="1" styleClass="statistics-value"/>
 
-                    <Label text="Liczba roślin:" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="statistics-label"/>
-                    <Label fx:id="plantCountLabel" text="0" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="statistics-value"/>
+                    <Label text="Liczba zwierzaków:" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="animalCountLabel" text="0" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="statistics-value"/>
 
-                    <Label text="Wolne pola:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="statistics-label"/>
-                    <Label fx:id="freeFieldsLabel" text="0" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="statistics-value"/>
+                    <Label text="Liczba roślin:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="plantCountLabel" text="0" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="statistics-value"/>
 
-                    <Label text="Najpopular. genotyp:" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="statistics-label"/>
-                    <Label fx:id="topGenotypeLabel" text="-" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="statistics-value"/>
+                    <Label text="Wolne pola:" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="freeFieldsLabel" text="0" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="statistics-value"/>
 
-                    <Label text="Śr. energia (żywe):" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="statistics-label"/>
-                    <Label fx:id="avgEnergyLabel" text="0.0" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="statistics-value"/>
+                    <Label text="Najpopular. genotyp:" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="topGenotypeLabel" text="-" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="statistics-value"/>
 
-                    <Label text="Śr. długość życia:" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="statistics-label"/>
-                    <Label fx:id="avgLifespanLabel" text="0.0" GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="statistics-value"/>
+                    <Label text="Śr. energia (żywe):" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="avgEnergyLabel" text="0.0" GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="statistics-value"/>
 
-                    <Label text="Śr. liczba dzieci:" GridPane.rowIndex="6" GridPane.columnIndex="0" styleClass="statistics-label"/>
-                    <Label fx:id="avgChildrenLabel" text="0.0" GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="statistics-value"/>
+                    <Label text="Śr. długość życia:" GridPane.rowIndex="6" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="avgLifespanLabel" text="0.0" GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="statistics-value"/>
+
+                    <Label text="Śr. liczba dzieci:" GridPane.rowIndex="7" GridPane.columnIndex="0" styleClass="statistics-label"/>
+                    <Label fx:id="avgChildrenLabel" text="0.0" GridPane.rowIndex="7" GridPane.columnIndex="1" styleClass="statistics-value"/>
                 </GridPane>
             </VBox>
 

@@ -15,6 +15,8 @@ import project.model.Boundary;
 import project.model.MapChangeListener;
 import project.model.RectangularMap;
 import project.model.Simulation.Simulation;
+import project.model.Statistics.SimulationStatistics;
+import project.model.Statistics.SimulationStatisticsTracker;
 import project.model.Vector2D;
 import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.Animals.AnimalComparator;
@@ -23,6 +25,7 @@ import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.EdibleElements.Poison;
 import project.model.WorldElements.WorldElement;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +33,7 @@ public final class MapPresenter implements MapChangeListener {
     private RectangularMap worldMap;
     private Simulation simulation;
     private Thread simulationThread;
+    private SimulationStatisticsTracker statisticsTracker;
 
     @FXML
     private Canvas mapCanvas;
@@ -55,6 +59,8 @@ public final class MapPresenter implements MapChangeListener {
 
     @FXML
     private Label avgChildrenLabel;
+    @FXML
+    private Label dayLabel;
     @FXML
     private void initialize() {
         toggleButton.setOnAction(event -> toggleSimulation());
@@ -129,6 +135,7 @@ public final class MapPresenter implements MapChangeListener {
     public void setSimulation(Simulation simulation) {
         this.simulation = simulation;
         this.worldMap = simulation.getWorldMap();
+        this.statisticsTracker = simulation.getStatisticsTracker();
         drawMap();
         startSimulation();
     }
@@ -234,8 +241,24 @@ public final class MapPresenter implements MapChangeListener {
     public void mapChanged(RectangularMap worldMap, String message) {
         Platform.runLater(() -> {
             drawMap();
+            updateStats();
             System.out.println(message);
         });
+    }
+
+    private void updateStats() {
+        int day = simulation.getDay();
+        statisticsTracker.updateStats();
+        SimulationStatistics stats = statisticsTracker.getStatistics();
+
+        dayLabel.setText(String.valueOf(day));
+        animalCountLabel.setText(String.valueOf(stats.getNumberOfAnimals()));
+        plantCountLabel.setText(String.valueOf(stats.getNumberOfPlants()));
+        freeFieldsLabel.setText(String.valueOf(stats.getNumberOfNotOccupiedFields()));
+        topGenotypeLabel.setText(Arrays.toString(stats.getMostPopularGenes()));
+        avgChildrenLabel.setText(String.format("%.2f", stats.getAverageAmountOfChildren()));
+        avgEnergyLabel.setText(String.format("%.2f", stats.getAverageAmountOfChildren()));
+        avgLifespanLabel.setText(String.format("%.2f", stats.getAverageLifespan()));
     }
 
     // turning simulation on/off

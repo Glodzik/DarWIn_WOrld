@@ -2,6 +2,7 @@ package project.model.Simulation;
 
 import project.model.RandomGenerator;
 import project.model.RectangularMap;
+import project.model.Statistics.SimulationStatisticsTracker;
 import project.model.Vector2D;
 import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.Animals.AnimalComparator;
@@ -21,11 +22,13 @@ public final class Simulation implements Runnable {
     private int day = 0;
     private final SimulationParameters simulationParameters;
     private boolean isRunning = false;
+    private final SimulationStatisticsTracker statisticsTracker;
 
     public Simulation(SimulationParameters parameters) {
         this.worldMap = new RectangularMap(parameters.mapWidth(), parameters.mapHeight());
         this.protectionGenome = new Genome(parameters.protectionGenomLength());
         this.simulationParameters = parameters;
+        this.statisticsTracker = new SimulationStatisticsTracker(this);
 
         addAnimals(parameters.startAnimals(), parameters.animalParameters());
         addPlants(parameters.startPlants(), parameters.plantParameters(), parameters.customPlants());
@@ -159,5 +162,13 @@ public final class Simulation implements Runnable {
 
     public RectangularMap getWorldMap() {
         return worldMap;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public SimulationStatisticsTracker getStatisticsTracker() {
+        return statisticsTracker;
     }
 }
