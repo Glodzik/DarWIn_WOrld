@@ -171,4 +171,8 @@ public final class Simulation implements Runnable {
     public SimulationStatisticsTracker getStatisticsTracker() {
         return statisticsTracker;
     }
+
+    public int getStartEnergy() {
+        return simulationParameters.animalParameters().startEnergy();
+    }
 }

@@ -172,35 +172,9 @@ public final class MapPresenter implements MapChangeListener {
             for (int x = cellSize; x < canvasWidth - cellSize + 1; x += cellSize) {
                 Vector2D currentPos = new Vector2D(xCellValue, yCellValue);
 
-                // Draw biome texture as background
-                boolean isInJungle = currentPos.follows(jungleBounds.lowerLeft()) && currentPos.precedes(jungleBounds.upperRight());
-                Image biomeTexture = loadImage(isInJungle ? JUNGLE_BIOME : STEPPE_BIOME);
-                if (biomeTexture != null) {
-                    graphics.drawImage(biomeTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
-                }
+                drawJungle(currentPos, jungleBounds, graphics, x, y, cellSize);
 
-                // Draw objects on top
-                WorldElement plant = worldMap.getPlantAt(currentPos);
-                if (plant != null) {
-                    Image plantTexture = getTextureForElement(plant);
-                    if (plantTexture != null) {
-                        graphics.drawImage(plantTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
-                    }
-                }
-
-                var animals = worldMap.getAnimalsAt(currentPos);
-                if (!animals.isEmpty()) {
-                    animals.sort(AnimalComparator.getComparator());
-                    Image animalTexture = loadImage(ANIMAL_TEXTURE);
-                    if (animalTexture != null) {
-                        graphics.save();
-                        graphics.translate(x + BORDER_OFFSET + (cellSize - BORDER_WIDTH) / 2.0, y + BORDER_OFFSET + (cellSize - BORDER_WIDTH) / 2.0);
-                        graphics.rotate(animals.getFirst().getCurrDirection().rotateDegrees());
-                        double size = cellSize - BORDER_WIDTH;
-                        graphics.drawImage(animalTexture, -size/2, -size/2, size, size);
-                        graphics.restore();
-                    }
-                }
+                drawMapObjects(currentPos, graphics, x, cellSize, y);
 
                 xCellValue++;
             }
@@ -235,6 +209,59 @@ public final class MapPresenter implements MapChangeListener {
             graphics.fillText(text, cellSize / 2, y);
             yCellValue--;
         }
+    }
+
+    private void drawMapObjects(Vector2D currentPos, GraphicsContext graphics, int x, int cellSize, int y) {
+        var animals = worldMap.getAnimalsAt(currentPos);
+        if (!animals.isEmpty()) {
+            animals.sort(AnimalComparator.getComparator());
+            Image animalTexture = loadImage(ANIMAL_TEXTURE);
+            if (animalTexture != null) {
+                graphics.save();
+                graphics.translate(x + BORDER_OFFSET + (cellSize - BORDER_WIDTH) / 2.0, y + BORDER_OFFSET + (cellSize - BORDER_WIDTH) / 2.0);
+                graphics.rotate(animals.getFirst().getCurrDirection().rotateDegrees());
+                double size = cellSize - BORDER_WIDTH;
+                graphics.drawImage(animalTexture, -size/2, -size/2, size, size);
+                graphics.restore();
+            }
+            drawEnergyBar(graphics, animals.getFirst(), x, y, cellSize);
+
+        } else {
+            WorldElement plant = worldMap.getPlantAt(currentPos);
+            if (plant != null) {
+                Image plantTexture = getTextureForElement(plant);
+                if (plantTexture != null) {
+                    graphics.drawImage(plantTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
+                }
+            }
+        }
+    }
+
+    private void drawJungle(Vector2D currentPos, Boundary jungleBounds, GraphicsContext graphics, int x, int y, int cellSize) {
+        boolean isInJungle = currentPos.follows(jungleBounds.lowerLeft()) && currentPos.precedes(jungleBounds.upperRight());
+        Image biomeTexture = loadImage(isInJungle ? JUNGLE_BIOME : STEPPE_BIOME);
+        if (biomeTexture != null) {
+            graphics.drawImage(biomeTexture, x + BORDER_OFFSET, y + BORDER_OFFSET, cellSize - BORDER_WIDTH, cellSize - BORDER_WIDTH);
+        }
+    }
+
+    private void drawEnergyBar(GraphicsContext graphics, Animal animal, int cellX, int cellY, int cellSize) {
+        int barHeight = Math.max(2, cellSize / 10);
+        double maxEnergy = simulation.getStartEnergy();
+
+        double barY = cellY + cellSize - barHeight - BORDER_OFFSET;
+        double barX = cellX + BORDER_OFFSET;
+        double barWidth = cellSize - 2 - BORDER_WIDTH;
+
+        double energyRatio = Math.min(animal.getEnergy() / maxEnergy, 1.0);
+        double filledWidth = barWidth * energyRatio;
+
+        graphics.setFill(Color.WHITE);
+        graphics.fillRect(barX, barY, barWidth, barHeight);
+
+        Color barColor = energyRatio > 0.5 ? Color.GREEN : energyRatio > 0.25 ? Color.YELLOW : Color.RED;
+        graphics.setFill(barColor);
+        graphics.fillRect(barX, barY, filledWidth, barHeight);
     }
 
     @Override
