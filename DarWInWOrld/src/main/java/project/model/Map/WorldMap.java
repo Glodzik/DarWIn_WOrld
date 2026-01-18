@@ -20,7 +20,7 @@ public interface WorldMap {
     void removeDeadAnimals();                       // Usuwa martwe zwierzęta
 
     // Operacje na roślinach
-    void placePlant(Plant plant);                   // Umieszcza roślinę (z logiką Pareto)
+    void placePlant(Plant plant);                   // Umieszcza roślinę
 
     void eatIfPossible(Animal animal);              // Zjada roślinę jeśli jest na pozycji
 
@@ -36,7 +36,7 @@ public interface WorldMap {
     // Granice mapy
     Boundary getMapBounds();                        // Granice całej mapy
 
-    Boundary getJungleBoundary();                   // Granice dżungli (równik)
+    Boundary getJungleBoundary();                   // Granice dżungli
 
     // Kolekcje
     List<Animal> getAnimals();                      // Wszystkie żywe zwierzęta
