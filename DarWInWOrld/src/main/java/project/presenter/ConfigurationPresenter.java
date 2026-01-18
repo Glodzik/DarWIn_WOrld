@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Slider;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import project.model.Simulation.Simulation;
@@ -15,7 +15,7 @@ import project.model.WorldElements.EdibleElements.PlantParameters;
 
 import java.io.IOException;
 
-public class ConfigurationPresenter {
+public final class ConfigurationPresenter {
     @FXML
     private Slider mapWidthField;
     @FXML

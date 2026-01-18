@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SimulationStatisticsTracker {
+public final class SimulationStatisticsTracker {
     private int numberOfNotOccupiedFields;
     private Map<String, Integer> mostPopularGenes = new HashMap<>();
     private double averageEnergyLevel;

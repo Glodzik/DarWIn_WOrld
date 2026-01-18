@@ -9,7 +9,7 @@ import project.presenter.ConfigurationPresenter;
 
 import java.io.IOException;
 
-public class SimulationApp extends Application {
+public final class SimulationApp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(); // zainicjowanie wczytywania FXML

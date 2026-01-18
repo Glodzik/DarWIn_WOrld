@@ -6,14 +6,14 @@ import project.model.Simulation.SimulationParameters;
 import project.model.Vector2D;
 import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.Animals.AnimalParameters;
+import project.model.WorldElements.Animals.Genome;
 import project.model.WorldElements.EdibleElements.Antidote;
 import project.model.WorldElements.EdibleElements.Plant;
-import project.model.WorldElements.Animals.Genome;
 import project.model.WorldElements.EdibleElements.PlantParameters;
 
 import java.util.Random;
 
-public class World {
+public final class World {
     public static void main(String[] args) {
         RectangularMap map = new RectangularMap(2, 2);
 

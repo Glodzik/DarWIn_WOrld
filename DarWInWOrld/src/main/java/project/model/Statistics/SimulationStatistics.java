@@ -1,6 +1,6 @@
 package project.model.Statistics;
 
-public class SimulationStatistics {
+public final class SimulationStatistics {
     private int numberOfAnimals;
     private int numberOfDeadAnimals;
     private int deadAnimals;
