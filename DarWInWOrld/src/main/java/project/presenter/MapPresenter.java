@@ -257,7 +257,7 @@ public final class MapPresenter implements MapChangeListener {
         freeFieldsLabel.setText(String.valueOf(stats.getNumberOfNotOccupiedFields()));
         topGenotypeLabel.setText(Arrays.toString(stats.getMostPopularGenes()));
         avgChildrenLabel.setText(String.format("%.2f", stats.getAverageAmountOfChildren()));
-        avgEnergyLabel.setText(String.format("%.2f", stats.getAverageAmountOfChildren()));
+        avgEnergyLabel.setText(String.format("%.2f", stats.getAverageEnergyLevel()));
         avgLifespanLabel.setText(String.format("%.2f", stats.getAverageLifespan()));
     }
 

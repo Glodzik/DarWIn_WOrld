@@ -9,12 +9,6 @@ public class SimulationStatistics {
     private double averageAmountOfChildren;
     private double averageLifespan;
 
-    // Konstruktor domyślny
-    public SimulationStatistics() {
-        this.mostPopularGenes = new int[0];
-    }
-
-    // Konstruktor z wszystkimi parametrami
     public SimulationStatistics(int numberOfAnimals,
                                 int numberOfPlants,
                                 int numberOfNotOccupiedFields,
