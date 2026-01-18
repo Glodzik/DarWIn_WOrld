@@ -1,6 +1,8 @@
 package project.model;
 
 import org.junit.jupiter.api.Test;
+import project.model.Coordinates.Vector2D;
+import project.model.Map.RectangularMap;
 import project.model.WorldElements.Animals.Animal;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

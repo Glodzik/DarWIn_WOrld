@@ -1,6 +1,6 @@
 package project.model.WorldElements.Animals;
 
-import project.model.RandomGenerator;
+import project.model.Random.RandomGenerator;
 
 import java.util.Comparator;
 

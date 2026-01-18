@@ -1,12 +1,16 @@
-package project.model;
+package project.model.Map;
 
+import project.model.Coordinates.Boundary;
+import project.model.Coordinates.Vector2D;
+import project.model.Random.RandomGenerator;
 import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.EdibleElements.Plant;
+import project.presenter.MapChangeListener;
 
 import java.util.*;
 
 
-public final class RectangularMap {
+public final class RectangularMap implements WorldMap {
     private final Map<Vector2D, List<Animal>> animals = new HashMap<>();
     private final Map<Vector2D, Plant> plants = new HashMap<>();
     private final Boundary mapBounds;

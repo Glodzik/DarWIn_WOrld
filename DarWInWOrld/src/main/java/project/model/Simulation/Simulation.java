@@ -1,9 +1,9 @@
 package project.model.Simulation;
 
-import project.model.RandomGenerator;
-import project.model.RectangularMap;
+import project.model.Coordinates.Vector2D;
+import project.model.Map.RectangularMap;
+import project.model.Random.RandomGenerator;
 import project.model.Statistics.SimulationStatisticsTracker;
-import project.model.Vector2D;
 import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.Animals.AnimalComparator;
 import project.model.WorldElements.Animals.AnimalParameters;

@@ -1,9 +1,9 @@
 package project;
 
-import project.model.RectangularMap;
+import project.model.Coordinates.Vector2D;
+import project.model.Map.RectangularMap;
 import project.model.Simulation.Simulation;
 import project.model.Simulation.SimulationParameters;
-import project.model.Vector2D;
 import project.model.WorldElements.Animals.Animal;
 import project.model.WorldElements.Animals.AnimalParameters;
 import project.model.WorldElements.Animals.Genome;

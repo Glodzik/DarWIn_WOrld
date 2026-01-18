@@ -1,6 +1,6 @@
 package project.model.WorldElements.EdibleElements;
 
-import project.model.Vector2D;
+import project.model.Coordinates.Vector2D;
 import project.model.WorldElements.WorldElement;
 
 public class Plant implements WorldElement, Edible {

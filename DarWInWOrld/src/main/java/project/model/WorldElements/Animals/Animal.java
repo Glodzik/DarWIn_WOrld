@@ -1,9 +1,9 @@
 package project.model.WorldElements.Animals;
 
-import project.model.Boundary;
-import project.model.MapDirection;
-import project.model.RandomGenerator;
-import project.model.Vector2D;
+import project.model.Coordinates.Boundary;
+import project.model.Coordinates.Vector2D;
+import project.model.Map.MapDirection;
+import project.model.Random.RandomGenerator;
 import project.model.WorldElements.EdibleElements.Plant;
 import project.model.WorldElements.WorldElement;
 
