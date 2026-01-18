@@ -2,6 +2,8 @@ package project.model.Statistics;
 
 public class SimulationStatistics {
     private int numberOfAnimals;
+    private int numberOfDeadAnimals;
+    private int deadAnimals;
     private int numberOfPlants;
     private int numberOfNotOccupiedFields;
     private int[] mostPopularGenes;
@@ -10,6 +12,7 @@ public class SimulationStatistics {
     private double averageLifespan;
 
     public SimulationStatistics(int numberOfAnimals,
+                                int numberOfDeadAnimals,
                                 int numberOfPlants,
                                 int numberOfNotOccupiedFields,
                                 int[] mostPopularGenes,
@@ -17,6 +20,7 @@ public class SimulationStatistics {
                                 double averageAmountOfChildren,
                                 double averageLifespan) {
         this.numberOfAnimals = numberOfAnimals;
+        this.numberOfDeadAnimals = numberOfDeadAnimals;
         this.numberOfPlants = numberOfPlants;
         this.numberOfNotOccupiedFields = numberOfNotOccupiedFields;
         this.mostPopularGenes = mostPopularGenes != null ? mostPopularGenes.clone() : new int[0];
@@ -79,5 +83,13 @@ public class SimulationStatistics {
 
     public void setAverageLifespan(double averageLifespan) {
         this.averageLifespan = averageLifespan;
+    }
+
+    public int getDeadAnimals() {
+        return deadAnimals;
+    }
+
+    public void setDeadAnimals(int deadAnimals) {
+        this.deadAnimals = deadAnimals;
     }
 }

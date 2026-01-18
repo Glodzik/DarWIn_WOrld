@@ -16,6 +16,7 @@ import java.util.List;
 
 public final class Simulation implements Runnable {
     private List<Animal> animals = new ArrayList<Animal>();
+    private List<Animal> deadAnimals = new ArrayList<>();
     private List<Plant> plants = new ArrayList<Plant>();
     private final RectangularMap worldMap;
     private final Genome protectionGenome;
@@ -78,6 +79,10 @@ public final class Simulation implements Runnable {
 
     private void removeAllDead() {
         updateAnimalsAndPlants();
+        List<Animal> justDied = animals.stream()
+                .filter(Animal::isDead)
+                .toList();
+        deadAnimals.addAll(justDied);
         worldMap.removeDeadAnimals();
     }
 
@@ -154,6 +159,10 @@ public final class Simulation implements Runnable {
 
     public List<Animal> getAnimals() {
         return animals;
+    }
+
+    public List<Animal> getDeadAnimals() {
+        return deadAnimals;
     }
 
     public List<Plant> getPlants() {

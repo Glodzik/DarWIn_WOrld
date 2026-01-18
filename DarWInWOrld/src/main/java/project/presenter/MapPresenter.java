@@ -43,6 +43,9 @@ public final class MapPresenter implements MapChangeListener {
     private Label animalCountLabel;
 
     @FXML
+    private Label deadAnimalCountLabel;
+
+    @FXML
     private Label plantCountLabel;
 
     @FXML
@@ -280,6 +283,7 @@ public final class MapPresenter implements MapChangeListener {
 
         dayLabel.setText(String.valueOf(day));
         animalCountLabel.setText(String.valueOf(stats.getNumberOfAnimals()));
+        deadAnimalCountLabel.setText(String.valueOf(stats.getDeadAnimals()));
         plantCountLabel.setText(String.valueOf(stats.getNumberOfPlants()));
         freeFieldsLabel.setText(String.valueOf(stats.getNumberOfNotOccupiedFields()));
         topGenotypeLabel.setText(Arrays.toString(stats.getMostPopularGenes()));

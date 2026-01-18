@@ -2,13 +2,10 @@ package project.model.Statistics;
 
 import project.model.Simulation.Simulation;
 import project.model.WorldElements.Animals.Animal;
-import project.model.WorldElements.Animals.Genome;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class SimulationStatisticsTracker {
     private int numberOfNotOccupiedFields;
@@ -21,12 +18,13 @@ public class SimulationStatisticsTracker {
 
     public SimulationStatisticsTracker(Simulation simulation) {
         this.simulation = simulation;
-        this.statistics = new SimulationStatistics(0, 0, 0, new int[0], 0.0, 0.0, 0.0);
+        this.statistics = new SimulationStatistics(0, 0, 0, 0, new int[0], 0.0, 0.0, 0.0);
     }
 
     public void updateStats() {
         statistics.setNumberOfNotOccupiedFields(countNumberOfNotOccupiedFields());
         statistics.setNumberOfAnimals(countNumberOfAnimals());
+        statistics.setDeadAnimals(countDeadAnimals());
         statistics.setNumberOfPlants(countNumberOfPlants());
         statistics.setAverageEnergyLevel(countAverageEnergyLevel());
         statistics.setAverageAmountOfChildren(countAverageAmountOfChildren());
@@ -50,6 +48,10 @@ public class SimulationStatisticsTracker {
 
     private int countNumberOfPlants() {
         return simulation.getPlants().size();
+    }
+
+    private int countDeadAnimals() {
+        return simulation.getDeadAnimals().size();
     }
 
     private double countAverageEnergyLevel() {
