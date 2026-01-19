@@ -1,19 +1,18 @@
-/* Globalny font dla całej aplikacji */
 .root {
-    -fx-font-family: "Proxima Nova", "Segoe UI", sans-serif;
+    -fx-font-family: "Montserrat", "Segoe UI", "Arial", sans-serif;
 }
 
 .app-title {
     -fx-font-size: 42px;
     -fx-font-weight: bold;
-    -fx-font-family: "Proxima Nova", "Proxima Nova Bold", sans-serif;
+    -fx-font-family: "Montserrat", "Segoe UI", sans-serif;
     -fx-fill: #43a047;
 }
 
 .app-title-highlight {
     -fx-font-size: 42px;
     -fx-font-weight: bold;
-    -fx-font-family: "Proxima Nova", "Proxima Nova Bold", sans-serif;
+    -fx-font-family: "Montserrat", "Segoe UI", sans-serif;
     -fx-fill: #ff7043;
 }
 
@@ -45,7 +44,7 @@ Label {
 }
 
 .statistics-header {
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #2c3e50;
     -fx-padding: 0 0 10 0;
@@ -53,15 +52,30 @@ Label {
 }
 
 .statistics-label {
-    -fx-font-size: 14px;
+    -fx-font-size: 13px;
 }
 
 .statistics-value {
-    -fx-font-size: 14px;
+    -fx-font-size: 13px;
+}
+
+.legend-label {
+    -fx-font-size: 13px;
+}
+
+.legend-energy-positive {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #43a047;
+}
+
+.legend-energy-negative {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e53935;
 }
 
 .button-style {
-    -fx-font-family: "Proxima Nova", "Proxima Nova Bold", sans-serif;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-background-color: #63d481;

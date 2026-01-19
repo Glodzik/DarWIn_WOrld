@@ -179,7 +179,7 @@ public final class MapDrafter {
     private void configureFont(GraphicsContext graphics, int size, Color color) {
         graphics.setTextAlign(TextAlignment.CENTER);
         graphics.setTextBaseline(VPos.CENTER);
-        graphics.setFont(new Font("Arial", size));
+        graphics.setFont(new Font("Montserrat", size));
         graphics.setFill(color);
     }
 
