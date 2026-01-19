@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import project.model.Map.RectangularMap;
 import project.model.Simulation.Simulation;
 import project.model.Simulation.SimulationParameters;
@@ -45,12 +46,25 @@ public final class MapPresenter implements MapChangeListener {
 
     @FXML
     private Label avgChildrenLabel;
+
     @FXML
     private Label dayLabel;
+
     @FXML
     private Label grassEnergyLabel;
+
     @FXML
     private Label lilyEnergyLabel;
+
+    @FXML
+    private VBox poisonLegendSection;
+    @FXML
+    private VBox basicLegend;
+    @FXML
+    private VBox customLegend;
+    @FXML
+    private Label basicPoisonEnergyLabel;
+
     @FXML
     private void initialize() {
         toggleButton.setOnAction(event -> toggleSimulation());
@@ -66,10 +80,40 @@ public final class MapPresenter implements MapChangeListener {
         startSimulation();
 
         SimulationParameters parameters = simulation.getParameters();
-        if(!parameters.customPlants()) {
+        setupLegend(parameters);
+    }
+
+    private void setupLegend(SimulationParameters parameters) {
+        boolean hasPoisons = parameters.plantParameters().poisonProbability() > 0;
+
+        if (parameters.customPlants()) {
+            // Tryb customowych roślin - pokazuj rozbudowaną legendę
+            basicLegend.setVisible(false);
+            basicLegend.setManaged(false);
+            customLegend.setVisible(true);
+            customLegend.setManaged(true);
+
+            // Ukryj sekcję TRUJĄCE gdy brak trujących roślin
+            if (!hasPoisons) {
+                poisonLegendSection.setVisible(false);
+                poisonLegendSection.setManaged(false);
+            }
+        } else {
+            // Tryb podstawowy - pokazuj uproszczoną legendę
+            customLegend.setVisible(false);
+            customLegend.setManaged(false);
+            basicLegend.setVisible(true);
+            basicLegend.setManaged(true);
+
+            grassEnergyLabel.setText("+%d".formatted(parameters.plantParameters().energy()));
+
             grassEnergyLabel.setText("+%d".formatted(parameters.plantParameters().energy()));
             if(parameters.plantParameters().poisonProbability() > 0) {
                 lilyEnergyLabel.setText("-%d".formatted(parameters.plantParameters().poisonEnergyLoss()));
+            } else {
+                // ukrywa trujące rośliny z legendy gdy są wyłączone
+                poisonLegendSection.setVisible(false);
+                poisonLegendSection.setManaged(false);
             }
         }
     }

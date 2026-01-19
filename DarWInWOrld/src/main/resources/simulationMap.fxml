@@ -173,7 +173,7 @@
                         </GridPane>
                     </VBox>
 
-                    <VBox spacing="3">
+                    <VBox fx:id="poisonLegendSection" spacing="3">
                         <Label text="TRUJĄCE"
                                style="-fx-font-weight: bold; -fx-text-fill: #e53935; -fx-font-size: 14px;"/>
                         <GridPane hgap="10" vgap="6" style="-fx-padding: 5 0 0 5;">
