@@ -47,7 +47,11 @@ public final class Simulation implements Runnable {
     public void addPlants(int plantsCount, PlantParameters parameters, boolean customPlants) {
         if(customPlants) {
             for (int i = 0; i < plantsCount; i++) {
-                Plant plant = RandomGenerator.randomCustomPlants(parameters.poisonProbability());
+                Plant plant = RandomGenerator.randomCustomPlants(
+                        parameters.poisonProbability(),
+                        parameters.energy(),
+                        parameters.poisonEnergyLoss()
+                );
                 worldMap.placePlant(plant);
             }
         } else {

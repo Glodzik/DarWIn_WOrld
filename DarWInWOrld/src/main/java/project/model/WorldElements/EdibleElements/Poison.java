@@ -15,6 +15,11 @@ public final class Poison extends Plant {
         this(position, values[poison]);
     }
 
+    public Poison(Vector2D position, int poisonIndex, int scaledEnergy) {
+        super(position, -scaledEnergy);
+        this.typeOfPoison = TypeOfPoison.values()[poisonIndex];
+    }
+
     public TypeOfPoison getType() {
         return typeOfPoison;
     }

@@ -89,7 +89,7 @@
                         <Label fx:id="startPlantsLabel" text="10"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
-                        <Label text="Energia zapewniana przez zjedzenie rośliny:" HBox.hgrow="ALWAYS"/>
+                        <Label text="Minimalna zdobywana energia po zjedzeniu rośliny:" HBox.hgrow="ALWAYS"/>
                         <Slider fx:id="eatingEnergyField" min="10" max="50" value="20" majorTickUnit="5" styleClass="slider-style"/>
                         <Label fx:id="eatingEnergyLabel" text="20"/>
                     </HBox>
@@ -114,7 +114,7 @@
                         <Label fx:id="poisonPlantProbabilityLabel" text="20"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
-                        <Label text="Energia tracona po zjedzeniu trucizny:" HBox.hgrow="ALWAYS"/>
+                        <Label text="Minimalna energia tracona po zjedzeniu trucizny:" HBox.hgrow="ALWAYS"/>
                         <Slider fx:id="poisonEnergyLossField" min="10" max="50" value="20" majorTickUnit="5" styleClass="slider-style"/>
                         <Label fx:id="poisonEnergyLossLabel" text="20"/>
                     </HBox>

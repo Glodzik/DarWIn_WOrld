@@ -33,14 +33,18 @@ public final class RandomGenerator {
         return random.nextBoolean();
     }
 
-    public static Plant randomCustomPlants(int poisonPlantProbability) {
+    public static Plant randomCustomPlants(int poisonPlantProbability, int basePlantEnergy, int basePoisonEnergy) {
         int probability = random.nextInt(101);
+        int[] multipliers = {1, 2, 3, 4, 6};
+
         if(probability <= poisonPlantProbability) {
-            int poison = random.nextInt(TypeOfPoison.values().length);
-            return new Poison(null, poison);
+            int poisonIndex = random.nextInt(TypeOfPoison.values().length);
+            int scaledEnergy = basePoisonEnergy * multipliers[poisonIndex];
+            return new Poison(null, poisonIndex, scaledEnergy);
         } else {
-            int antidote = random.nextInt(TypeOfAntidote.values().length);
-            return new Antidote(null, antidote);
+            int antidoteIndex = random.nextInt(TypeOfAntidote.values().length);
+            int scaledEnergy = basePlantEnergy * multipliers[antidoteIndex];
+            return new Antidote(null, antidoteIndex, scaledEnergy);
         }
     }
 

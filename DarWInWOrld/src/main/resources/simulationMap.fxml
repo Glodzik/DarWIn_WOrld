@@ -115,7 +115,7 @@
 
                 <VBox fx:id="customLegend" spacing="8">
                     <VBox spacing="3">
-                        <Label text="POŻYWNE"
+                        <Label text="ROŚLINY"
                                style="-fx-font-weight: bold; -fx-text-fill: #43a047; -fx-font-size: 14px;"/>
                         <GridPane hgap="10" vgap="6" style="-fx-padding: 5 0 0 5;">
                             <columnConstraints>
@@ -184,7 +184,7 @@
                     </VBox>
 
                     <VBox fx:id="poisonLegendSection" spacing="3">
-                        <Label text="TRUJĄCE"
+                        <Label text="TRUCIZNY"
                                style="-fx-font-weight: bold; -fx-text-fill: #e53935; -fx-font-size: 14px;"/>
                         <GridPane hgap="10" vgap="6" style="-fx-padding: 5 0 0 5;">
                             <columnConstraints>
