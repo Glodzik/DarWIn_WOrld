@@ -14,8 +14,8 @@
         <SplitPane dividerPositions="0.25, 0.8"
                    minWidth="300">
             <!-- STATYSTYKI -->
-            <VBox style="-fx-padding: 10;" spacing="15">
-                <Label text="STATYSTYKI SYMULACJI" styleClass="statistics-header"/>
+            <VBox style="-fx-padding: 10;" spacing="15" alignment="TOP_CENTER">
+                <Label text="STATYSTYKI SYMULACJI" styleClass="statistics-header" style="-fx-alignment: center;"/>
                 <GridPane hgap="10" vgap="10">
                     <columnConstraints>
                         <ColumnConstraints hgrow="ALWAYS"/>
@@ -78,13 +78,18 @@
             </VBox>
 
             <!-- LEGENDA -->
-            <VBox style="-fx-padding: 8; -fx-background-color: #f9f9f9;" spacing="10" minWidth="150">
-                <Label text="LEGENDA" styleClass="statistics-header"/>
+            <VBox style="-fx-padding: 8; -fx-background-color: #f9f9f9;" spacing="10" minWidth="150"
+                  alignment="TOP_CENTER">
+                <Label text="LEGENDA" styleClass="statistics-header" style="-fx-alignment: center;"/>
 
                 <VBox fx:id="basicLegend" spacing="8" managed="false" visible="false">
-                    <GridPane hgap="10" vgap="4">
-                        <HBox spacing="4" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                            <ImageView fitWidth="18" fitHeight="18">
+                    <GridPane hgap="10" vgap="6" style="-fx-padding: 5 0 0 5;">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints minWidth="30" halignment="RIGHT"/>
+                        </columnConstraints>
+                        <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                            <ImageView fitWidth="32" fitHeight="32">
                                 <image>
                                     <Image url="@/textures/plants/antidotes/grass.png"/>
                                 </image>
@@ -94,10 +99,11 @@
                         <Label fx:id="basicPlantEnergyLabel" text="+20" styleClass="legend-energy-positive"
                                GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                        <HBox spacing="4" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="0">
-                            <ImageView fitWidth="18" fitHeight="18">
+                        <HBox fx:id="basicPoisonRow" spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="1"
+                              GridPane.columnIndex="0">
+                            <ImageView fitWidth="32" fitHeight="32">
                                 <image>
-                                    <Image url="@/textures/plants/poisons/aloe.png"/>
+                                    <Image url="@/textures/plants/poisons/lily.png"/>
                                 </image>
                             </ImageView>
                             <Label text="Trucizna" styleClass="legend-label"/>
@@ -135,7 +141,8 @@
                                 </ImageView>
                                 <Label text="Bambus" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="+10" styleClass="legend-energy-positive" GridPane.rowIndex="1"
+                            <Label text="+10" fx:id="bambooEnergyLabel" styleClass="legend-energy-positive"
+                                   GridPane.rowIndex="1"
                                    GridPane.columnIndex="1"/>
 
                             <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="2" GridPane.columnIndex="0">
@@ -146,7 +153,8 @@
                                 </ImageView>
                                 <Label text="Marchew" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="+15" styleClass="legend-energy-positive" GridPane.rowIndex="2"
+                            <Label text="+15" fx:id="carrotEnergyLabel" styleClass="legend-energy-positive"
+                                   GridPane.rowIndex="2"
                                    GridPane.columnIndex="1"/>
 
                             <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="3" GridPane.columnIndex="0">
@@ -157,7 +165,8 @@
                                 </ImageView>
                                 <Label text="Pietruszka" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="+20" styleClass="legend-energy-positive" GridPane.rowIndex="3"
+                            <Label text="+20" fx:id="parsleyEnergyLabel" styleClass="legend-energy-positive"
+                                   GridPane.rowIndex="3"
                                    GridPane.columnIndex="1"/>
 
                             <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="4" GridPane.columnIndex="0">
@@ -168,7 +177,8 @@
                                 </ImageView>
                                 <Label text="Słonecznik" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="+30" styleClass="legend-energy-positive" GridPane.rowIndex="4"
+                            <Label text="+30" fx:id="sunflowerEnergyLabel" styleClass="legend-energy-positive"
+                                   GridPane.rowIndex="4"
                                    GridPane.columnIndex="1"/>
                         </GridPane>
                     </VBox>
@@ -200,7 +210,8 @@
                                 </ImageView>
                                 <Label text="Aloes" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="-10" styleClass="legend-energy-negative" GridPane.rowIndex="1"
+                            <Label text="-10" fx:id="aloeEnergyLabel" styleClass="legend-energy-negative"
+                                   GridPane.rowIndex="1"
                                    GridPane.columnIndex="1"/>
 
                             <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="2" GridPane.columnIndex="0">
@@ -211,7 +222,8 @@
                                 </ImageView>
                                 <Label text="Azalia" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="-15" styleClass="legend-energy-negative" GridPane.rowIndex="2"
+                            <Label text="-15" fx:id="azaleaEnergyLabel" styleClass="legend-energy-negative"
+                                   GridPane.rowIndex="2"
                                    GridPane.columnIndex="1"/>
 
                             <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="3" GridPane.columnIndex="0">
@@ -222,7 +234,8 @@
                                 </ImageView>
                                 <Label text="Oleander" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="-20" styleClass="legend-energy-negative" GridPane.rowIndex="3"
+                            <Label text="-20" fx:id="oleanderEnergyLabel" styleClass="legend-energy-negative"
+                                   GridPane.rowIndex="3"
                                    GridPane.columnIndex="1"/>
 
                             <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="4" GridPane.columnIndex="0">
@@ -233,33 +246,36 @@
                                 </ImageView>
                                 <Label text="Cis" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="-30" styleClass="legend-energy-negative" GridPane.rowIndex="4"
+                            <Label text="-30" fx:id="cisEnergyLabel" styleClass="legend-energy-negative"
+                                   GridPane.rowIndex="4"
                                    GridPane.columnIndex="1"/>
                         </GridPane>
                     </VBox>
-                    <VBox spacing="3">
-                        <Label text="BIOMY"
-                               style="-fx-font-weight: bold; -fx-text-fill: #5d4037; -fx-font-size: 14px;"/>
-                        <GridPane hgap="10" vgap="6" style="-fx-padding: 5 0 0 5;">
-                            <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                                <ImageView fitWidth="32" fitHeight="32">
-                                    <image>
-                                        <Image url="@/textures/biomes/grass_block_top_jungle.png"/>
-                                    </image>
-                                </ImageView>
-                                <Label text="Dżungla" styleClass="legend-label"/>
-                            </HBox>
+                </VBox>
 
-                            <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="0">
-                                <ImageView fitWidth="32" fitHeight="32">
-                                    <image>
-                                        <Image url="@/textures/biomes/grass_block_top_steppe.png"/>
-                                    </image>
-                                </ImageView>
-                                <Label text="Step" styleClass="legend-label"/>
-                            </HBox>
-                        </GridPane>
-                    </VBox>
+                <!-- BIOMY - zawsze widoczne -->
+                <VBox spacing="3">
+                    <Label text="BIOMY"
+                           style="-fx-font-weight: bold; -fx-text-fill: #5d4037; -fx-font-size: 14px;"/>
+                    <GridPane hgap="10" vgap="6" style="-fx-padding: 5 0 0 5;">
+                        <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                            <ImageView fitWidth="32" fitHeight="32">
+                                <image>
+                                    <Image url="@/textures/biomes/grass_block_top_jungle.png"/>
+                                </image>
+                            </ImageView>
+                            <Label text="Dżungla" styleClass="legend-label"/>
+                        </HBox>
+
+                        <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                            <ImageView fitWidth="32" fitHeight="32">
+                                <image>
+                                    <Image url="@/textures/biomes/grass_block_top_steppe.png"/>
+                                </image>
+                            </ImageView>
+                            <Label text="Step" styleClass="legend-label"/>
+                        </HBox>
+                    </GridPane>
                 </VBox>
             </VBox>
 
