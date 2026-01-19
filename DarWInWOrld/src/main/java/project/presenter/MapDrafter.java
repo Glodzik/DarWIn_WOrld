@@ -29,7 +29,7 @@ public final class MapDrafter {
     private static final String STEPPE_BIOME = "/textures/biomes/grass_block_top_steppe.png";
     private static final String ANIMAL_TEXTURE = "/textures/animal/animalUp.png";
     private static final String DEFAULT_PLANT = "/textures/plants/antidotes/grass.png";
-    private static final String DEFAULT_POISON = "/textures/plants/poisons/aloe.png";
+    private static final String DEFAULT_POISON = "/textures/plants/poisons/lily.png";
 
     private final Map<String, Image> imageCache = new HashMap<>();
     private final Canvas canvas;

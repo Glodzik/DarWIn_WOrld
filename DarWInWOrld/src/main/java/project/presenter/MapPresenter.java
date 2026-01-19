@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import project.model.Map.RectangularMap;
 import project.model.Simulation.Simulation;
+import project.model.Simulation.SimulationParameters;
 import project.model.Statistics.SimulationStatistics;
 import project.model.Statistics.SimulationStatisticsTracker;
 
@@ -47,6 +48,10 @@ public final class MapPresenter implements MapChangeListener {
     @FXML
     private Label dayLabel;
     @FXML
+    private Label grassEnergyLabel;
+    @FXML
+    private Label lilyEnergyLabel;
+    @FXML
     private void initialize() {
         toggleButton.setOnAction(event -> toggleSimulation());
     }
@@ -59,6 +64,14 @@ public final class MapPresenter implements MapChangeListener {
 
         mapDrafter.drawMap(worldMap);
         startSimulation();
+
+        SimulationParameters parameters = simulation.getParameters();
+        if(!parameters.customPlants()) {
+            grassEnergyLabel.setText("+%d".formatted(parameters.plantParameters().energy()));
+            if(parameters.plantParameters().poisonProbability() > 0) {
+                lilyEnergyLabel.setText("-%d".formatted(parameters.plantParameters().poisonEnergyLoss()));
+            }
+        }
     }
 
 

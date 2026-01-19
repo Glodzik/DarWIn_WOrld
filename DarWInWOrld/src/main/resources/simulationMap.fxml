@@ -124,7 +124,7 @@
                                 </ImageView>
                                 <Label text="Trawa" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="+5" styleClass="legend-energy-positive" GridPane.rowIndex="0"
+                            <Label text="+5" fx:id="grassEnergyLabel" styleClass="legend-energy-positive" GridPane.rowIndex="0"
                                    GridPane.columnIndex="1"/>
 
                             <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="0">
@@ -189,7 +189,7 @@
                                 </ImageView>
                                 <Label text="Lilia" styleClass="legend-label"/>
                             </HBox>
-                            <Label text="-5" styleClass="legend-energy-negative" GridPane.rowIndex="0"
+                            <Label text="-5" fx:id="lilyEnergyLabel" styleClass="legend-energy-negative" GridPane.rowIndex="0"
                                    GridPane.columnIndex="1"/>
 
                             <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="0">

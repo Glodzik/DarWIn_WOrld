@@ -129,7 +129,6 @@ public final class ConfigurationPresenter {
     }
 
     private void setupCheckboxListeners() {
-        // Listener dla checkboxa trujących roślin
         poisonPlantsVariantCheckbox.selectedProperty().addListener((observable, oldValue, newValue) -> {
             poisonPlantProbabilityField.setDisable(!newValue);
             poisonEnergyLossField.setDisable(!newValue);

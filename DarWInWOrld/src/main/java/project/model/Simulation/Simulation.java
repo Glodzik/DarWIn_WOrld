@@ -184,4 +184,8 @@ public final class Simulation implements Runnable {
     public int getStartEnergy() {
         return simulationParameters.animalParameters().startEnergy();
     }
+
+    public SimulationParameters getParameters() {
+        return simulationParameters;
+    }
 }
