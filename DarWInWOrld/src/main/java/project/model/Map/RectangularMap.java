@@ -164,6 +164,10 @@ public final class RectangularMap implements WorldMap {
         observers.add(observer);
     }
 
+    public void removeObserver(MapChangeListener observer) {
+        observers.remove(observer);
+    }
+
     public void mapChanged(String message) {
         for (MapChangeListener observer : observers) {
             observer.mapChanged(this, message);

@@ -223,8 +223,10 @@ public final class MapPresenter implements MapChangeListener {
 
     public void cleanup() {
         stopSimulation();
+        if (worldMap != null) {
+            worldMap.removeObserver(this);
+        }
     }
-
     private String formatGenome(int[] genes) {
         if (genes == null) return "-";
         StringBuilder sb = new StringBuilder();
