@@ -3,6 +3,7 @@ package project.presenter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -150,6 +151,10 @@ public final class ConfigurationPresenter {
     }
 
     public void onSimulationStartClicked() {
+        if (!validateParameters()) {
+            return;
+        }
+
         SimulationParameters parameters = getSimulationParameters();
         Simulation simulation = new Simulation(parameters);
 
@@ -210,5 +215,51 @@ public final class ConfigurationPresenter {
         return new SimulationParameters
                 (mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
                         animalParameters, plantParameters, protectionGenomeLength, customPlants);
+    }
+
+    private boolean validateParameters() {
+        return validateMutationRange()
+                && validatePlantsCount()
+                && validateProtectionGenomeLength();
+    }
+
+    private boolean validateMutationRange() {
+        int minMutation = (int) minMutationField.getValue();
+        int maxMutation = (int) maxMutationField.getValue();
+        if (minMutation > maxMutation) {
+            showAlert("Minimalna liczba mutacji nie może być większa od maksymalnej.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validatePlantsCount() {
+        int mapWidth = (int) mapWidthField.getValue();
+        int mapHeight = (int) mapHeightField.getValue();
+        int startPlants = (int) startPlantsField.getValue();
+        int totalFields = mapWidth * mapHeight;
+        if (startPlants > totalFields) {
+            showAlert("Liczba roślin (" + startPlants + ") przekracza liczbę pól na mapie (" + totalFields + ").");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateProtectionGenomeLength() {
+        int genomeLength = (int) genomeLengthField.getValue();
+        int protectionGenomeLength = (int) protectionGenomeLengthField.getValue();
+        if (protectionGenomeLength > genomeLength) {
+            showAlert("Długość genomu ochronnego (" + protectionGenomeLength + ") nie może być większa od długości genomu zwierzaka (" + genomeLength + ").");
+            return false;
+        }
+        return true;
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Błąd konfiguracji");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

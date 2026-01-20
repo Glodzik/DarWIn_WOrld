@@ -10,8 +10,8 @@ import javafx.scene.layout.VBox;
 import project.model.Map.RectangularMap;
 import project.model.Simulation.Simulation;
 import project.model.Simulation.SimulationParameters;
-import project.model.Statistics.SimulationStatistics;
-import project.model.Statistics.SimulationStatisticsTracker;
+import project.model.Simulation.Statistics.SimulationStatistics;
+import project.model.Simulation.Statistics.SimulationStatisticsTracker;
 
 public final class MapPresenter implements MapChangeListener {
     private RectangularMap worldMap;
