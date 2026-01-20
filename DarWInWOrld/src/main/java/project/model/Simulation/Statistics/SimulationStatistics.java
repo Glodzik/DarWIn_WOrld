@@ -1,4 +1,4 @@
-package project.model.Statistics;
+package project.model.Simulation.Statistics;
 
 public final class SimulationStatistics {
     private int numberOfAnimals;

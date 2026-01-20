@@ -1,4 +1,4 @@
-package project.model.Statistics;
+package project.model.Simulation.Statistics;
 
 import project.model.Simulation.Simulation;
 import project.model.WorldElements.Animals.Animal;
