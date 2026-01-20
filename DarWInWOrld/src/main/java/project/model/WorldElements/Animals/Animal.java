@@ -17,7 +17,7 @@ public final class Animal implements WorldElement {
     private int daysAlive = 0;
     private int protection = 0;
     private int childrenCount = 0;
-    private int movingPointer;
+    private int movingPointer = 0;
 
     private static final Vector2D START_POSITION = new Vector2D(0, 0);
     private static final int START_ENERGY = 100;
@@ -40,8 +40,7 @@ public final class Animal implements WorldElement {
                 parameters.minMutation(), parameters.maxMutation()
         );
         this.protection = Genome.protectionLevel(this.genom, protectionGenome);
-        Random random = new Random();
-        this.movingPointer = random.nextInt(parameters.genomLength());
+        this.movingPointer = RandomGenerator.randomMovingPointer(parameters.genomLength());
     }
 
     public Animal(AnimalParameters parameters, Genome protectionGenome) {
@@ -50,8 +49,7 @@ public final class Animal implements WorldElement {
         this.energy = parameters.startEnergy();
         this.genom = new Genome(parameters.genomLength());
         this.protection = Genome.protectionLevel(this.genom, protectionGenome);
-        Random random = new Random();
-        this.movingPointer = random.nextInt(parameters.genomLength());
+        this.movingPointer = RandomGenerator.randomMovingPointer(parameters.genomLength());
     }
 
     public Animal(Vector2D position) {
@@ -59,8 +57,7 @@ public final class Animal implements WorldElement {
         this.genom = new Genome(8);
         this.currDirection = RandomGenerator.randomDirection();
         this.energy = START_ENERGY;
-        Random random = new Random();
-        this.movingPointer = random.nextInt(genom.getGenomeSize());
+        this.movingPointer = RandomGenerator.randomMovingPointer(8);
     }
 
     public Animal() {

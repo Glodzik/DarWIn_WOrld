@@ -121,12 +121,12 @@ public final class MapPresenter implements MapChangeListener {
             customLegend.setManaged(true);
 
             // Skalowanie wartości energii dla antidotes
-            // plantEnergy to wartość minimalna (Trawa), reszta rośnie proporcjonalnie (1x, 2x, 3x, 4x, 6x)
+            // plantEnergy to wartość minimalna (Trawa), reszta rośnie proporcjonalnie (1x, 1.5x, 2x, 2.5x, 3x)
             grassEnergyLabel.setText("+%d".formatted(plantEnergy));
-            bambooEnergyLabel.setText("+%d".formatted(plantEnergy * 2));
-            carrotEnergyLabel.setText("+%d".formatted(plantEnergy * 3));
-            parsleyEnergyLabel.setText("+%d".formatted(plantEnergy * 4));
-            sunflowerEnergyLabel.setText("+%d".formatted(plantEnergy * 6));
+            bambooEnergyLabel.setText("+%d".formatted((int)(plantEnergy * 1.5)));
+            carrotEnergyLabel.setText("+%d".formatted(plantEnergy * 2));
+            parsleyEnergyLabel.setText("+%d".formatted((int)(plantEnergy * 2.5)));
+            sunflowerEnergyLabel.setText("+%d".formatted(plantEnergy * 3));
 
             // Ukryj sekcję TRUJĄCE gdy brak trujących roślin
             if (!hasPoisons) {
@@ -135,10 +135,10 @@ public final class MapPresenter implements MapChangeListener {
             } else {
                 // Skalowanie wartości energii dla poisons (1x, 2x, 3x, 4x, 6x)
                 lilyEnergyLabel.setText("-%d".formatted(poisonEnergy));
-                aloeEnergyLabel.setText("-%d".formatted(poisonEnergy * 2));
-                azaleaEnergyLabel.setText("-%d".formatted(poisonEnergy * 3));
-                oleanderEnergyLabel.setText("-%d".formatted(poisonEnergy * 4));
-                cisEnergyLabel.setText("-%d".formatted(poisonEnergy * 6));
+                aloeEnergyLabel.setText("-%d".formatted((int)(poisonEnergy * 1.5)));
+                azaleaEnergyLabel.setText("-%d".formatted(poisonEnergy * 2));
+                oleanderEnergyLabel.setText("-%d".formatted((int)(poisonEnergy * 2.5)));
+                cisEnergyLabel.setText("-%d".formatted(poisonEnergy * 3));
             }
         } else {
             // Tryb podstawowy - pokazuj uproszczoną legendę

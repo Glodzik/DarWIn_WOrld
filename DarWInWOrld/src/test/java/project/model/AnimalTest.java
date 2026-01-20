@@ -3,6 +3,8 @@ package project.model;
 import org.junit.jupiter.api.Test;
 import project.model.Coordinates.Vector2D;
 import project.model.WorldElements.Animals.Animal;
+import project.model.WorldElements.Animals.AnimalParameters;
+import project.model.WorldElements.Animals.Genome;
 import project.model.WorldElements.EdibleElements.Antidote;
 import project.model.WorldElements.EdibleElements.Poison;
 
@@ -81,4 +83,30 @@ class AnimalTest {
         }
     }
 
+    @Test
+    void testConstructorWithParameters() {
+        AnimalParameters parameters = new AnimalParameters(100, 10, 80, 40, 1, 5, 8);
+        Animal animal = new Animal(parameters, new Genome(8));
+
+        assertNotNull(animal);
+        assertEquals(new Vector2D(0, 0), animal.getPosition());
+        assertNotNull(animal.getCurrDirection());
+        assertNotNull(animal.getGenom());
+        assertEquals(100, animal.getEnergy());
+        assertEquals(0, animal.getDaysAlive());
+        assertEquals(0, animal.getChildrenCount());
+    }
+
+    @Test
+    void testConstructorWithPosition() {
+        Animal animal = new Animal(new Vector2D(2, 2));
+
+        assertNotNull(animal);
+        assertEquals(new Vector2D(2, 2), animal.getPosition());
+        assertNotNull(animal.getCurrDirection());
+        assertNotNull(animal.getGenom());
+        assertEquals(100, animal.getEnergy());
+        assertEquals(0, animal.getDaysAlive());
+        assertEquals(0, animal.getChildrenCount());
+    }
 }

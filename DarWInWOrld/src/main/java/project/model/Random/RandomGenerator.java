@@ -35,15 +35,15 @@ public final class RandomGenerator {
 
     public static Plant randomCustomPlants(int poisonPlantProbability, int basePlantEnergy, int basePoisonEnergy) {
         int probability = random.nextInt(101);
-        int[] multipliers = {1, 2, 3, 4, 6};
+        double[] multipliers = {1, 1.5, 2.0, 2.5, 3.0};
 
         if(probability <= poisonPlantProbability) {
             int poisonIndex = random.nextInt(TypeOfPoison.values().length);
-            int scaledEnergy = basePoisonEnergy * multipliers[poisonIndex];
+            int scaledEnergy = (int) (basePoisonEnergy * multipliers[poisonIndex]);
             return new Poison(null, poisonIndex, scaledEnergy);
         } else {
             int antidoteIndex = random.nextInt(TypeOfAntidote.values().length);
-            int scaledEnergy = basePlantEnergy * multipliers[antidoteIndex];
+            int scaledEnergy = (int) (basePlantEnergy * multipliers[antidoteIndex]);
             return new Antidote(null, antidoteIndex, scaledEnergy);
         }
     }
@@ -55,5 +55,9 @@ public final class RandomGenerator {
         } else {
             return new Plant(null, plantEnergy);
         }
+    }
+
+    public static int randomMovingPointer(int genomLength) {
+        return random.nextInt(genomLength);
     }
 }
