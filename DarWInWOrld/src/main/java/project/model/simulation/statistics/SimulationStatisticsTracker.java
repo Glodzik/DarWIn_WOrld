@@ -1,7 +1,7 @@
-package project.model.Simulation.Statistics;
+package project.model.simulation.statistics;
 
-import project.model.Simulation.Simulation;
-import project.model.WorldElements.Animals.Animal;
+import project.model.simulation.Simulation;
+import project.model.worldelements.animals.Animal;
 
 import java.util.Arrays;
 import java.util.HashMap;

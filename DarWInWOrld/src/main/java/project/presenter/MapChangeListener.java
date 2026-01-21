@@ -1,6 +1,6 @@
 package project.presenter;
 
-import project.model.Map.RectangularMap;
+import project.model.map.RectangularMap;
 
 public interface MapChangeListener {
     void mapChanged(RectangularMap worldMap, String message);

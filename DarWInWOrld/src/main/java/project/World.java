@@ -1,15 +1,15 @@
 package project;
 
-import project.model.Coordinates.Vector2D;
-import project.model.Map.RectangularMap;
-import project.model.Simulation.Simulation;
-import project.model.Simulation.SimulationParameters;
-import project.model.WorldElements.Animals.Animal;
-import project.model.WorldElements.Animals.AnimalParameters;
-import project.model.WorldElements.Animals.Genome;
-import project.model.WorldElements.EdibleElements.Antidote;
-import project.model.WorldElements.EdibleElements.Plant;
-import project.model.WorldElements.EdibleElements.PlantParameters;
+import project.model.coordinates.Vector2D;
+import project.model.map.RectangularMap;
+import project.model.simulation.Simulation;
+import project.model.simulation.SimulationParameters;
+import project.model.worldelements.animals.Animal;
+import project.model.worldelements.animals.AnimalParameters;
+import project.model.worldelements.animals.Genome;
+import project.model.worldelements.edibleelements.Antidote;
+import project.model.worldelements.edibleelements.Plant;
+import project.model.worldelements.edibleelements.PlantParameters;
 
 import java.util.Random;
 

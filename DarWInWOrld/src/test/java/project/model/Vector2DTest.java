@@ -1,7 +1,7 @@
 package project.model;
 
 import org.junit.jupiter.api.Test;
-import project.model.Coordinates.Vector2D;
+import project.model.coordinates.Vector2D;
 
 import static org.junit.jupiter.api.Assertions.*;
 

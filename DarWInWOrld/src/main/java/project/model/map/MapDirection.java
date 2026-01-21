@@ -1,6 +1,6 @@
-package project.model.Map;
+package project.model.map;
 
-import project.model.Coordinates.Vector2D;
+import project.model.coordinates.Vector2D;
 
 public enum MapDirection {
     NORTH(0),

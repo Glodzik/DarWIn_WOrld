@@ -1,15 +1,15 @@
-package project.model.Simulation;
+package project.model.simulation;
 
-import project.model.Coordinates.Vector2D;
-import project.model.Map.RectangularMap;
-import project.model.Random.RandomGenerator;
-import project.model.Simulation.Statistics.SimulationStatisticsTracker;
-import project.model.WorldElements.Animals.Animal;
-import project.model.WorldElements.Animals.AnimalComparator;
-import project.model.WorldElements.Animals.AnimalParameters;
-import project.model.WorldElements.Animals.Genome;
-import project.model.WorldElements.EdibleElements.Plant;
-import project.model.WorldElements.EdibleElements.PlantParameters;
+import project.model.coordinates.Vector2D;
+import project.model.map.RectangularMap;
+import project.model.random.RandomGenerator;
+import project.model.simulation.statistics.SimulationStatisticsTracker;
+import project.model.worldelements.animals.Animal;
+import project.model.worldelements.animals.AnimalComparator;
+import project.model.worldelements.animals.AnimalParameters;
+import project.model.worldelements.animals.Genome;
+import project.model.worldelements.edibleelements.Plant;
+import project.model.worldelements.edibleelements.PlantParameters;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package project.model.WorldElements.EdibleElements;
+package project.model.worldelements.edibleelements;
 
-import project.model.Coordinates.Vector2D;
-import project.model.WorldElements.WorldElement;
+import project.model.coordinates.Vector2D;
+import project.model.worldelements.WorldElement;
 
 public class Plant implements WorldElement, Edible {
     private Vector2D position;

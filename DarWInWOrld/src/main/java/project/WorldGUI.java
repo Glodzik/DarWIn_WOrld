@@ -2,7 +2,7 @@ package project;
 
 import javafx.application.Application;
 import javafx.scene.text.Font;
-import project.model.Simulation.SimulationApp;
+import project.model.simulation.SimulationApp;
 
 public final class WorldGUI {
     public static void main(String[] args) {

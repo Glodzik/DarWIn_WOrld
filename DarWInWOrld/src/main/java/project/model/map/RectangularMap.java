@@ -1,10 +1,10 @@
-package project.model.Map;
+package project.model.map;
 
-import project.model.Coordinates.Boundary;
-import project.model.Coordinates.Vector2D;
-import project.model.Random.RandomGenerator;
-import project.model.WorldElements.Animals.Animal;
-import project.model.WorldElements.EdibleElements.Plant;
+import project.model.coordinates.Boundary;
+import project.model.coordinates.Vector2D;
+import project.model.random.RandomGenerator;
+import project.model.worldelements.animals.Animal;
+import project.model.worldelements.edibleelements.Plant;
 import project.presenter.MapChangeListener;
 
 import java.util.*;

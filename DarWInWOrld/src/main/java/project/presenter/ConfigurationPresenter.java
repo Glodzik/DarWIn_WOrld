@@ -9,10 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import project.model.Simulation.Simulation;
-import project.model.Simulation.SimulationParameters;
-import project.model.WorldElements.Animals.AnimalParameters;
-import project.model.WorldElements.EdibleElements.PlantParameters;
+import project.model.simulation.Simulation;
+import project.model.simulation.SimulationParameters;
+import project.model.worldelements.animals.AnimalParameters;
+import project.model.worldelements.edibleelements.PlantParameters;
 
 import java.io.IOException;
 

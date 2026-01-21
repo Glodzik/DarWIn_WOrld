@@ -1,4 +1,4 @@
-package project.model.WorldElements.EdibleElements;
+package project.model.worldelements.edibleelements;
 
 public enum TypeOfPoison {
     LILY(-5, "/textures/plants/poisons/lily.png"),

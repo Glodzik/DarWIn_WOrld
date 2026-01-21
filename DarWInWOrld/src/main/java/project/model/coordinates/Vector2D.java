@@ -1,4 +1,4 @@
-package project.model.Coordinates;
+package project.model.coordinates;
 
 import java.util.Objects;
 

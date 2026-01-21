@@ -1,9 +1,9 @@
-package project.model.Random;
+package project.model.random;
 
-import project.model.Coordinates.Boundary;
-import project.model.Coordinates.Vector2D;
-import project.model.Map.MapDirection;
-import project.model.WorldElements.EdibleElements.*;
+import project.model.coordinates.Boundary;
+import project.model.coordinates.Vector2D;
+import project.model.map.MapDirection;
+import project.model.worldelements.edibleelements.*;
 
 import java.util.Random;
 

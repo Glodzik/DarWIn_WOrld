@@ -1,13 +1,13 @@
 package project.model;
 
 import org.junit.jupiter.api.Test;
-import project.model.Coordinates.Boundary;
-import project.model.Coordinates.Vector2D;
-import project.model.Map.MapDirection;
-import project.model.Random.RandomGenerator;
-import project.model.WorldElements.EdibleElements.Antidote;
-import project.model.WorldElements.EdibleElements.Plant;
-import project.model.WorldElements.EdibleElements.Poison;
+import project.model.coordinates.Boundary;
+import project.model.coordinates.Vector2D;
+import project.model.map.MapDirection;
+import project.model.random.RandomGenerator;
+import project.model.worldelements.edibleelements.Antidote;
+import project.model.worldelements.edibleelements.Plant;
+import project.model.worldelements.edibleelements.Poison;
 
 import static org.junit.jupiter.api.Assertions.*;
 

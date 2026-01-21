@@ -1,17 +1,16 @@
 package project.model;
 
 import org.junit.jupiter.api.Test;
-import project.model.Coordinates.Boundary;
-import project.model.Coordinates.Vector2D;
-import project.model.Map.MapDirection;
-import project.model.WorldElements.Animals.Animal;
-import project.model.WorldElements.Animals.AnimalParameters;
-import project.model.WorldElements.Animals.Genome;
-import project.model.WorldElements.EdibleElements.Antidote;
-import project.model.WorldElements.EdibleElements.Poison;
+import project.model.coordinates.Boundary;
+import project.model.coordinates.Vector2D;
+import project.model.map.MapDirection;
+import project.model.worldelements.animals.Animal;
+import project.model.worldelements.animals.AnimalParameters;
+import project.model.worldelements.animals.Genome;
+import project.model.worldelements.edibleelements.Antidote;
+import project.model.worldelements.edibleelements.Poison;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static project.model.Map.MapDirection.*;
 
 class AnimalTest {
 

@@ -1,7 +1,7 @@
-package project.model.Simulation;
+package project.model.simulation;
 
-import project.model.WorldElements.Animals.AnimalParameters;
-import project.model.WorldElements.EdibleElements.PlantParameters;
+import project.model.worldelements.animals.AnimalParameters;
+import project.model.worldelements.edibleelements.PlantParameters;
 
 public record SimulationParameters(int mapHeight, int mapWidth,
                                    int startPlants, int newPlantsEveryday, int startAnimals,

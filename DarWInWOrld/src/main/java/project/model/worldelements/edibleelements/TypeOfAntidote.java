@@ -1,4 +1,4 @@
-package project.model.WorldElements.EdibleElements;
+package project.model.worldelements.edibleelements;
 
 public enum TypeOfAntidote {
     GRASS(5, "/textures/plants/antidotes/grass.png"),

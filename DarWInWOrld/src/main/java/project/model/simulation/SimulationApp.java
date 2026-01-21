@@ -1,4 +1,4 @@
-package project.model.Simulation;
+package project.model.simulation;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

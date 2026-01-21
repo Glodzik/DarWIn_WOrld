@@ -1,13 +1,11 @@
-package project.model.WorldElements.Animals;
+package project.model.worldelements.animals;
 
-import project.model.Coordinates.Boundary;
-import project.model.Coordinates.Vector2D;
-import project.model.Map.MapDirection;
-import project.model.Random.RandomGenerator;
-import project.model.WorldElements.EdibleElements.Plant;
-import project.model.WorldElements.WorldElement;
-
-import java.util.Random;
+import project.model.coordinates.Boundary;
+import project.model.coordinates.Vector2D;
+import project.model.map.MapDirection;
+import project.model.random.RandomGenerator;
+import project.model.worldelements.WorldElement;
+import project.model.worldelements.edibleelements.Plant;
 
 public final class Animal implements WorldElement {
     private MapDirection currDirection;

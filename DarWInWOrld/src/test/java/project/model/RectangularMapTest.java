@@ -1,11 +1,11 @@
 package project.model;
 
 import org.junit.jupiter.api.Test;
-import project.model.Coordinates.Boundary;
-import project.model.Coordinates.Vector2D;
-import project.model.Map.RectangularMap;
-import project.model.WorldElements.Animals.Animal;
-import project.model.WorldElements.EdibleElements.Plant;
+import project.model.coordinates.Boundary;
+import project.model.coordinates.Vector2D;
+import project.model.map.RectangularMap;
+import project.model.worldelements.animals.Animal;
+import project.model.worldelements.edibleelements.Plant;
 
 import java.util.List;
 

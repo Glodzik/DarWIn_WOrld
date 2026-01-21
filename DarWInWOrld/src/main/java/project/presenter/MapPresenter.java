@@ -7,11 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import project.model.Map.RectangularMap;
-import project.model.Simulation.Simulation;
-import project.model.Simulation.SimulationParameters;
-import project.model.Simulation.Statistics.SimulationStatistics;
-import project.model.Simulation.Statistics.SimulationStatisticsTracker;
+import project.model.map.RectangularMap;
+import project.model.simulation.Simulation;
+import project.model.simulation.SimulationParameters;
+import project.model.simulation.statistics.SimulationStatistics;
+import project.model.simulation.statistics.SimulationStatisticsTracker;
 
 public final class MapPresenter implements MapChangeListener {
     private RectangularMap worldMap;
