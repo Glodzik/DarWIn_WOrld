@@ -31,8 +31,9 @@ class RectangularMapTest {
     void move() {
         //given
         RectangularMap map = new RectangularMap(5, 5);
-        Animal animal = new Animal();
-        map.place(animal);
+        Vector2D position = new Vector2D(2, 2);
+        Animal animal = new Animal(position);
+        map.place(animal, position);
         Vector2D oldPosition = animal.getPosition();
 
         //when

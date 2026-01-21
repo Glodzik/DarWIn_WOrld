@@ -183,10 +183,6 @@ public final class Simulation implements Runnable {
         return statisticsTracker;
     }
 
-    public int getStartEnergy() {
-        return simulationParameters.animalParameters().startEnergy();
-    }
-
     public SimulationParameters getParameters() {
         return simulationParameters;
     }

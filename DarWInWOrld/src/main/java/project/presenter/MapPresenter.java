@@ -100,7 +100,7 @@ public final class MapPresenter implements MapChangeListener {
         this.simulation = simulation;
         this.worldMap = simulation.getWorldMap();
         this.statisticsTracker = simulation.getStatisticsTracker();
-        this.mapDrafter = new MapDrafter(mapCanvas, simulation.getStartEnergy());
+        this.mapDrafter = new MapDrafter(mapCanvas, simulation.getParameters().animalParameters().startEnergy());
 
         mapDrafter.drawMap(worldMap);
         startSimulation();

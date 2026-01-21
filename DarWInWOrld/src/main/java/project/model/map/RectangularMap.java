@@ -23,11 +23,15 @@ public final class RectangularMap implements WorldMap {
     public RectangularMap(int width, int height) {
         this.mapBounds = new Boundary(LOWER_LEFT, new Vector2D(width - 1, height - 1));
         this.jungleHeight = Math.max((int) Math.round(height * 0.2), 1);
+        this.jungleBoundary = calculateJungleBoundary(width, height);
+    }
+
+    private Boundary calculateJungleBoundary(int width, int height) {
         int jungleStartY = (int) Math.round(((height - 1) / 2.0) - (jungleHeight - 1) / 2.0);
         int jungleEndY = jungleStartY + jungleHeight - 1;
         Vector2D jungleLowerLeft = new Vector2D(0, jungleStartY);
         Vector2D jungleUpperRight = new Vector2D(width - 1, jungleEndY);
-        this.jungleBoundary = new Boundary(jungleLowerLeft, jungleUpperRight);
+        return new Boundary(jungleLowerLeft, jungleUpperRight);
     }
 
     public void place(Animal animal) {
