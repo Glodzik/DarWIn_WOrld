@@ -20,7 +20,7 @@ public final class Simulation implements Runnable {
     private List<Plant> plants = new ArrayList<Plant>();
     private final RectangularMap worldMap;
     private final Genome protectionGenome;
-    private int day = 0;
+    private int day = 1;
     private final SimulationParameters simulationParameters;
     private boolean isRunning = false;
     private final SimulationStatisticsTracker statisticsTracker;
@@ -154,8 +154,8 @@ public final class Simulation implements Runnable {
 
     public void run() {
         while (!animals.isEmpty() && isRunning) {
-            dayAction();
             statisticsTracker.updateStats();
+            dayAction();
         }
     }
 
