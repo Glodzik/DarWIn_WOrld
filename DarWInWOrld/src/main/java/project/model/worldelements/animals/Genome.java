@@ -80,4 +80,13 @@ public final class Genome {
         double percentage = (double) matches / protectionGenomeArray.length * 100;
         return (int) Math.round(percentage);
     }
+
+    public static String formatGenome(int[] genes) {
+        if (genes == null) return "-";
+        StringBuilder sb = new StringBuilder();
+        for (int gene : genes) {
+            sb.append(gene);
+        }
+        return sb.toString();
+    }
 }

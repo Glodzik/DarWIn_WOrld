@@ -12,6 +12,7 @@ import project.model.simulation.Simulation;
 import project.model.simulation.SimulationParameters;
 import project.model.simulation.statistics.SimulationStatistics;
 import project.model.simulation.statistics.SimulationStatisticsTracker;
+import project.model.worldelements.animals.Genome;
 
 public final class MapPresenter implements MapChangeListener {
     private RectangularMap worldMap;
@@ -180,7 +181,7 @@ public final class MapPresenter implements MapChangeListener {
         deadAnimalCountLabel.setText(String.valueOf(stats.getDeadAnimals()));
         plantCountLabel.setText(String.valueOf(stats.getNumberOfPlants()));
         freeFieldsLabel.setText(String.valueOf(stats.getNumberOfNotOccupiedFields()));
-        topGenotypeLabel.setText(formatGenome(stats.getMostPopularGenes()));
+        topGenotypeLabel.setText(Genome.formatGenome(stats.getMostPopularGenes()));
         avgChildrenLabel.setText(String.format("%.2f", stats.getAverageAmountOfChildren()));
         avgEnergyLabel.setText(String.format("%.2f", stats.getAverageEnergyLevel()));
         avgLifespanLabel.setText(String.format("%.2f", stats.getAverageLifespan()));
@@ -226,13 +227,5 @@ public final class MapPresenter implements MapChangeListener {
         if (worldMap != null) {
             worldMap.removeObserver(this);
         }
-    }
-    private String formatGenome(int[] genes) {
-        if (genes == null) return "-";
-        StringBuilder sb = new StringBuilder();
-        for (int gene : genes) {
-            sb.append(gene);
-        }
-        return sb.toString();
     }
 }
