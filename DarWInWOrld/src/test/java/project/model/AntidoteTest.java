@@ -63,13 +63,14 @@ class AntidoteTest {
         Vector2D position = new Vector2D(5, 5);
 
         TypeOfAntidote[] values = TypeOfAntidote.values();
-        Antidote[] antidotes = new Antidote[values.length];
+        int length = values.length;
+        Antidote[] antidotes = new Antidote[length];
 
-        for (int i = 0; i < values.length; i++) {
+        for (int i = 0; i < length; i++) {
             antidotes[i] = new Antidote(position, values[i]);
         }
 
-        for(int i = 0; i < values.length; i++) {
+        for(int i = 0; i < length; i++) {
             assertEquals(values[i], antidotes[i].getType());
         }
     }

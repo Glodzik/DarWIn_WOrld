@@ -138,7 +138,7 @@ class RectangularMapTest {
     @Test
     void testPlacePlant() {
         Plant plant = new Plant(null, 10); // Zakładam, że Plant ma konstruktor z energią
-        RectangularMap map = new RectangularMap(2, 2);
+        RectangularMap map = new RectangularMap(5, 5);
 
         map.placePlant(plant);
         assertNotNull(plant.getPosition());
