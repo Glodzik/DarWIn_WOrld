@@ -72,9 +72,6 @@ public final class Simulation implements Runnable {
 
         removeAllDead();
         animalsMoving();
-        // miedzy kazdym ruchem ma byc pauza na moment
-        // moze animalsMoving(time)?
-
         animalsEating();
         animalsBreeding();
         addPlants(simulationParameters.newPlantsEveryday(), simulationParameters.plantParameters(), simulationParameters.customPlants());
@@ -158,6 +155,7 @@ public final class Simulation implements Runnable {
     public void run() {
         while (!animals.isEmpty() && isRunning) {
             dayAction();
+            statisticsTracker.updateStats();
         }
     }
 

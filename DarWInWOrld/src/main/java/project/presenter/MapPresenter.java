@@ -173,7 +173,6 @@ public final class MapPresenter implements MapChangeListener {
 
     private void updateStats() {
         int day = simulation.getDay();
-        statisticsTracker.updateStats();
         SimulationStatistics stats = statisticsTracker.getStatistics();
 
         dayLabel.setText(String.valueOf(day));
@@ -224,6 +223,7 @@ public final class MapPresenter implements MapChangeListener {
 
     public void cleanup() {
         stopSimulation();
+        statisticsTracker.closeFile();
         if (worldMap != null) {
             worldMap.removeObserver(this);
         }
