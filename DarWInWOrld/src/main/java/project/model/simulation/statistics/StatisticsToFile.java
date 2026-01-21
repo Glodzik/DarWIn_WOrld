@@ -39,17 +39,16 @@ public class StatisticsToFile {
 
         try {
             writeStatsHeader();
-            StringBuilder statsLine = new StringBuilder();
 
-            statsLine.append(dayNumber).append(",");
-            statsLine.append(stats.getNumberOfAnimals()).append(",");
-            statsLine.append(stats.getNumberOfPlants()).append(",");
-            statsLine.append(stats.getNumberOfNotOccupiedFields()).append(",");
-            statsLine.append(stats.getDeadAnimals()).append(",");
-            statsLine.append(String.format("%.2f", stats.getAverageEnergyLevel())).append(",");
-            statsLine.append(String.format("%.2f", stats.getAverageAmountOfChildren())).append(",");
-            statsLine.append(String.format("%.2f", stats.getAverageLifespan())).append(",");
-            statsLine.append(Genome.formatGenome(stats.getMostPopularGenes()));
+            String statsLine = dayNumber + "," +
+                    stats.getNumberOfAnimals() + "," +
+                    stats.getNumberOfPlants() + "," +
+                    stats.getNumberOfNotOccupiedFields() + "," +
+                    stats.getDeadAnimals() + "," +
+                    String.format("%.2f", stats.getAverageEnergyLevel()) + "," +
+                    String.format("%.2f", stats.getAverageAmountOfChildren()) + "," +
+                    String.format("%.2f", stats.getAverageLifespan()) + "," +
+                    Genome.formatGenome(stats.getMostPopularGenes());
 
             statsWriter.println(statsLine);
             statsWriter.flush();
