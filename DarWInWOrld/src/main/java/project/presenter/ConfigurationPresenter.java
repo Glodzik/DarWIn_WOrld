@@ -98,9 +98,6 @@ public final class ConfigurationPresenter {
         setupSliderListeners();
         setupCheckboxListeners();
 
-        presetComboBox.getItems().add("Custom");
-
-
         presetComboBox.getItems().addAll(presetService.getPresetNames());
         presetComboBox.setValue("Domyślny");
         presetComboBox.setOnAction(event -> applyPreset());
