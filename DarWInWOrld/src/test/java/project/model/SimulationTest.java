@@ -46,6 +46,7 @@ class SimulationTest {
                 animalParams,
                 plantParams,
                 8,
+                false,
                 true
         );
 
@@ -131,7 +132,7 @@ class SimulationTest {
         PlantParameters plantParams = new PlantParameters(20, 30, 10);
 
         SimulationParameters params = new SimulationParameters(
-                10, 10, 0, 10, 0, animalParams, plantParams, 8, false
+                10, 10, 0, 10, 0, animalParams, plantParams, 8, false, false
         );
 
         simulation = new Simulation(params);
@@ -191,7 +192,7 @@ class SimulationTest {
         PlantParameters plantParams = new PlantParameters(20, 30, 10);
 
         SimulationParameters params = new SimulationParameters(
-                10, 10, 0, 10, 0, animalParams, plantParams, 8, false
+                10, 10, 0, 10, 0, animalParams, plantParams, 8, false, false
         );
 
         Simulation simulation = new Simulation(params);

@@ -42,7 +42,7 @@ public final class World {
 
         SimulationParameters parameters = new SimulationParameters(5,5, 5,2,5,
                 animalParameters,
-                new PlantParameters(20, 40, -20), 8, false);
+                new PlantParameters(20, 40, -20), 8, false, false);
         Simulation simulation = new Simulation(parameters);
         simulation.run();
     }

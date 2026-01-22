@@ -97,10 +97,6 @@ public final class ConfigurationPresenter {
     public void initialize() {
         setupSliderListeners();
         setupCheckboxListeners();
-
-        presetComboBox.getItems().add("Custom");
-
-
         presetComboBox.getItems().addAll(presetService.getPresetNames());
         presetComboBox.setValue("Domyślny");
         presetComboBox.setOnAction(event -> applyPreset());
@@ -234,31 +230,10 @@ public final class ConfigurationPresenter {
 
         return new SimulationParameters
                 (mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
-                        animalParameters, plantParameters, protectionGenomeLength, customPlants);
+                        animalParameters, plantParameters, protectionGenomeLength, poisonPlantsVariant, customPlants);
     }
 
-    private ConfigurationData getCurrentConfiguration() {
-        return new ConfigurationData(
-                (int) mapHeightField.getValue(),
-                (int) mapWidthField.getValue(),
-                (int) startPlantsField.getValue(),
-                (int) newPlantsEverydayField.getValue(),
-                (int) startAnimalsField.getValue(),
-                (int) startEnergyField.getValue(),
-                (int) energyLossEveryDayField.getValue(),
-                (int) energyLevelToBreedField.getValue(),
-                (int) energyLossAfterBreedField.getValue(),
-                (int) minMutationField.getValue(),
-                (int) maxMutationField.getValue(),
-                (int) genomeLengthField.getValue(),
-                (int) eatingEnergyField.getValue(),
-                (int) poisonPlantProbabilityField.getValue(),
-                (int) poisonEnergyLossField.getValue(),
-                (int) protectionGenomeLengthField.getValue(),
-                poisonPlantsVariantCheckbox.isSelected(),
-                customPlantsCheckbox.isSelected()
-        );
-    }
+
 
     @FXML
     public void onSavePreset() {
@@ -272,7 +247,7 @@ public final class ConfigurationPresenter {
         File file = fileChooser.showSaveDialog(mapWidthField.getScene().getWindow());
         if (file != null) {
             try {
-                presetService.saveToFile(getCurrentConfiguration(), file);
+                presetService.saveToFile(getSimulationParameters(), file);
             } catch (IOException e) {
                 showAlert("Błąd zapisu: " + e.getMessage());
             }
@@ -290,7 +265,7 @@ public final class ConfigurationPresenter {
         File file = fileChooser.showOpenDialog(mapWidthField.getScene().getWindow());
         if (file != null) {
             try {
-                ConfigurationData data = presetService.loadFromFile(file);
+                SimulationParameters data = presetService.loadFromFile(file);
                 applyConfiguration(data);
                 presetComboBox.setValue(null); // Reset combobox
             } catch (IOException e) {
@@ -299,35 +274,36 @@ public final class ConfigurationPresenter {
         }
     }
 
-    private void applyConfiguration(ConfigurationData d) {
+    private void applyConfiguration(SimulationParameters d) {
         List.of(
                 Map.entry(mapHeightField, d.mapHeight()),
                 Map.entry(mapWidthField, d.mapWidth()),
                 Map.entry(startPlantsField, d.startPlants()),
                 Map.entry(newPlantsEverydayField, d.newPlantsEveryday()),
                 Map.entry(startAnimalsField, d.startAnimals()),
-                Map.entry(startEnergyField, d.startEnergy()),
-                Map.entry(energyLossEveryDayField, d.energyLossEveryDay()),
-                Map.entry(energyLevelToBreedField, d.energyLevelToBreed()),
-                Map.entry(energyLossAfterBreedField, d.energyLossAfterBreed()),
-                Map.entry(minMutationField, d.minMutation()),
-                Map.entry(maxMutationField, d.maxMutation()),
-                Map.entry(genomeLengthField, d.genomeLength()),
-                Map.entry(eatingEnergyField, d.eatingEnergy()),
-                Map.entry(poisonPlantProbabilityField, d.poisonProbability()),
-                Map.entry(poisonEnergyLossField, d.poisonEnergyLoss()),
-                Map.entry(protectionGenomeLengthField, d.protectionLength())
+                Map.entry(startEnergyField, d.animalParameters().startEnergy()),
+                Map.entry(energyLossEveryDayField, d.animalParameters().energyLossEveryDay()),
+                Map.entry(energyLevelToBreedField, d.animalParameters().energyLevelToBreed()),
+                Map.entry(energyLossAfterBreedField, d.animalParameters().energyLossAfterBreed()),
+                Map.entry(minMutationField, d.animalParameters().minMutation()),
+                Map.entry(maxMutationField, d.animalParameters().maxMutation()),
+                Map.entry(genomeLengthField, d.animalParameters().genomLength()),
+                Map.entry(eatingEnergyField, d.plantParameters().energy()),
+                Map.entry(poisonPlantProbabilityField, d.plantParameters().poisonProbability()),
+                Map.entry(poisonEnergyLossField, d.plantParameters().poisonEnergyLoss()),
+                Map.entry(protectionGenomeLengthField, d.protectionGenomLength())
         ).forEach(e -> e.getKey().setValue(e.getValue()));
-        poisonPlantsVariantCheckbox.setSelected(d.poisonPlantVariant());
+
+        boolean poisonVariant = d.poisonPlants();
+        poisonPlantsVariantCheckbox.setSelected(poisonVariant);
         customPlantsCheckbox.setSelected(d.customPlants());
     }
 
-    // Zmień applyPreset() żeby używał tej metody
     private void applyPreset() {
         String selected = presetComboBox.getValue();
         if (selected == null || selected.equals("Custom")) return;
-        ConfigurationData d = presetService.getPreset(selected);
-        if (d != null) applyConfiguration(d);
+        SimulationParameters parameters = presetService.getPreset(selected);
+        if (parameters != null) applyConfiguration(parameters);
     }
 
     private boolean validateParameters() {
