@@ -137,7 +137,6 @@ public final class RectangularMap implements WorldMap {
         }
     }
 
-    // unmodifiable lists
     public List<Plant> getPlants() {
         return new ArrayList<>(plants.values());
     }

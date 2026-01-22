@@ -9,11 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class SimulationStatisticsTracker {
-    private int numberOfNotOccupiedFields;
-    private Map<String, Integer> mostPopularGenes = new HashMap<>();
-    private double averageEnergyLevel;
-    private int averageLifespan;
-    private int averageCountOfChildren;
     private final Simulation simulation;
     private final SimulationStatistics statistics;
     private final StatisticsToFile statsWriter;

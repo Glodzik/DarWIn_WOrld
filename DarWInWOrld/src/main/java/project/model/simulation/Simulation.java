@@ -16,7 +16,7 @@ import java.util.List;
 
 public final class Simulation implements Runnable {
     private List<Animal> animals = new ArrayList<Animal>();
-    private List<Animal> deadAnimals = new ArrayList<>();
+    private final List<Animal> deadAnimals = new ArrayList<>();
     private List<Plant> plants = new ArrayList<Plant>();
     private final RectangularMap worldMap;
     private final Genome protectionGenome;
@@ -35,6 +35,7 @@ public final class Simulation implements Runnable {
         addPlants(parameters.startPlants(), parameters.plantParameters(), parameters.customPlants());
 
         updateAnimalsAndPlants();
+        statisticsTracker.updateStats();
     }
 
     public void addAnimals(int animalsCount, AnimalParameters parameters) {
@@ -154,8 +155,8 @@ public final class Simulation implements Runnable {
 
     public void run() {
         while (!animals.isEmpty() && isRunning) {
-            statisticsTracker.updateStats();
             dayAction();
+            statisticsTracker.updateStats();
         }
     }
 
