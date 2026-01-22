@@ -75,15 +75,13 @@ public final class SimulationStatisticsTracker {
         int maxCount = 0;
 
         for (Animal animal : animals) {
-            if (!animal.isDead()) {
-                int[] genome = animal.getGenom().getGenomeSequence();
-                String key = Arrays.toString(genome);
-                int newCount = counts.merge(key, 1, Integer::sum);
+            int[] genome = animal.getGenom().getGenomeSequence();
+            String key = Arrays.toString(genome);
+            int newCount = counts.merge(key, 1, Integer::sum);
 
-                if (newCount > maxCount) {
-                    maxCount = newCount;
-                    mostPopular = genome;
-                }
+            if (newCount > maxCount) {
+                maxCount = newCount;
+                mostPopular = genome;
             }
         }
 
