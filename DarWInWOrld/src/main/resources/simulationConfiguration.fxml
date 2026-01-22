@@ -89,7 +89,7 @@
                         <Label fx:id="startPlantsLabel" text="10"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
-                        <Label text="Minimalna zdobywana energia po zjedzeniu rośliny:" HBox.hgrow="ALWAYS"/>
+                        <Label text="Energia po zjedzeniu rośliny:" HBox.hgrow="ALWAYS"/>
                         <Slider fx:id="eatingEnergyField" min="10" max="50" value="20" majorTickUnit="5" styleClass="slider-style"/>
                         <Label fx:id="eatingEnergyLabel" text="20"/>
                     </HBox>
@@ -114,7 +114,7 @@
                         <Label fx:id="poisonPlantProbabilityLabel" text="20"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
-                        <Label text="Minimalna energia tracona po zjedzeniu trucizny:" HBox.hgrow="ALWAYS"/>
+                        <Label text="Energia tracona po zjedzeniu trucizny:" HBox.hgrow="ALWAYS"/>
                         <Slider fx:id="poisonEnergyLossField" min="10" max="50" value="20" majorTickUnit="5" styleClass="slider-style"/>
                         <Label fx:id="poisonEnergyLossLabel" text="20"/>
                     </HBox>
@@ -131,8 +131,10 @@
 
             <HBox spacing="10" style="-fx-padding: 20 0 0 0;">
                 <Label text="Customowe rośliny:" HBox.hgrow="ALWAYS"/>
-                <CheckBox fx:id="customPlantsCheckbox" text="Włącz różne rodzaje roślin (przypisana z góry energia roślin)"/>
+                <CheckBox fx:id="customPlantsCheckbox" />
             </HBox>
+
+            <Label text="Wariant *Customowe rośliny* dodaje dodatkowe typy roślin na mapę o energiach będących mnożnikami podanej energii bazowej rośliny/trucizny" HBox.hgrow="ALWAYS"/>
 
             <HBox alignment="CENTER" style="-fx-padding: 40 0 20 0;">
                 <Button onAction="#onSimulationStartClicked" styleClass="button-style">START</Button>
