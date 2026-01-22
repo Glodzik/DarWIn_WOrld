@@ -46,7 +46,7 @@ public final class PresetService {
                     new PlantParameters(20, 0, 0),
                     0, true, false
             ),
-            "Długa - customowe rośliny", new SimulationParameters(
+            "Customowe rośliny", new SimulationParameters(
                     20, 20,
                     40, 25, 10,
                     new AnimalParameters(150, 5, 60, 25, 1, 3, 10),
@@ -77,8 +77,7 @@ public final class PresetService {
         props.setProperty("poisonProbability", String.valueOf(data.plantParameters().poisonProbability()));
         props.setProperty("poisonEnergyLoss", String.valueOf(data.plantParameters().poisonEnergyLoss()));
         props.setProperty("protectionLength", String.valueOf(data.protectionGenomLength()));
-        // Inference for backward compatibility or future use
-        boolean poisonPlantVariant = data.plantParameters().poisonProbability() > 0;
+        boolean poisonPlantVariant = data.poisonPlants();
         props.setProperty("poisonPlantVariant", String.valueOf(poisonPlantVariant));
         props.setProperty("customPlants", String.valueOf(data.customPlants()));
 
