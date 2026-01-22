@@ -97,6 +97,10 @@ public final class ConfigurationPresenter {
     public void initialize() {
         setupSliderListeners();
         setupCheckboxListeners();
+        setupPresets();
+    }
+
+    private void setupPresets() {
         presetComboBox.getItems().addAll(presetService.getPresetNames());
         presetComboBox.setValue("Domyślny");
         presetComboBox.setOnAction(event -> applyPreset());
@@ -107,7 +111,6 @@ public final class ConfigurationPresenter {
                 maxMutationField, genomeLengthField, eatingEnergyField,
                 poisonPlantProbabilityField, poisonEnergyLossField, protectionGenomeLengthField
         ).forEach(s -> s.setOnMousePressed(e -> presetComboBox.setValue("Custom")));
-
     }
 
     private void setupSliderListeners() {
