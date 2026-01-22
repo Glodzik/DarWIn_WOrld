@@ -169,6 +169,7 @@ public final class MapPresenter implements MapChangeListener {
                 stopSimulation();
                 toggleButton.setText("SYMULACJA ZAKOŃCZONA");
                 toggleButton.setDisable(true);
+                updateStatsLabels();
             }
 
             mapDrafter.drawMap(worldMap);

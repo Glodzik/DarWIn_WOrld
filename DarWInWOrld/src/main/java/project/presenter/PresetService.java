@@ -43,7 +43,7 @@ public final class PresetService {
                     15, 15,
                     15, 10, 10,
                     new AnimalParameters(100, 10, 80, 30, 2, 5, 10),
-                    new PlantParameters(20, 0, 0),
+                    new PlantParameters(40, 40, 30),
                     0, true, false
             ),
             "Customowe rośliny", new SimulationParameters(
