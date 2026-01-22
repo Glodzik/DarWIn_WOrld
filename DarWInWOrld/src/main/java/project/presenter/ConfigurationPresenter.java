@@ -104,13 +104,13 @@ public final class ConfigurationPresenter {
         presetComboBox.getItems().addAll(presetService.getPresetNames());
         presetComboBox.setValue("Domyślny");
         presetComboBox.setOnAction(event -> applyPreset());
-        presetComboBox.getItems().add("Custom");
+        presetComboBox.getItems().add("Własna");
         List.of(mapWidthField, mapHeightField, startPlantsField, newPlantsEverydayField,
                 startAnimalsField, startEnergyField, energyLossEveryDayField,
                 energyLevelToBreedField, energyLossAfterBreedField, minMutationField,
                 maxMutationField, genomeLengthField, eatingEnergyField,
                 poisonPlantProbabilityField, poisonEnergyLossField, protectionGenomeLengthField
-        ).forEach(s -> s.setOnMousePressed(e -> presetComboBox.setValue("Custom")));
+        ).forEach(s -> s.setOnMousePressed(e -> presetComboBox.setValue("Własna")));
     }
 
     private void setupSliderListeners() {
