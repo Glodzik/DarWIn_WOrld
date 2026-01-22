@@ -38,12 +38,12 @@ public final class RectangularMap implements WorldMap {
         Vector2D position = RandomGenerator.randomPositionWithinBounds(mapBounds);
         animal.setPosition(position);
         animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
-        mapChanged("Animal placed at random position: %s".formatted(animal.getPosition()));
+//        mapChanged("Animal placed at random position: %s".formatted(animal.getPosition()));
     }
 
     public void place(Animal animal, Vector2D position) {
         animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
-        mapChanged("Animal placed at specified position: %s".formatted(animal.getPosition()));
+//        mapChanged("Animal placed at specified position: %s".formatted(animal.getPosition()));
     }
 
     public void placePlant(Plant plant) {
@@ -69,7 +69,7 @@ public final class RectangularMap implements WorldMap {
         if(!isOccupiedByPlant(vectorToPlacePlant)) {
             plants.put(vectorToPlacePlant, plant);
             plant.setPosition(vectorToPlacePlant);
-            mapChanged("Plant placed at position: %s".formatted(vectorToPlacePlant));
+//            mapChanged("Plant placed at position: %s".formatted(vectorToPlacePlant));
         }
     }
 
@@ -86,7 +86,7 @@ public final class RectangularMap implements WorldMap {
 
         Vector2D newPosition = animal.getPosition();
         animals.computeIfAbsent(newPosition, k -> new ArrayList<>()).add(animal);
-        mapChanged("Animal moved from %s to %s".formatted(oldPosition, newPosition));
+//        mapChanged("Animal moved from %s to %s".formatted(oldPosition, newPosition));
     }
 
     public Boundary getMapBounds() {

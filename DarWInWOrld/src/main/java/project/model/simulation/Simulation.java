@@ -82,6 +82,7 @@ public final class Simulation implements Runnable {
         animalsBreeding();
         addPlants(simulationParameters.newPlantsEveryday(), simulationParameters.plantParameters(), simulationParameters.customPlants());
         animalsEnergyLoss();
+        worldMap.mapChanged("Day " + day + " ended");
     }
 
     private void removeAllDead() {
