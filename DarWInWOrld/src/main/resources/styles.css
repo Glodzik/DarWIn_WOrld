@@ -29,11 +29,6 @@
     -fx-minor-tick-count: 0;
 }
 
-.button-style {
-    -fx-font-size: 14px;
-    -fx-padding: 8 15;
-}
-
 .toggle-button {
     -fx-text-fill: white;
     -fx-font-weight: bold;
@@ -86,4 +81,13 @@ Label {
 
 .button-style:hover {
     -fx-background-color: #44915e;
+}
+
+.button-preset-style {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-background-color: #43a047;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
 }
