@@ -165,14 +165,14 @@ public final class MapPresenter implements MapChangeListener {
     @Override
     public void mapChanged(RectangularMap worldMap, String message) {
         Platform.runLater(() -> {
-            mapDrafter.drawMap(worldMap);
-            updateStatsLabels();
-
             if (worldMap.getAnimals().isEmpty()) {
                 stopSimulation();
                 toggleButton.setText("SYMULACJA ZAKOŃCZONA");
                 toggleButton.setDisable(true);
             }
+
+            mapDrafter.drawMap(worldMap);
+            updateStatsLabels();
 
             System.out.println(message);
         });
