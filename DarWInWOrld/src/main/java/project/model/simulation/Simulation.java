@@ -71,6 +71,11 @@ public final class Simulation implements Runnable {
         day++;
 
         removeAllDead();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         animalsMoving();
         animalsEating();
         animalsBreeding();
@@ -90,11 +95,6 @@ public final class Simulation implements Runnable {
     private void animalsMoving() {
         updateAnimalsAndPlants();
         for(Animal animal : animals) {
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             worldMap.move(animal);
         }
     }

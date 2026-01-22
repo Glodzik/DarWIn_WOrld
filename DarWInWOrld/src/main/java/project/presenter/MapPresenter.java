@@ -166,12 +166,12 @@ public final class MapPresenter implements MapChangeListener {
     public void mapChanged(RectangularMap worldMap, String message) {
         Platform.runLater(() -> {
             mapDrafter.drawMap(worldMap);
-            updateStats();
+            updateStatsLabels();
             System.out.println(message);
         });
     }
 
-    private void updateStats() {
+    private void updateStatsLabels() {
         int day = simulation.getDay();
         SimulationStatistics stats = statisticsTracker.getStatistics();
 
