@@ -167,6 +167,13 @@ public final class MapPresenter implements MapChangeListener {
         Platform.runLater(() -> {
             mapDrafter.drawMap(worldMap);
             updateStatsLabels();
+
+            if (worldMap.getAnimals().isEmpty()) {
+                stopSimulation();
+                toggleButton.setText("SYMULACJA ZAKOŃCZONA");
+                toggleButton.setDisable(true);
+            }
+
             System.out.println(message);
         });
     }

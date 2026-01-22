@@ -3,7 +3,7 @@ package project.model.worldelements.edibleelements;
 import project.model.coordinates.Vector2D;
 import project.model.worldelements.WorldElement;
 
-public class Plant implements WorldElement, Edible {
+public class Plant implements WorldElement {
     private Vector2D position;
     private final int energy;
 
