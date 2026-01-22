@@ -9,22 +9,31 @@
             fx:controller="project.presenter.ConfigurationPresenter"
             stylesheets="@styles.css">
     <top>
-        <HBox styleClass="title-container" HBox.hgrow="ALWAYS">
-            <TextFlow textAlignment="CENTER" HBox.hgrow="ALWAYS" style="-fx-padding: 15 0;">
-                <Text text="D" styleClass="app-title"/>
-                <Text text="a" styleClass="app-title"/>
-                <Text text="r" styleClass="app-title"/>
-                <Text text="W" styleClass="app-title-highlight"/>
-                <Text text="I" styleClass="app-title-highlight"/>
-                <Text text="n" styleClass="app-title"/>
-                <Text text=" " styleClass="app-title"/>
-                <Text text="W" styleClass="app-title-highlight"/>
-                <Text text="O" styleClass="app-title-highlight"/>
-                <Text text="r" styleClass="app-title"/>
-                <Text text="l" styleClass="app-title"/>
-                <Text text="d" styleClass="app-title"/>
-            </TextFlow>
-        </HBox>
+        <VBox>
+            <HBox styleClass="title-container" HBox.hgrow="ALWAYS">
+                <TextFlow textAlignment="CENTER" HBox.hgrow="ALWAYS" style="-fx-padding: 15 0;">
+                    <Text text="D" styleClass="app-title"/>
+                    <Text text="a" styleClass="app-title"/>
+                    <Text text="r" styleClass="app-title"/>
+                    <Text text="W" styleClass="app-title-highlight"/>
+                    <Text text="I" styleClass="app-title-highlight"/>
+                    <Text text="n" styleClass="app-title"/>
+                    <Text text=" " styleClass="app-title"/>
+                    <Text text="W" styleClass="app-title-highlight"/>
+                    <Text text="O" styleClass="app-title-highlight"/>
+                    <Text text="r" styleClass="app-title"/>
+                    <Text text="l" styleClass="app-title"/>
+                    <Text text="d" styleClass="app-title"/>
+                </TextFlow>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10 20;">
+                <Label text="Preset:"/>
+                <ComboBox fx:id="presetComboBox" prefWidth="200"/>
+                <Button text="ZAPISZ" onAction="#onSavePreset" styleClass="button-style"/>
+                <Button text="WCZYTAJ" onAction="#onLoadPreset" styleClass="button-style"/>
+            </HBox>
+        </VBox>
     </top>
     <center>
         <VBox style="-fx-padding: 5px 10px;" spacing="5">
@@ -42,7 +51,8 @@
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
                         <Label text="Startowa liczba zwierzaków:" HBox.hgrow="ALWAYS"/>
-                        <Slider fx:id="startAnimalsField" min="5" max="30" value="10" majorTickUnit="3" styleClass="slider-style" />
+                        <Slider fx:id="startAnimalsField" min="5" max="100" value="10" majorTickUnit="10"
+                                styleClass="slider-style"/>
                         <Label fx:id="startAnimalsLabel" text="10"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
