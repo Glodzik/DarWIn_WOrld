@@ -11,8 +11,7 @@ public final class Antidote extends Plant {
     }
 
     public Antidote(Vector2D position, int antidote) {
-        TypeOfAntidote[] values = TypeOfAntidote.values();
-        this(position, values[antidote]);
+        this(position, TypeOfAntidote.values()[antidote]);
     }
 
     public Antidote(Vector2D position, int antidoteIndex, int scaledEnergy) {
