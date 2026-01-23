@@ -10,7 +10,8 @@ public enum MapDirection {
     SOUTH(4),
     SOUTH_WEST(5),
     WEST(6),
-    NORTH_WEST(7);
+    NORTH_WEST(7),
+    ;
 
     private final int order;
 

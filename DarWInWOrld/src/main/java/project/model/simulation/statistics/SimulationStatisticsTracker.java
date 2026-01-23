@@ -9,17 +9,20 @@ import java.util.List;
 import java.util.Map;
 
 public final class SimulationStatisticsTracker {
-    private int numberOfNotOccupiedFields;
-    private Map<String, Integer> mostPopularGenes = new HashMap<>();
-    private double averageEnergyLevel;
-    private int averageLifespan;
-    private int averageCountOfChildren;
     private final Simulation simulation;
     private final SimulationStatistics statistics;
+    private final StatisticsToFile statsWriter;
 
     public SimulationStatisticsTracker(Simulation simulation) {
         this.simulation = simulation;
         this.statistics = new SimulationStatistics(0, 0, 0, 0, new int[0], 0.0, 0.0, 0.0);
+        this.statsWriter = new StatisticsToFile();
+
+        try {
+            statsWriter.initializeStatsFile();
+        } catch (Exception e) {
+            System.err.println("Nie udało się zainicjalizować pliku CSV: " + e.getMessage());
+        }
     }
 
     public void updateStats() {
@@ -31,10 +34,16 @@ public final class SimulationStatisticsTracker {
         statistics.setAverageAmountOfChildren(countAverageAmountOfChildren());
         statistics.setMostPopularGenes(countMostPopularGenes());
         statistics.setAverageLifespan(countAverageLifespan());
+
+        statsWriter.saveDailyStats(simulation.getDay(), statistics);
     }
 
     public SimulationStatistics getStatistics() {
         return statistics;
+    }
+
+    public void closeFile() {
+        statsWriter.closeStatsFile();
     }
 
     // counting stats methods
@@ -66,15 +75,13 @@ public final class SimulationStatisticsTracker {
         int maxCount = 0;
 
         for (Animal animal : animals) {
-            if (!animal.isDead()) {
-                int[] genome = animal.getGenom().getGenomeSequence();
-                String key = Arrays.toString(genome);
-                int newCount = counts.merge(key, 1, Integer::sum);
+            int[] genome = animal.getGenom().getGenomeSequence();
+            String key = Arrays.toString(genome);
+            int newCount = counts.merge(key, 1, Integer::sum);
 
-                if (newCount > maxCount) {
-                    maxCount = newCount;
-                    mostPopular = genome;
-                }
+            if (newCount > maxCount) {
+                maxCount = newCount;
+                mostPopular = genome;
             }
         }
 
@@ -100,7 +107,7 @@ public final class SimulationStatisticsTracker {
         }
 
         return animals.stream()
-                .filter(animal -> !animal.isDead())  // tylko żywe zwierzęta
+                .filter(animal -> !animal.isDead())
                 .mapToInt(Animal::getChildrenCount)
                 .average()
                 .orElse(0.0);

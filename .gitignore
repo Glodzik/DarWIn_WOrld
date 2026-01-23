@@ -81,3 +81,9 @@ http-client.private.env.json
 # Apifox Helper cache
 .idea/.cache/.Apifox_Helper
 .idea/ApifoxUploaderProjectSetting.xml
+
+# Folder z statystykami symulacji
+simulation_stats/
+
+# Pliki ze statystykami CSV
+*.csv

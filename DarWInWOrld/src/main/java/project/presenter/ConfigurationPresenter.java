@@ -3,20 +3,22 @@ package project.presenter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import project.model.simulation.Simulation;
 import project.model.simulation.SimulationParameters;
 import project.model.worldelements.animals.AnimalParameters;
 import project.model.worldelements.edibleelements.PlantParameters;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public final class ConfigurationPresenter {
+
     @FXML
     private Slider mapWidthField;
     @FXML
@@ -86,12 +88,29 @@ public final class ConfigurationPresenter {
     private Label poisonEnergyLossLabel;
     @FXML
     private Label protectionGenomeLengthLabel;
+    @FXML
+    private ComboBox<String> presetComboBox;
 
+    private final PresetService presetService = new PresetService();
 
     @FXML
     public void initialize() {
         setupSliderListeners();
         setupCheckboxListeners();
+        setupPresets();
+    }
+
+    private void setupPresets() {
+        presetComboBox.getItems().addAll(presetService.getPresetNames());
+        presetComboBox.setValue("Domyślny");
+        presetComboBox.setOnAction(event -> applyPreset());
+        presetComboBox.getItems().add("Własna");
+        List.of(mapWidthField, mapHeightField, startPlantsField, newPlantsEverydayField,
+                startAnimalsField, startEnergyField, energyLossEveryDayField,
+                energyLevelToBreedField, energyLossAfterBreedField, minMutationField,
+                maxMutationField, genomeLengthField, eatingEnergyField,
+                poisonPlantProbabilityField, poisonEnergyLossField, protectionGenomeLengthField
+        ).forEach(s -> s.setOnMousePressed(e -> presetComboBox.setValue("Własna")));
     }
 
     private void setupSliderListeners() {
@@ -214,7 +233,80 @@ public final class ConfigurationPresenter {
 
         return new SimulationParameters
                 (mapHeight, mapWidth, startPlants, newPlantsEveryday, startAnimals,
-                        animalParameters, plantParameters, protectionGenomeLength, customPlants);
+                        animalParameters, plantParameters, protectionGenomeLength, poisonPlantsVariant, customPlants);
+    }
+
+
+
+    @FXML
+    public void onSavePreset() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Zapisz konfigurację");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Pliki konfiguracji", "*.properties")
+        );
+        fileChooser.setInitialFileName("moj_preset.properties");
+
+        File file = fileChooser.showSaveDialog(mapWidthField.getScene().getWindow());
+        if (file != null) {
+            try {
+                presetService.saveToFile(getSimulationParameters(), file);
+            } catch (IOException e) {
+                showAlert("Błąd zapisu: " + e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void onLoadPreset() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Wczytaj konfigurację");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Pliki konfiguracji", "*.properties")
+        );
+
+        File file = fileChooser.showOpenDialog(mapWidthField.getScene().getWindow());
+        if (file != null) {
+            try {
+                SimulationParameters data = presetService.loadFromFile(file);
+                applyConfiguration(data);
+                presetComboBox.setValue(null); // Reset combobox
+            } catch (IOException e) {
+                showAlert("Błąd odczytu: " + e.getMessage());
+            }
+        }
+    }
+
+    private void applyConfiguration(SimulationParameters d) {
+        List.of(
+                Map.entry(mapHeightField, d.mapHeight()),
+                Map.entry(mapWidthField, d.mapWidth()),
+                Map.entry(startPlantsField, d.startPlants()),
+                Map.entry(newPlantsEverydayField, d.newPlantsEveryday()),
+                Map.entry(startAnimalsField, d.startAnimals()),
+                Map.entry(startEnergyField, d.animalParameters().startEnergy()),
+                Map.entry(energyLossEveryDayField, d.animalParameters().energyLossEveryDay()),
+                Map.entry(energyLevelToBreedField, d.animalParameters().energyLevelToBreed()),
+                Map.entry(energyLossAfterBreedField, d.animalParameters().energyLossAfterBreed()),
+                Map.entry(minMutationField, d.animalParameters().minMutation()),
+                Map.entry(maxMutationField, d.animalParameters().maxMutation()),
+                Map.entry(genomeLengthField, d.animalParameters().genomLength()),
+                Map.entry(eatingEnergyField, d.plantParameters().energy()),
+                Map.entry(poisonPlantProbabilityField, d.plantParameters().poisonProbability()),
+                Map.entry(poisonEnergyLossField, d.plantParameters().poisonEnergyLoss()),
+                Map.entry(protectionGenomeLengthField, d.protectionGenomLength())
+        ).forEach(e -> e.getKey().setValue(e.getValue()));
+
+        boolean poisonVariant = d.poisonPlants();
+        poisonPlantsVariantCheckbox.setSelected(poisonVariant);
+        customPlantsCheckbox.setSelected(d.customPlants());
+    }
+
+    private void applyPreset() {
+        String selected = presetComboBox.getValue();
+        if (selected == null || selected.equals("Custom")) return;
+        SimulationParameters parameters = presetService.getPreset(selected);
+        if (parameters != null) applyConfiguration(parameters);
     }
 
     private boolean validateParameters() {

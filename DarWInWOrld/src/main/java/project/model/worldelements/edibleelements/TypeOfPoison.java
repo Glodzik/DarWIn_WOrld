@@ -5,7 +5,8 @@ public enum TypeOfPoison {
     ALOE(-10, "/textures/plants/poisons/aloe.png"),
     AZALEA(-15, "/textures/plants/poisons/azalea.png"),
     OLEANDER(-20, "/textures/plants/poisons/oleander.png"),
-    COMMON_YEW(-30, "/textures/plants/poisons/commonYew.png");
+    COMMON_YEW(-30, "/textures/plants/poisons/commonYew.png"),
+    ;
     private final int energy;
     private final String texturePath;
 

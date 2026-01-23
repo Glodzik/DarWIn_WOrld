@@ -23,23 +23,25 @@ public final class RectangularMap implements WorldMap {
     public RectangularMap(int width, int height) {
         this.mapBounds = new Boundary(LOWER_LEFT, new Vector2D(width - 1, height - 1));
         this.jungleHeight = Math.max((int) Math.round(height * 0.2), 1);
+        this.jungleBoundary = calculateJungleBoundary(width, height);
+    }
+
+    private Boundary calculateJungleBoundary(int width, int height) {
         int jungleStartY = (int) Math.round(((height - 1) / 2.0) - (jungleHeight - 1) / 2.0);
         int jungleEndY = jungleStartY + jungleHeight - 1;
         Vector2D jungleLowerLeft = new Vector2D(0, jungleStartY);
         Vector2D jungleUpperRight = new Vector2D(width - 1, jungleEndY);
-        this.jungleBoundary = new Boundary(jungleLowerLeft, jungleUpperRight);
+        return new Boundary(jungleLowerLeft, jungleUpperRight);
     }
 
     public void place(Animal animal) {
         Vector2D position = RandomGenerator.randomPositionWithinBounds(mapBounds);
         animal.setPosition(position);
         animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
-        mapChanged("Animal placed at random position: %s".formatted(animal.getPosition()));
     }
 
     public void place(Animal animal, Vector2D position) {
         animals.computeIfAbsent(position, k -> new ArrayList<>()).add(animal);
-        mapChanged("Animal placed at specified position: %s".formatted(animal.getPosition()));
     }
 
     public void placePlant(Plant plant) {
@@ -65,7 +67,6 @@ public final class RectangularMap implements WorldMap {
         if(!isOccupiedByPlant(vectorToPlacePlant)) {
             plants.put(vectorToPlacePlant, plant);
             plant.setPosition(vectorToPlacePlant);
-            mapChanged("Plant placed at position: %s".formatted(vectorToPlacePlant));
         }
     }
 
@@ -82,7 +83,6 @@ public final class RectangularMap implements WorldMap {
 
         Vector2D newPosition = animal.getPosition();
         animals.computeIfAbsent(newPosition, k -> new ArrayList<>()).add(animal);
-        mapChanged("Animal moved from %s to %s".formatted(oldPosition, newPosition));
     }
 
     public Boundary getMapBounds() {
@@ -133,7 +133,6 @@ public final class RectangularMap implements WorldMap {
         }
     }
 
-    // unmodifiable lists
     public List<Plant> getPlants() {
         return new ArrayList<>(plants.values());
     }

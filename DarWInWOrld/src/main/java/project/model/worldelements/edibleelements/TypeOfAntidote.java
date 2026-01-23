@@ -5,7 +5,8 @@ public enum TypeOfAntidote {
     BAMBOO(10, "/textures/plants/antidotes/bamboo.png"),
     CARROT(15, "/textures/plants/antidotes/carrot.png"),
     PARSLEY(20, "/textures/plants/antidotes/parsley.png"),
-    SUNFLOWER(30, "/textures/plants/antidotes/sunflower_front.png");
+    SUNFLOWER(30, "/textures/plants/antidotes/sunflower_front.png"),
+    ;
 
     private final int energy;
     private final String texturePath;

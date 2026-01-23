@@ -16,11 +16,11 @@ import java.util.List;
 
 public final class Simulation implements Runnable {
     private List<Animal> animals = new ArrayList<Animal>();
-    private List<Animal> deadAnimals = new ArrayList<>();
+    private final List<Animal> deadAnimals = new ArrayList<>();
     private List<Plant> plants = new ArrayList<Plant>();
     private final RectangularMap worldMap;
     private final Genome protectionGenome;
-    private int day = 0;
+    private int day = 1;
     private final SimulationParameters simulationParameters;
     private boolean isRunning = false;
     private final SimulationStatisticsTracker statisticsTracker;
@@ -35,6 +35,7 @@ public final class Simulation implements Runnable {
         addPlants(parameters.startPlants(), parameters.plantParameters(), parameters.customPlants());
 
         updateAnimalsAndPlants();
+        statisticsTracker.updateStats();
     }
 
     public void addAnimals(int animalsCount, AnimalParameters parameters) {
@@ -71,14 +72,17 @@ public final class Simulation implements Runnable {
         day++;
 
         removeAllDead();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         animalsMoving();
-        // miedzy kazdym ruchem ma byc pauza na moment
-        // moze animalsMoving(time)?
-
         animalsEating();
         animalsBreeding();
         addPlants(simulationParameters.newPlantsEveryday(), simulationParameters.plantParameters(), simulationParameters.customPlants());
         animalsEnergyLoss();
+        worldMap.mapChanged("Day " + day + " ended");
     }
 
     private void removeAllDead() {
@@ -93,11 +97,6 @@ public final class Simulation implements Runnable {
     private void animalsMoving() {
         updateAnimalsAndPlants();
         for(Animal animal : animals) {
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             worldMap.move(animal);
         }
     }
@@ -158,6 +157,7 @@ public final class Simulation implements Runnable {
     public void run() {
         while (!animals.isEmpty() && isRunning) {
             dayAction();
+            statisticsTracker.updateStats();
         }
     }
 
@@ -183,10 +183,6 @@ public final class Simulation implements Runnable {
 
     public SimulationStatisticsTracker getStatisticsTracker() {
         return statisticsTracker;
-    }
-
-    public int getStartEnergy() {
-        return simulationParameters.animalParameters().startEnergy();
     }
 
     public SimulationParameters getParameters() {

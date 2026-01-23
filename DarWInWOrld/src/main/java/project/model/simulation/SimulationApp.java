@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import project.presenter.ConfigurationPresenter;
 
@@ -13,6 +14,9 @@ public final class SimulationApp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(); // zainicjowanie wczytywania FXML
+
+        // wczytanie czcionki
+        Font.loadFont(getClass().getResourceAsStream("/font/Montserrat-Regular.ttf"), 42);
 
         // wczytanie zasobu z katalogu resources (uniwersalny sposób)
         loader.setLocation(getClass().getClassLoader().getResource("simulationConfiguration.fxml"));
@@ -32,8 +36,9 @@ public final class SimulationApp extends Application {
         primaryStage.setScene(scene);
 
         // konfiguracja okna
-        primaryStage.setTitle("Simulation parameters");
+        primaryStage.setTitle("Konfiguracja symulacji");
         primaryStage.minWidthProperty().bind(viewRoot.minWidthProperty());
         primaryStage.minHeightProperty().bind(viewRoot.minHeightProperty());
+        primaryStage.setMaximized(true);
     }
 }

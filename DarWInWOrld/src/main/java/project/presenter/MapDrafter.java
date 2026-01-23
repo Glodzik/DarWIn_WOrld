@@ -41,6 +41,8 @@ public final class MapDrafter {
     }
 
     public void drawMap(RectangularMap worldMap) {
+        clearCanvas();
+
         Boundary boundary = worldMap.getMapBounds();
         Vector2D lowerLeft = boundary.lowerLeft();
         Vector2D upperRight = boundary.upperRight();
@@ -162,7 +164,7 @@ public final class MapDrafter {
     private void clearCanvas() {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.setFill(Color.WHITE);
-        graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        graphics.fillRect(0, 0, canvas.getWidth() + 100, canvas.getHeight() + 100);
     }
 
     private int calculateCellSize(int mapWidth, int mapHeight) {

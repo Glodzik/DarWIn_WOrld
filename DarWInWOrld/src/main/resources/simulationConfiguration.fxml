@@ -9,22 +9,31 @@
             fx:controller="project.presenter.ConfigurationPresenter"
             stylesheets="@styles.css">
     <top>
-        <HBox styleClass="title-container" HBox.hgrow="ALWAYS">
-            <TextFlow textAlignment="CENTER" HBox.hgrow="ALWAYS" style="-fx-padding: 15 0;">
-                <Text text="D" styleClass="app-title"/>
-                <Text text="a" styleClass="app-title"/>
-                <Text text="r" styleClass="app-title"/>
-                <Text text="W" styleClass="app-title-highlight"/>
-                <Text text="I" styleClass="app-title-highlight"/>
-                <Text text="n" styleClass="app-title"/>
-                <Text text=" " styleClass="app-title"/>
-                <Text text="W" styleClass="app-title-highlight"/>
-                <Text text="O" styleClass="app-title-highlight"/>
-                <Text text="r" styleClass="app-title"/>
-                <Text text="l" styleClass="app-title"/>
-                <Text text="d" styleClass="app-title"/>
-            </TextFlow>
-        </HBox>
+        <VBox>
+            <HBox styleClass="title-container" HBox.hgrow="ALWAYS">
+                <TextFlow textAlignment="CENTER" HBox.hgrow="ALWAYS" style="-fx-padding: 0 0;">
+                    <Text text="D" styleClass="app-title"/>
+                    <Text text="a" styleClass="app-title"/>
+                    <Text text="r" styleClass="app-title"/>
+                    <Text text="W" styleClass="app-title-highlight"/>
+                    <Text text="I" styleClass="app-title-highlight"/>
+                    <Text text="n" styleClass="app-title"/>
+                    <Text text=" " styleClass="app-title"/>
+                    <Text text="W" styleClass="app-title-highlight"/>
+                    <Text text="O" styleClass="app-title-highlight"/>
+                    <Text text="r" styleClass="app-title"/>
+                    <Text text="l" styleClass="app-title"/>
+                    <Text text="d" styleClass="app-title"/>
+                </TextFlow>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER" style="-fx-padding: 5 0;">
+                <Label text="Symulacja:"/>
+                <ComboBox fx:id="presetComboBox" prefWidth="200"/>
+                <Button text="ZAPISZ" onAction="#onSavePreset" styleClass="button-preset-style"/>
+                <Button text="WCZYTAJ" onAction="#onLoadPreset" styleClass="button-preset-style"/>
+            </HBox>
+        </VBox>
     </top>
     <center>
         <VBox style="-fx-padding: 5px 10px;" spacing="5">
@@ -42,7 +51,8 @@
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
                         <Label text="Startowa liczba zwierzaków:" HBox.hgrow="ALWAYS"/>
-                        <Slider fx:id="startAnimalsField" min="5" max="30" value="10" majorTickUnit="3" styleClass="slider-style" />
+                        <Slider fx:id="startAnimalsField" min="5" max="100" value="10" majorTickUnit="10"
+                                styleClass="slider-style"/>
                         <Label fx:id="startAnimalsLabel" text="10"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
@@ -58,12 +68,12 @@
                     <HBox spacing="10" alignment="CENTER_RIGHT">
                         <Label text="Energia konieczna, by uznać zwierzaka za najedzonego:" HBox.hgrow="ALWAYS"/>
                         <Slider fx:id="energyLevelToBreedField" min="60" max="100" value="80" majorTickUnit="5" styleClass="slider-style"/>
-                        <Label fx:id="energyLevelToBreedLabel" text="10"/>
+                        <Label fx:id="energyLevelToBreedLabel" text="80"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
                         <Label text="Energia rodziców zużywana by stworzyć potomka:" HBox.hgrow="ALWAYS"/>
                         <Slider fx:id="energyLossAfterBreedField" min="20" max="50" value="30" majorTickUnit="5" styleClass="slider-style"/>
-                        <Label fx:id="energyLossAfterBreedLabel" text="50"/>
+                        <Label fx:id="energyLossAfterBreedLabel" text="30"/>
                     </HBox>
                 </VBox>
 
@@ -89,7 +99,7 @@
                         <Label fx:id="startPlantsLabel" text="10"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
-                        <Label text="Minimalna zdobywana energia po zjedzeniu rośliny:" HBox.hgrow="ALWAYS"/>
+                        <Label text="Energia po zjedzeniu rośliny:" HBox.hgrow="ALWAYS"/>
                         <Slider fx:id="eatingEnergyField" min="10" max="50" value="20" majorTickUnit="5" styleClass="slider-style"/>
                         <Label fx:id="eatingEnergyLabel" text="20"/>
                     </HBox>
@@ -114,7 +124,7 @@
                         <Label fx:id="poisonPlantProbabilityLabel" text="20"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_RIGHT">
-                        <Label text="Minimalna energia tracona po zjedzeniu trucizny:" HBox.hgrow="ALWAYS"/>
+                        <Label text="Energia tracona po zjedzeniu trucizny:" HBox.hgrow="ALWAYS"/>
                         <Slider fx:id="poisonEnergyLossField" min="10" max="50" value="20" majorTickUnit="5" styleClass="slider-style"/>
                         <Label fx:id="poisonEnergyLossLabel" text="20"/>
                     </HBox>
@@ -131,10 +141,12 @@
 
             <HBox spacing="10" style="-fx-padding: 20 0 0 0;">
                 <Label text="Customowe rośliny:" HBox.hgrow="ALWAYS"/>
-                <CheckBox fx:id="customPlantsCheckbox" text="Włącz różne rodzaje roślin (przypisana z góry energia roślin)"/>
+                <CheckBox fx:id="customPlantsCheckbox" />
             </HBox>
 
-            <HBox alignment="CENTER" style="-fx-padding: 40 0 20 0;">
+            <Label text="Wariant *Customowe rośliny* dodaje dodatkowe typy roślin na mapę o energiach będących mnożnikami podanej energii bazowej rośliny/trucizny" HBox.hgrow="ALWAYS"/>
+
+            <HBox alignment="CENTER" style="-fx-padding: 5 0 5 0;">
                 <Button onAction="#onSimulationStartClicked" styleClass="button-style">START</Button>
             </HBox>
         </VBox>

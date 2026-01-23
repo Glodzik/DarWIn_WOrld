@@ -5,7 +5,7 @@ import java.util.Random;
 public final class Genome {
 
     private final int size;
-    private int[] genomeSequence;
+    private final int[] genomeSequence;
 
     public Genome(int size) {
         this.size = size;
@@ -79,5 +79,14 @@ public final class Genome {
 
         double percentage = (double) matches / protectionGenomeArray.length * 100;
         return (int) Math.round(percentage);
+    }
+
+    public static String formatGenome(int[] genes) {
+        if (genes == null) return "-";
+        StringBuilder sb = new StringBuilder();
+        for (int gene : genes) {
+            sb.append(gene);
+        }
+        return sb.toString();
     }
 }
