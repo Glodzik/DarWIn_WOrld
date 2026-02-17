@@ -1,0 +1,93 @@
+.root {
+    -fx-font-family: "Montserrat", "Segoe UI", "Arial", sans-serif;
+}
+
+.app-title {
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Montserrat", "Segoe UI", sans-serif;
+    -fx-fill: #43a047;
+}
+
+.app-title-highlight {
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Montserrat", "Segoe UI", sans-serif;
+    -fx-fill: #ff7043;
+}
+
+.title-container {
+    -fx-alignment: center;
+    -fx-padding: 15 0 15 0;
+    -fx-background-color: #f4f4f4;
+}
+
+.slider-style {
+    -fx-pref-width: 300px;
+    -fx-show-tick-labels: true;
+    -fx-show-tick-marks: true;
+    -fx-minor-tick-count: 0;
+}
+
+.toggle-button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+Label {
+    -fx-font-size: 12px;
+}
+
+.statistics-header {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 0 0 10 0;
+    -fx-alignment: center;
+}
+
+.statistics-label {
+    -fx-font-size: 13px;
+}
+
+.statistics-value {
+    -fx-font-size: 13px;
+}
+
+.legend-label {
+    -fx-font-size: 13px;
+}
+
+.legend-energy-positive {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #43a047;
+}
+
+.legend-energy-negative {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e53935;
+}
+
+.button-style {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-color: #43a047;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+}
+
+.button-style:hover {
+    -fx-background-color: #44915e;
+}
+
+.button-preset-style {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-background-color: #43a047;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+}
