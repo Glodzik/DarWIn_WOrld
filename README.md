@@ -1,16 +1,16 @@
 # DarWIn WOrld
 
-**Wariant:** Trucizny i Odpornosc  
-**Autorzy:** Michal Grabos, Jakub Glod  
+**Wariant:** Trucizny i Odporność  
+**Autorzy:** Michał Graboś, Jakub Głód  
 **Technologie:** Java 21, JavaFX 21, Gradle, JUnit 5
 
 ---
 
 ## Opis
 
-Symulator ewolucyjny, w ktorym zwierzeta poruszaja sie po prostokatnej mapie, jedza rosliny, rozmnazaja sie i ewoluuja dzieki genomom. Mapa podzielona jest na **dzungle** (centralny pas, 80% roslin) i **step** (reszta, 20% roslin). Swiat jest kulisty -- krawedzie lewo/prawo zawijaja sie, a na biegunach zwierze zawraca.
+Symulator ewolucyjny, w którym zwierzęta poruszają się po prostokątnej mapie, jedzą rośliny, rozmnażają się i ewoluują dzięki genomom. Mapa podzielona jest na **dżunglę** (centralny pas, 80% roślin) i **step** (reszta, 20% roślin). Świat jest kulisty -- krawędzie lewo/prawo zawijają się, a na biegunach zwierzę zawraca.
 
-W wariancie **Trucizny i Odpornosc** rosliny moga byc trujace, a zwierzeta zyskuja odpornosc proporcjonalna do zgodnosci ich genomu z genomem ochronnym.
+W wariancie **Trucizny i Odporność** rośliny mogą być trujące, a zwierzęta zyskują odporność proporcjonalną do zgodności ich genomu z genomem ochronnym.
 
 ---
 
@@ -60,11 +60,11 @@ project/
 
 ## Zrealizowane rozszerzenia
 
-1. **Wiele symulacji jednoczesnie** -- osobne okna, osobne watki
-2. **Wizualizacja energii** -- paski energii nad zwierzetami (zielony -> czerwony)
-3. **Presety i zapis/odczyt konfiguracji** -- 5 wbudowanych presetow + serializacja do `.properties`
+1. **Wiele symulacji jednocześnie** -- osobne okna, osobne wątki
+2. **Wizualizacja energii** -- paski energii nad zwierzętami (zielony -> czerwony)
+3. **Presety i zapis/odczyt konfiguracji** -- 5 wbudowanych presetów + serializacja do `.properties`
 4. **Eksport statystyk do CSV** -- dzienne statystyki zapisywane do `simulationstats/`
-5. **Customowe rosliny** -- 10 gatunkow z wlasnymi teksturami i skalowana energia (rozszerzenie wlasne)
+5. **Customowe rośliny** -- 10 gatunków z własnymi teksturami i skalowaną energią (rozszerzenie własne)
 
 ---
 
@@ -72,10 +72,10 @@ project/
 
 | Grupa | Parametry |
 |-------|-----------|
-| Mapa | szerokosc, wysokosc, poczatkowe rosliny, nowe rosliny/dzien, poczatkowe zwierzeta |
-| Zwierzeta | energia startowa, dzienna strata, prog rozmnazania, koszt rozmnazania, min/max mutacji, dlugosc genomu |
-| Rosliny | energia bazowa, % trucizn, strata od trucizn |
-| Warianty | trucizny wl/wyl, customowe rosliny wl/wyl, dlugosc genomu ochronnego |
+| Mapa | szerokość, wysokość, początkowe rośliny, nowe rośliny/dzień, początkowe zwierzęta |
+| Zwierzęta | energia startowa, dzienna strata, próg rozmnażania, koszt rozmnażania, min/max mutacji, długość genomu |
+| Rośliny | energia bazowa, % trucizn, strata od trucizn |
+| Warianty | trucizny wł/wył, customowe rośliny wł/wył, długość genomu ochronnego |
 
 ---
 
