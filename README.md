@@ -64,12 +64,7 @@ project/
 2. **Wizualizacja energii** -- paski energii nad zwierzętami (zielony -> czerwony)
 3. **Presety i zapis/odczyt konfiguracji** -- 5 wbudowanych presetów + serializacja do `.properties`
 4. **Eksport statystyk do CSV** -- dzienne statystyki zapisywane do `simulationstats/`
-<<<<<<< HEAD
-5. **Customowe rośliny** -- 10 gatunków z własnymi teksturami i skalowaną energią (rozszerzenie własne)
-=======
-5. **Customowe rosliny** -- 10 gatunkow z wlasnymi teksturami i skalowana energia
->>>>>>> fa259bd4feb9c183e7ec242e76c177a73e0bdb93
-
+5. **Customowe rośliny** -- 10 gatunków z własnymi teksturami i skalowaną energią
 ---
 
 ## Parametry konfiguracji
